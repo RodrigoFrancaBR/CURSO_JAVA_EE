@@ -1,11 +1,22 @@
 package br.com.franca.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import br.com.franca.enun.Situacao;
 
+@Entity
 public class Unidade {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String endereco;
+	@Enumerated(EnumType.ORDINAL)
 	private Situacao situacao;
 
 	public Long getId() {
