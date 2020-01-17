@@ -24,7 +24,9 @@ public enum Situacao {
 
 	PAGO(8, "Pago"),
 
-	A_VENCER(9, "A vencer");
+	A_VENCER(9, "A vencer"),
+	
+	INVALIDA(100, "Situação inválida");
 
 	private int chave;
 	private String valor;
@@ -39,7 +41,11 @@ public enum Situacao {
 	 * @return Uma Situação ou null caso não encontre uma situação existente
 	 */
 	public Situacao getSituacao(int chave) {
-		return Arrays.asList(Situacao.values()).parallelStream().findFirst().orElse(null);
+		return Arrays.asList(Situacao.values())
+				.parallelStream()
+				.filter(e -> e.getChave() == chave)
+				.findFirst()
+				.orElse(Situacao.INVALIDA);
 	}
 
 	public int getChave() {
