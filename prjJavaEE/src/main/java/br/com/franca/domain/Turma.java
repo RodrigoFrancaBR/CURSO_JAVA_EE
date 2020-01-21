@@ -2,14 +2,37 @@ package br.com.franca.domain;
 
 import java.util.Set;
 
-import br.com.franca.enun.Situacao;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import br.com.franca.domain.enun.Status;
 
+@Table(name = "tb_turma")
+@Entity
 public class Turma {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nome;
+
+	@ManyToOne
+	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
+
+	@OneToMany(mappedBy = "turma")
 	private Set<Contrato> contratos;
-	private Situacao situacao;
+
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
+
+	private String nome;
 
 	public Long getId() {
 		return id;
@@ -43,12 +66,12 @@ public class Turma {
 		this.contratos = contratos;
 	}
 
-	public Situacao getSituacao() {
-		return situacao;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setSituacao(Situacao situacao) {
-		this.situacao = situacao;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override

@@ -5,27 +5,78 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import br.com.franca.enun.CondicaoContrato;
-import br.com.franca.enun.FormaPagamento;
-import br.com.franca.enun.Situacao;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import br.com.franca.domain.enun.CondicaoContrato;
+import br.com.franca.domain.enun.FormaPagamento;
+import br.com.franca.domain.enun.Matricula;
+
+@Table(name = "tb_contrato")
+@Entity
 public class Contrato {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@ManyToOne
+	@JoinColumn(name = "turma_id")
 	private Turma turma;
+
+	@ManyToOne
+	@JoinColumn(name = "aluno_id")
 	private Aluno aluno;
-	private Set<Parcela> parcelas = new HashSet<>();
+
+	@OneToMany(mappedBy = "contrato")
+	private Set<Parcela> parcelas = new HashSet<Parcela>();
+
+	@Column(name = "tx_matri")
 	private BigDecimal taxaMatricula = new BigDecimal(0);
+
+	@Column(name = "vlr_curso")
 	private BigDecimal valorCurso;
+
+	@Column(name = "desc_curso")
 	private Double descontoCurso;
+
+	@Column(name = "qtd_parc_curso")
 	private Integer qtdParcelasCurso;
+
+	@Column(name = "qtd_parc_mate")
 	private Integer qtdParcelasMaterial;
+
+	@Column(name = "vlr_mate")
 	private BigDecimal valorMaterial;
+
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "forma_pg")
 	private FormaPagamento formaPagamento;
+
+	@Column(name = "dia_venc")
 	private Integer diaVencimento;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dt_matri")
 	private Calendar dataMatricula = Calendar.getInstance();
+
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "cond_contrato")
 	private CondicaoContrato condicaoContrato;
-	private String matricula;
-	private Situacao situacao;
+
+	@Enumerated(EnumType.ORDINAL)
+	private Matricula matricula;
 
 	public Long getId() {
 		return id;
@@ -139,20 +190,12 @@ public class Contrato {
 		this.condicaoContrato = condicaoContrato;
 	}
 
-	public String getMatricula() {
+	public Matricula getMatricula() {
 		return matricula;
 	}
 
-	public void setMatricula(String matricula) {
+	public void setMatricula(Matricula matricula) {
 		this.matricula = matricula;
-	}
-
-	public Situacao getSituacao() {
-		return situacao;
-	}
-
-	public void setSituacao(Situacao situacao) {
-		this.situacao = situacao;
 	}
 
 	@Override
