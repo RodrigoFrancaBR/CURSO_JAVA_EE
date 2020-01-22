@@ -12,7 +12,7 @@ import br.com.franca.web.api.UnidadeAPI;
 
 @Path("unidade")
 public class UnidadeResource implements UnidadeAPI {
-	private List<Unidade> unidades = new ArrayList<>();
+	private List<Unidade> unidades = new ArrayList<>();		
 
 	@PostConstruct
 	public void init() {
@@ -30,6 +30,8 @@ public class UnidadeResource implements UnidadeAPI {
 	}
 
 	public Unidade find(Long id) {		
+		// unidades.parallelStream().map(e->e.getId()).reduce(10l,(a,b)->a+b);
+		// return null;
 		return unidades.parallelStream()
 		.filter(e -> e.getId().equals(id))
 		.findFirst()

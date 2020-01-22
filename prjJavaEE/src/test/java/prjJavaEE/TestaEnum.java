@@ -33,6 +33,7 @@ public class TestaEnum {
 		assertEquals(Status.DESATIVADA, u.getStatus().getStatus(0));
 		
 		
+		
 	}
 	
 	

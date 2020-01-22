@@ -13,11 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.franca.dao.CrudDAO;
 import br.com.franca.domain.enun.Status;
 
 @Entity
 @Table(name = "tb_unidade")
-public class Unidade implements Serializable{
+public class Unidade extends CrudDAO implements Serializable {
 
 	/**
 	 * 
