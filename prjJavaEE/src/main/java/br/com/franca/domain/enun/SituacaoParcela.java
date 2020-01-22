@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum SituacaoParcela {
 	// Usado para Alunos
-	A_VENCER(0, "A vencer"), PAGO(1, "Pago"), ATRASADO(100, "Atrasado"),  INVALIDA(100, "Situação inválida");
+	A_VENCER(0, "A vencer"), PAGO(1, "Pago"), ATRASADO(2, "Atrasado"),  INVALIDA(100, "Situação inválida");
 
 	private int chave;
 	private String valor;

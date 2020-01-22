@@ -1,5 +1,6 @@
 package br.com.franca.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,12 @@ import br.com.franca.domain.enun.Status;
 
 @Entity
 @Table(name = "tb_unidade")
-public class Unidade {
+public class Unidade implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8674768342761231956L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,6 +67,14 @@ public class Unidade {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}	
+
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
 	}
 
 	public Unidade() {
