@@ -1,4 +1,4 @@
-package br.com.franca.enun;
+package br.com.franca.domain.enun;
 
 import java.util.Arrays;
 

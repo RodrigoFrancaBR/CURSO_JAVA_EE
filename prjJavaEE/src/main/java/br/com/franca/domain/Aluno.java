@@ -4,11 +4,40 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import br.com.franca.enun.Sexo;
-import br.com.franca.enun.Situacao;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import br.com.franca.domain.enun.Sexo;
+import br.com.franca.domain.enun.SituacaoAluno;
+
+@Table(name = "tb_aluno")
+@Entity
 public class Aluno {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Temporal(TemporalType.DATE)
+	private Calendar dataNascimento = Calendar.getInstance();
+
+	@Enumerated(EnumType.ORDINAL)
+	private Sexo sexo;
+
+	@Enumerated(EnumType.ORDINAL)
+	private SituacaoAluno situacao;
+
+	@OneToMany(mappedBy = "aluno")
+	private Set<Contrato> contratos = new HashSet<>();
+
 	private String nome;
 	private String cpf;
 	private String rg;
@@ -24,10 +53,6 @@ public class Aluno {
 	private String estado;
 	private String pai;
 	private String mae;
-	private Calendar dataNascimento = Calendar.getInstance();
-	private Sexo sexo;
-	private Situacao situacao;
-	private Set<Contrato> contratos = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -173,11 +198,11 @@ public class Aluno {
 		this.sexo = sexo;
 	}
 
-	public Situacao getSituacao() {
+	public SituacaoAluno getSituacao() {
 		return situacao;
 	}
 
-	public void setSituacao(Situacao situacao) {
+	public void setSituacao(SituacaoAluno situacao) {
 		this.situacao = situacao;
 	}
 

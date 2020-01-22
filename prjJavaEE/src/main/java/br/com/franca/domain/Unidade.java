@@ -1,23 +1,35 @@
 package br.com.franca.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import br.com.franca.enun.Situacao;
+import br.com.franca.domain.enun.Status;
 
 @Entity
+@Table(name = "tb_unidade")
 public class Unidade {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
+
+	@OneToMany(mappedBy = "unidade")
+	private List<Turma> turmas = new ArrayList<Turma>();
+
 	private String nome;
 	private String endereco;
-	@Enumerated(EnumType.ORDINAL)
-	private Situacao situacao;
 
 	public Long getId() {
 		return id;
@@ -43,12 +55,12 @@ public class Unidade {
 		this.endereco = endereco;
 	}
 
-	public Situacao getSituacao() {
-		return situacao;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setSituacao(Situacao situacao) {
-		this.situacao = situacao;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override
