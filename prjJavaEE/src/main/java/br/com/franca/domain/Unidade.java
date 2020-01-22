@@ -63,6 +63,19 @@ public class Unidade {
 		this.status = status;
 	}
 
+	public Unidade() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Unidade(Long id, Status status, List<Turma> turmas, String nome, String endereco) {
+		super();
+		this.id = id;
+		this.status = status;
+		this.turmas = turmas;
+		this.nome = nome;
+		this.endereco = endereco;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
