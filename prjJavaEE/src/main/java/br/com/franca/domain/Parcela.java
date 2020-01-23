@@ -1,5 +1,6 @@
 package br.com.franca.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
@@ -16,11 +17,17 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.franca.dao.BaseEntity;
 import br.com.franca.domain.enun.SituacaoParcela;
 
 @Table(name = "tb_parcela")
 @Entity
-public class Parcela {
+public class Parcela implements BaseEntity, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5762722499351113021L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

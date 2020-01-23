@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EntityBean;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,12 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.franca.dao.CrudDAO;
+import br.com.franca.dao.BaseEntity;
+import br.com.franca.dao.DAOGenerico;
 import br.com.franca.domain.enun.Status;
 
 @Entity
 @Table(name = "tb_unidade")
-public class Unidade extends CrudDAO implements Serializable {
+public class Unidade implements BaseEntity, Serializable {
 
 	/**
 	 * 
@@ -68,7 +70,7 @@ public class Unidade extends CrudDAO implements Serializable {
 
 	public void setStatus(Status status) {
 		this.status = status;
-	}	
+	}
 
 	public List<Turma> getTurmas() {
 		return turmas;

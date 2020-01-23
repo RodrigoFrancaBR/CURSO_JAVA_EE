@@ -1,5 +1,6 @@
 package br.com.franca.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -19,13 +20,19 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.franca.dao.BaseEntity;
 import br.com.franca.domain.enun.CondicaoContrato;
 import br.com.franca.domain.enun.FormaPagamento;
 import br.com.franca.domain.enun.Matricula;
 
 @Table(name = "tb_contrato")
 @Entity
-public class Contrato {
+public class Contrato implements BaseEntity, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8311550580079368922L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

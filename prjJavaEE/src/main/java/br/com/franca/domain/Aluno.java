@@ -1,5 +1,6 @@
 package br.com.franca.domain;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,12 +16,18 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.franca.dao.BaseEntity;
 import br.com.franca.domain.enun.Sexo;
 import br.com.franca.domain.enun.SituacaoAluno;
 
 @Table(name = "tb_aluno")
 @Entity
-public class Aluno {
+public class Aluno implements BaseEntity, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 908063983548647354L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,6 @@
 package br.com.franca.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -12,11 +13,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import br.com.franca.dao.BaseEntity;
 import br.com.franca.domain.enun.Status;
 
 @Table(name = "tb_turma")
 @Entity
-public class Turma {
+public class Turma implements BaseEntity, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5005319466125595311L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
