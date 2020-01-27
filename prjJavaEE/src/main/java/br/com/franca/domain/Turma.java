@@ -14,12 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.franca.dao.BaseEntity;
 import br.com.franca.domain.enun.Status;
 
 @Table(name = "tb_turma")
 @Entity
-public class Turma implements BaseEntity, Serializable {
+public class Turma implements BaseEntity<Long>, Serializable {
 
 	/**
 	 * 

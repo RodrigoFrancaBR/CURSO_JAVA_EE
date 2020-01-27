@@ -2,9 +2,6 @@ package prjJavaEE;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

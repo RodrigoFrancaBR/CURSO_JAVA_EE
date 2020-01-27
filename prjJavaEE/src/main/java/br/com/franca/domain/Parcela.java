@@ -17,12 +17,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.franca.dao.BaseEntity;
 import br.com.franca.domain.enun.SituacaoParcela;
 
 @Table(name = "tb_parcela")
 @Entity
-public class Parcela implements BaseEntity, Serializable{
+public class Parcela implements BaseEntity<Long>, Serializable{
 
 	/**
 	 * 
@@ -58,6 +57,7 @@ public class Parcela implements BaseEntity, Serializable{
 	private BigDecimal valorTotalParcela;
 
 	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "situacao")
 	private SituacaoParcela situacao;
 
 	public Long getId() {

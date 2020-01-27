@@ -14,13 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.franca.dao.BaseEntity;
-import br.com.franca.dao.DAOGenerico;
+import br.com.franca.dao.implement.DAOGenerico;
 import br.com.franca.domain.enun.Status;
 
 @Entity
 @Table(name = "tb_unidade")
-public class Unidade implements BaseEntity, Serializable {
+public class Unidade implements BaseEntity<Long>, Serializable {
 
 	/**
 	 * 

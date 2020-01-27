@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,13 +17,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.franca.dao.BaseEntity;
 import br.com.franca.domain.enun.Sexo;
 import br.com.franca.domain.enun.SituacaoAluno;
 
 @Table(name = "tb_aluno")
 @Entity
-public class Aluno implements BaseEntity, Serializable {
+public class Aluno implements BaseEntity<Long>, Serializable {
 
 	/**
 	 * 
@@ -40,6 +40,7 @@ public class Aluno implements BaseEntity, Serializable {
 	private Sexo sexo;
 
 	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "situacao")
 	private SituacaoAluno situacao;
 
 	@OneToMany(mappedBy = "aluno")

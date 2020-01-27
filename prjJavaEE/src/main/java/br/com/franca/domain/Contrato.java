@@ -20,14 +20,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.franca.dao.BaseEntity;
 import br.com.franca.domain.enun.CondicaoContrato;
 import br.com.franca.domain.enun.FormaPagamento;
 import br.com.franca.domain.enun.Matricula;
 
 @Table(name = "tb_contrato")
 @Entity
-public class Contrato implements BaseEntity, Serializable{
+public class Contrato implements BaseEntity<Long>, Serializable{
 
 	/**
 	 * 
