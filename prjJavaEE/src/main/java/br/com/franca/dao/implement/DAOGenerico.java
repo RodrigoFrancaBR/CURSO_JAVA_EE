@@ -60,9 +60,11 @@ public abstract class DAOGenerico<T extends BaseEntity<PK>, PK> implements DAOI<
 			em.persist(entity);
 			em.getTransaction().commit();
 			this.setMensagem("Entidade persistida: " + entity.getId() + " com sucesso!");
+			System.out.println(this.getMensagem());
 		} catch (Exception e) {
 			roolback();
 			this.setMensagem("Ocorreu um erro ao tentar persistir a Entidade: " + entity.getId() + " .");
+			System.out.println(this.getMensagem());
 			e.getStackTrace();
 		} finally {
 			return entity;

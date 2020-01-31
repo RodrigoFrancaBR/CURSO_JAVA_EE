@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EntityBean;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,12 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-import br.com.franca.dao.implement.DAOGenerico;
 import br.com.franca.domain.enun.Status;
 
 @Entity
-@Table(name = "tb_unidade")
+//definindo um index name unique: "nome_endereco_UK" para as colunas: nome, endereco
+@Table(name = "tb_unidade", uniqueConstraints = @UniqueConstraint(columnNames = { "nome",
+		"endereco" }, name = "nome_endereco_UK"))
 public class Unidade implements BaseEntity<Long>, Serializable {
 
 	/**
@@ -115,6 +116,12 @@ public class Unidade implements BaseEntity<Long>, Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Unidade [id=" + id + ", status=" + status + ", turmas=" + turmas + ", nome=" + nome + ", endereco="
+				+ endereco + "]";
 	}
 
 }

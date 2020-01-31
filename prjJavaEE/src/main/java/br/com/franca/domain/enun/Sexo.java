@@ -21,16 +21,8 @@ public enum Sexo {
 		return chave;
 	}
 
-	public void setChave(int chave) {
-		this.chave = chave;
-	}
-
 	public String getValor() {
 		return valor;
-	}
-
-	public void setValor(String valor) {
-		this.valor = valor;
 	}
 
 }

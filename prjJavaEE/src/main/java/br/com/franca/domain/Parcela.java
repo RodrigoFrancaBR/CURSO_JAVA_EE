@@ -21,7 +21,7 @@ import br.com.franca.domain.enun.SituacaoParcela;
 
 @Table(name = "tb_parcela")
 @Entity
-public class Parcela implements BaseEntity<Long>, Serializable{
+public class Parcela implements BaseEntity<Long>, Serializable {
 
 	/**
 	 * 
@@ -57,7 +57,7 @@ public class Parcela implements BaseEntity<Long>, Serializable{
 	private BigDecimal valorTotalParcela;
 
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "situacao")
+	@Column(name = "sit_parc")
 	private SituacaoParcela situacao;
 
 	public Long getId() {
@@ -156,7 +156,13 @@ public class Parcela implements BaseEntity<Long>, Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Parcela [id=" + id + ", contrato=" + contrato + ", dataVencimento=" + dataVencimento + ", valorPago="
+				+ valorPago + ", dataPagamento=" + dataPagamento + ", valorParcelaCurso=" + valorParcelaCurso
+				+ ", valorParcelaMaterial=" + valorParcelaMaterial + ", valorTotalParcela=" + valorTotalParcela
+				+ ", situacao=" + situacao + "]";
+	}
 
 }

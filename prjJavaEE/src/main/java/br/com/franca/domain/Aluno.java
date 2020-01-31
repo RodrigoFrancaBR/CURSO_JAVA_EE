@@ -40,7 +40,7 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 	private Sexo sexo;
 
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "situacao")
+	@Column(name = "sit_aluno")
 	private SituacaoAluno situacao;
 
 	@OneToMany(mappedBy = "aluno")
@@ -247,4 +247,12 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Aluno [id=" + id + ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + ", situacao=" + situacao
+				+ ", contratos=" + contratos + ", nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", orgaoExp="
+				+ orgaoExp + ", ufRg=" + ufRg + ", celular=" + celular + ", residencial=" + residencial + ", email="
+				+ email + ", cep=" + cep + ", endereco=" + endereco + ", bairro=" + bairro + ", cidade=" + cidade
+				+ ", estado=" + estado + ", pai=" + pai + ", mae=" + mae + "]";
+	}
 }

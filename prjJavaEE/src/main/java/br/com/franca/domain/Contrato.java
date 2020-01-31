@@ -26,7 +26,7 @@ import br.com.franca.domain.enun.Matricula;
 
 @Table(name = "tb_contrato")
 @Entity
-public class Contrato implements BaseEntity<Long>, Serializable{
+public class Contrato implements BaseEntity<Long>, Serializable {
 
 	/**
 	 * 
@@ -227,6 +227,16 @@ public class Contrato implements BaseEntity<Long>, Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Contrato [id=" + id + ", turma=" + turma + ", aluno=" + aluno + ", parcelas=" + parcelas
+				+ ", taxaMatricula=" + taxaMatricula + ", valorCurso=" + valorCurso + ", descontoCurso=" + descontoCurso
+				+ ", qtdParcelasCurso=" + qtdParcelasCurso + ", qtdParcelasMaterial=" + qtdParcelasMaterial
+				+ ", valorMaterial=" + valorMaterial + ", formaPagamento=" + formaPagamento + ", diaVencimento="
+				+ diaVencimento + ", dataMatricula=" + dataMatricula + ", condicaoContrato=" + condicaoContrato
+				+ ", matricula=" + matricula + "]";
 	}
 
 }

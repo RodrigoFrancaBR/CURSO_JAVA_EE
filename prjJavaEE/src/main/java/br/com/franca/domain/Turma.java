@@ -9,15 +9,20 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import br.com.franca.domain.enun.Status;
 
-@Table(name = "tb_turma")
 @Entity
+//definindo um index name unique: "nome_unidade_id_UK" para as colunas: nome, unidade_id
+//definindo um index name: FK_tb_turma_tb_unidade_UK para fk unidade_id
+@Table(name = "tb_turma", uniqueConstraints = @UniqueConstraint(columnNames = { "nome",
+		"unidade_id" }, name = "nome_unidade_id_UK"), indexes = @Index(columnList = "unidade_id", name = "FK_tb_turma_tb_unidade_UK"))
 public class Turma implements BaseEntity<Long>, Serializable {
 
 	/**
@@ -104,6 +109,12 @@ public class Turma implements BaseEntity<Long>, Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Turma [id=" + id + ", unidade=" + unidade + ", contratos=" + contratos + ", status=" + status
+				+ ", nome=" + nome + "]";
 	}
 
 }
