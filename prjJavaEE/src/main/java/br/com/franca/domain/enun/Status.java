@@ -20,7 +20,7 @@ public enum Status {
 	 * @param Alguma chave válida 0,1,2,3 etc..
 	 * @return Um Status ou null caso não encontre um status existente
 	 */
-	public Status getStatus(int chave) {
+	public static Status getStatus(int chave) {
 		return Arrays.asList(Status.values()).parallelStream().filter(e -> e.getChave() == chave).findFirst()
 				.orElse(Status.INVALIDA);
 	}

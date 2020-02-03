@@ -81,16 +81,14 @@ public class Unidade implements BaseEntity<Long>, Serializable {
 	}
 
 	public Unidade() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public Unidade(Long id, Status status, List<Turma> turmas, String nome, String endereco) {
-		super();
+	public Unidade(Long id, Status status, String nome, String endereco, List<Turma> turmas) {
 		this.id = id;
 		this.status = status;
-		this.turmas = turmas;
 		this.nome = nome;
 		this.endereco = endereco;
+		this.turmas = turmas;
 	}
 
 	@Override
