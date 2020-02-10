@@ -1,83 +1,42 @@
 package br.com.franca.dao.implement;
 
 import java.lang.reflect.Constructor;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.franca.dao.interfaces.DAOI;
-import br.com.franca.domain.BaseEntity;
+import br.com.franca.crud.interfaces.CRUDI;
 import br.com.franca.util.EntityManagerUtil;
-import cedae.metrusweb.dao.BaseDAO;
-import cedae.metrusweb.dao.factory.IDAOFactory;
 
-public abstract class DAOGeneric<T extends BaseEntity<PK>, PK> implements DAOI<T, PK> {
+public  class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 
-	protected EntityManager em;
-	protected Class<T> clazz;
-	private String mensagem = "";
-	private final HashMap<String, DAOGeneric<BaseEntity<PK>, PK>> listDAO ;
+	public EntityManager em;
+	public Class<Dominio> dominio;
+	public String mensagem = "";
 
 	public DAOGeneric() {
 		this.em = EntityManagerUtil.getEntityManager();
-		this.listDAO = new HashMap<>();
+	}
+
+	public Class<Dominio> getDominio() {
+		return dominio;
+	}
+
+	public void setDominio(Class<Dominio> dominio) {
+		this.dominio = dominio;
 	}
 	
-	/**
-	 * Obtem a instância de uma classe DAO, de acordo com a classe informada.
-	 * @param clazz Classe de DAO desejada.
-	 * @return Instância da classe de negócio ou null se a classe informada não herdar de BaseDAO, 
-	 * ou não tiver um construtor que receba MetrusDAOFactory como parâmetro.
-	 */
-    public <U extends DAOGeneric<BaseEntity<PK>, PK>> U getDAO(Class<U> clazz) {
-    	U retorno = getInstance(clazz);
-    	if (retorno == null) {
-    		retorno = createInstance(clazz);
-    	}
-		return retorno;
+	public <DAO extends DAOGeneric<Dominio, Id>> DAO getDAO(Class<DAO> dao) {
+		DAO daoInstance= null;
+	try {
+		Constructor<DAO> construtor = dao.getDeclaredConstructor(DAOGeneric.class);
+		construtor.setAccessible(true);
+		daoInstance = construtor.newInstance(this);
+	} catch (Exception e) {
+	}		
+		return daoInstance;
 	}
-    
-    /**
-     * Cria uma instância da classe de negócio.
-	 * @param clazz Classe de negócio desejada.
-     * @return Instância da classe de negócio ou null
-     */
-	protected <U extends DAOGeneric<BaseEntity<PK>, PK>> U createInstance(Class<U> clazz) {
-		U retorno = null;
-		try {
-			Constructor<U> construtor = clazz.getDeclaredConstructor(IDAOFactory.class);
-			construtor.setAccessible(true);
-			retorno = construtor.newInstance(this);
-			if (retorno != null) {
-				listaDAO.put(clazz.getName(), retorno);
-			}
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-		return retorno;
-	}
-    
-    /**
-     * Busca uma instância da classe de negócio na listagem.
-	 * @param clazz Classe de negócio desejada.
-     * @return Instância da classe de negócio ou null
-     */
-	@SuppressWarnings("unchecked")
-	protected <U extends DAOGeneric<BaseEntity<PK>, PK>> U getInstance(Class<U> clazz) {
-		U retorno = (U)listDAO.get(clazz.getName());
-		return retorno;
-	}
-
-
-	public Class<T> getClazz() {
-		return clazz;
-	}
-
-	public void setClazz(Class<T> clazz) {
-		this.clazz = clazz;
-	}
-
+	
 	public void roolback() {
 		if (!em.getTransaction().isActive()) {
 			em.getTransaction().begin();
@@ -94,55 +53,55 @@ public abstract class DAOGeneric<T extends BaseEntity<PK>, PK> implements DAOI<T
 	}
 
 	@Override
-	public T find(PK pk) {
-		return em.find(clazz, pk);
+	public Dominio find(Id id) {
+		return em.find(dominio, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> findAll() {
-		return em.createQuery("from " + clazz.getSimpleName()).getResultList();
+	public List<Dominio> findAll() {
+		return em.createQuery("from " + dominio.getSimpleName()).getResultList();
 	}
 
 	@SuppressWarnings("finally")
 	@Override
-	public T save(T entity) {
+	public Dominio save(Dominio dominio) {
 		try {
 			em.getTransaction().begin();
-			em.persist(entity);
+			em.persist(dominio);
 			em.getTransaction().commit();
-			this.setMensagem("Entidade persistida: " + entity.getId() + " com sucesso!");
+			this.setMensagem("Entidade persistida com sucesso!");
 			System.out.println(this.getMensagem());
 		} catch (Exception e) {
 			roolback();
-			this.setMensagem("Ocorreu um erro ao tentar persistir a Entidade: " + entity.getId() + " .");
+			this.setMensagem("Ocorreu um erro ao tentar persistir a Entidade.");
 			System.out.println(this.getMensagem());
 			e.getStackTrace();
 		} finally {
-			return entity;
+			return dominio;
 		}
 	}
 
 	@SuppressWarnings("finally")
 	@Override
-	public T update(T entity) {
+	public Dominio update(Dominio dominio) {
 		try {
 			em.getTransaction().begin();
-			em.merge(entity);
+			em.merge(dominio);
 			em.getTransaction().commit();
-			this.setMensagem("Entidade modificada: " + entity.getId() + " com sucesso!");
+			this.setMensagem("Entidade modificada com sucesso!");
 		} catch (Exception e) {
 			roolback();
-			this.setMensagem("Ocorreu um erro ao tentar modificar a Entidade: " + entity.getId() + " .");
+			this.setMensagem("Ocorreu um erro ao tentar modificar a Entidade.");
 			e.getStackTrace();
 		} finally {
-			return entity;
+			return dominio;
 		}
 	}
 
 	@SuppressWarnings("finally")
 	@Override
-	public PK delete(PK id) {
+	public Id delete(Id id) {
 		try {
 			em.getTransaction().begin();
 			em.remove(id);
