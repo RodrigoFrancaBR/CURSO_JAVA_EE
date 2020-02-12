@@ -16,8 +16,10 @@ public abstract class BusinessGeneric<Dominio, Id, DAO extends DAOGeneric<Domini
 	}
 
 	public BusinessGeneric() {
+		// this.dao = new DAOGeneric<>();
 	}
 
+	@Override
 	public List<Dominio> findAll() {
 		return this.dao.findAll();
 	}

@@ -20,29 +20,34 @@ public interface UnidadeAPI {
 	@GET
 	@Path("/findAll")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Unidade> findAll();
+	// public List<Unidade> findAll();
+	public List<Unidade> buscarTodas();
 
 	@GET
 	@Path("/find/{id}/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Unidade find(@PathParam("id") Long id);
+	// public Unidade find(@PathParam("id") Long id);
+	public Unidade buscarPor(@PathParam("id") Long id);
 	
 	@POST
 	@Path("/insert")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Unidade insert(Unidade unidade);
+	// public Unidade insert(Unidade unidade);
+	public Unidade inserir(Unidade unidade);
 
 	@PUT
 	@Path("/update")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Unidade update(Unidade unidade);
+	public Unidade atualizar(Unidade unidade);
+	// public Unidade update(Unidade unidade);
 
 	@DELETE
 	@Path("/delete/{id}/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Unidade delete(@PathParam("id") Long id);
+	// public Unidade delete(@PathParam("id") Long id);
+	public Unidade remover(@PathParam("id") Long id);
 }

@@ -11,4 +11,5 @@ public class ParcelaBusiness extends BusinessGeneric<Parcela, Long, ParcelaDAOIm
 		super();
 		this.dao = new ParcelaDAOImp();
 	}
+	
 }
