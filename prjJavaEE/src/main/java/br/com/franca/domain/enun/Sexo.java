@@ -3,7 +3,7 @@ package br.com.franca.domain.enun;
 import java.util.Arrays;
 
 public enum Sexo {
-	MASCULINO(0, "Masculino"), FEMININO(1, "Feminino");
+	MASCULINO(0, "Masculino"), FEMININO(1, "Feminino"), INVALIDO(100, "Sexo inválido");
 
 	private Sexo(int chave, String valor) {
 		this.chave = chave;
@@ -14,7 +14,8 @@ public enum Sexo {
 	private String valor;
 
 	public Sexo getSexo(int chave) {
-		return Arrays.asList(Sexo.values()).parallelStream().findAny().orElse(null);
+		return Arrays.asList(Sexo.values()).parallelStream().filter(e -> e.getChave() == chave).findFirst()
+				.orElse(Sexo.INVALIDO);
 	}
 
 	public int getChave() {

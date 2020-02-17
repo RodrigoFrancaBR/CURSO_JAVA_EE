@@ -7,9 +7,11 @@ public enum FormaPagamento {
 
 	CHEQUE(1, "Cheque"),
 
-	CARTAO_CREDITO(2, "Cartão de crédito"),
+	CARTAO_CREDITO(2, "CartÃ£o de crÃ©dito"),
 
-	CARTAO_DEBITO(3, "Cartão de débito");
+	CARTAO_DEBITO(3, "CartÃ£o de dÃ©bito"),
+
+	INVALIDA(100, "Forma de Pagamento invÃ¡lida");
 
 	private final int chave;
 	private final String valor;
@@ -28,6 +30,7 @@ public enum FormaPagamento {
 	}
 
 	public FormaPagamento getFormaPagamento(Integer chave) {
-		return Arrays.asList(FormaPagamento.values()).parallelStream().findFirst().orElse(null);
+		return Arrays.asList(FormaPagamento.values()).parallelStream().filter(e -> e.getChave() == chave).findFirst()
+				.orElse(FormaPagamento.INVALIDA);
 	}
 }

@@ -6,7 +6,7 @@ public enum Matricula {
 	// Usada para Matriculas
 
 	CANCELADA(0, "Cancelada"), ATIVA(1, "Ativa"), EM_ACORDO(2, "Em acordo"), ENCERRADA(3, "Encerrada"),
-	INVALIDA(100, "Situação inválida");
+	INVALIDA(100, "SituaÃ§Ã£o invÃ¡lida");
 
 	private int chave;
 	private String valor;
@@ -17,8 +17,8 @@ public enum Matricula {
 	}
 
 	/**
-	 * @param Alguma chave válida 0,1,2,3 etc..
-	 * @return Uma Matricula ou null caso não encontre uma matrícula existente
+	 * @param Alguma chave vï¿½lida 0,1,2,3 etc..
+	 * @return Uma Matricula ou null caso nï¿½o encontre uma matrï¿½cula existente
 	 */
 	public Matricula getMatricula(int chave) {
 		return Arrays.asList(Matricula.values()).parallelStream().filter(e -> e.getChave() == chave).findFirst()

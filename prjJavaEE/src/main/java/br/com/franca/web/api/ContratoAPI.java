@@ -12,41 +12,40 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import br.com.franca.domain.Unidade;
+import br.com.franca.domain.Contrato;
 
-@Path("unidades")
-public interface UnidadeAPI {
+@Path("contratos")
+public interface ContratoAPI {
 
 	@GET
 	// @Path("/findAll")
 	// @Path("/")
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Unidade> findAll();
+	public List<Contrato> findAll();
 
 	@GET
 	@Path("/{id}/")
 	// @Path("/find/{id}/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Unidade find(@PathParam("id") Long id);
+	public Contrato find(@PathParam("id") Long id);
 
 	@POST
 	// @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Unidade insert(Unidade unidade);
+	public Contrato insert(Contrato contrato);
 
 	@PUT
 	// @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Unidade update(Unidade unidade);
+	public Contrato update(Contrato contrato);
 
 	@DELETE
 	@Path("/{id}/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Unidade delete(@PathParam("id") Long id);
+	public Contrato delete(@PathParam("id") Long id);
 
 }

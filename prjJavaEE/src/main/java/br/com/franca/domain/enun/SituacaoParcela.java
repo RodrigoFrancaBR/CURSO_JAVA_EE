@@ -4,19 +4,19 @@ import java.util.Arrays;
 
 public enum SituacaoParcela {
 	// Usado para Alunos
-	A_VENCER(0, "A vencer"), PAGO(1, "Pago"), ATRASADO(2, "Atrasado"),  INVALIDA(100, "Situação inválida");
+	A_VENCER(0, "A vencer"), PAGO(1, "Pago"), ATRASADO(2, "Atrasado"), INVALIDA(100, "SituaÃ§Ã£o invÃ¡lida");
 
 	private int chave;
 	private String valor;
 
 	private SituacaoParcela(int chave, String valor) {
-			this.chave = chave;
-			this.valor = valor;
-		}
+		this.chave = chave;
+		this.valor = valor;
+	}
 
 	/**
-	 * @param Alguma chave válida 0,1,2,3 etc..
-	 * @return Uma Situação ou null caso não encontre uma situação existente
+	 * @param Alguma chave vï¿½lida 0,1,2,3 etc..
+	 * @return Uma Situaï¿½ï¿½o ou null caso nï¿½o encontre uma situaï¿½ï¿½o existente
 	 */
 	public SituacaoParcela getSituacao(int chave) {
 		return Arrays.asList(SituacaoParcela.values()).parallelStream().filter(e -> e.getChave() == chave).findFirst()

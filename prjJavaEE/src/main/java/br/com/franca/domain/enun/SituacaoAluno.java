@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum SituacaoAluno {
 	// Usado para Alunos
-	INATIVO(0, "Inativo"), ATIVO(1, "Ativo"), INVALIDA(100, "Situação inválida");
+	INATIVO(0, "Inativo"), ATIVO(1, "Ativo"), INVALIDA(100, "SituaÃ§Ã£o invÃ¡lida");
 
 	private int chave;
 	private String valor;
@@ -15,8 +15,8 @@ public enum SituacaoAluno {
 	}
 
 	/**
-	 * @param Alguma chave válida 0,1,2,3 etc..
-	 * @return Uma Situação ou null caso não encontre uma situação existente
+	 * @param Alguma chave vï¿½lida 0,1,2,3 etc..
+	 * @return Uma Situaï¿½ï¿½o ou null caso nï¿½o encontre uma situaï¿½ï¿½o existente
 	 */
 	public SituacaoAluno getSituacao(int chave) {
 		return Arrays.asList(SituacaoAluno.values()).parallelStream().filter(e -> e.getChave() == chave).findFirst()

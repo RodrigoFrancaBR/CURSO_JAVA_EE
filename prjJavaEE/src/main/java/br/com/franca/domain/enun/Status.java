@@ -6,7 +6,7 @@ public enum Status {
 
 // Usado para Turmas e Unidades
 
-	DESATIVADA(0, "Desativada"), ATIVA(1, "Ativa"), INVALIDA(100, "Status inválido");
+	DESATIVADA(0, "Desativada"), ATIVA(1, "Ativa"), INVALIDA(100, "Status invÃ¡lido");
 
 	private int chave;
 	private String valor;
@@ -17,8 +17,8 @@ public enum Status {
 	}
 
 	/**
-	 * @param Alguma chave válida 0,1,2,3 etc..
-	 * @return Um Status ou null caso não encontre um status existente
+	 * @param Alguma chave vï¿½lida 0,1,2,3 etc..
+	 * @return Um Status ou null caso nï¿½o encontre um status existente
 	 */
 	public static Status getStatus(int chave) {
 		return Arrays.asList(Status.values()).parallelStream().filter(e -> e.getChave() == chave).findFirst()

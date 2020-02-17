@@ -1,14 +1,15 @@
 package br.com.franca.dao.implement;
 
-import java.lang.reflect.Constructor;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.franca.crud.interfaces.CRUDI;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
+
+import br.com.franca.dao.interfaces.CRUDI;
 import br.com.franca.util.EntityManagerUtil;
 
-public  class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
+public class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 
 	public EntityManager em;
 	public Class<Dominio> dominio;
@@ -17,26 +18,18 @@ public  class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 	public DAOGeneric() {
 		this.em = EntityManagerUtil.getEntityManager();
 	}
+	/*
+	 * public Class<Dominio> getDominio() { return dominio; }
+	 * 
+	 * public void setDominio(Class<Dominio> dominio) { this.dominio = dominio; }
+	 * 
+	 * public <DAO extends DAOGeneric<Dominio, Id>> DAO getDAO(Class<DAO> dao) { DAO
+	 * daoInstance = null; try { Constructor<DAO> construtor =
+	 * dao.getDeclaredConstructor(DAOGeneric.class); construtor.setAccessible(true);
+	 * daoInstance = construtor.newInstance(this); } catch (Exception e) { } return
+	 * daoInstance; }
+	 */
 
-	public Class<Dominio> getDominio() {
-		return dominio;
-	}
-
-	public void setDominio(Class<Dominio> dominio) {
-		this.dominio = dominio;
-	}
-	
-	public <DAO extends DAOGeneric<Dominio, Id>> DAO getDAO(Class<DAO> dao) {
-		DAO daoInstance= null;
-	try {
-		Constructor<DAO> construtor = dao.getDeclaredConstructor(DAOGeneric.class);
-		construtor.setAccessible(true);
-		daoInstance = construtor.newInstance(this);
-	} catch (Exception e) {
-	}		
-		return daoInstance;
-	}
-	
 	public void roolback() {
 		if (!em.getTransaction().isActive()) {
 			em.getTransaction().begin();
@@ -60,7 +53,14 @@ public  class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Dominio> findAll() {
-		return em.createQuery("from " + dominio.getSimpleName()).getResultList();
+		/*
+		 * String jpql = "select u from " + dominio.getSimpleName() + " u"; Query query
+		 * = em.createQuery(jpql); List<Dominio> resultList = query.getResultList();
+		 * return resultList;
+		 */
+		// return em.createQuery("from " + dominio.getSimpleName()).getResultList();
+
+		return em.createQuery("select u from " + dominio.getSimpleName() + " u").getResultList();
 	}
 
 	@SuppressWarnings("finally")
@@ -99,20 +99,19 @@ public  class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 		}
 	}
 
-	@SuppressWarnings("finally")
 	@Override
-	public Id delete(Id id) {
+	public Dominio delete(Dominio dominio) {
 		try {
 			em.getTransaction().begin();
-			em.remove(id);
+			em.remove(dominio);
 			em.getTransaction().commit();
-			this.setMensagem("Entidade removida: " + id + " com sucesso!");
+			this.setMensagem("Entidade removida: com sucesso!");
+			return dominio;
 		} catch (Exception e) {
 			roolback();
-			this.setMensagem("Ocorreu um erro ao tentar remover a Entidade: " + id + " .");
+			this.setMensagem("Ocorreu um erro ao tentar remover a Entidade.");
 			e.getStackTrace();
-		} finally {
-			return id;
+			return null;
 		}
 	}
 

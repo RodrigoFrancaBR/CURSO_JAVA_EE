@@ -3,8 +3,8 @@ package prjJavaEE;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import br.com.franca.business.implement.UnidadeBusiness;
-import br.com.franca.dao.implement.UnidadeDAOImp;
+import br.com.franca.business.UnidadeBusiness;
+import br.com.franca.dao.implement.UnidadeDAO;
 import br.com.franca.domain.Unidade;
 import br.com.franca.domain.enun.Status;
 
@@ -18,7 +18,7 @@ public class TestaUnidadeDAO {
 		u.setEndereco("Piragibe 78");
 		u.setStatus(Status.ATIVA);
 
-		UnidadeDAOImp dao = new UnidadeDAOImp();
+		UnidadeDAO dao = new UnidadeDAO();
 
 		dao.save(u);
 
