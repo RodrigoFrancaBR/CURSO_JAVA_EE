@@ -24,10 +24,10 @@ public class UnidadeBusiness extends BusinessGeneric<Unidade, Long> {
 		if (idIsNull(id)) {
 			throw new RuntimeException("ID não pode ser null.");
 		}
+		return  this.dao.find(id);
+		// unidade = this.dao.find(id);
 
-		unidade = this.dao.find(id);
-
-		return domainIsNull(unidade) ? null : unidade;
+		// return domainIsNull(unidade) ? null : unidade;
 	}
 
 	public Unidade insert(Unidade unidade) {
