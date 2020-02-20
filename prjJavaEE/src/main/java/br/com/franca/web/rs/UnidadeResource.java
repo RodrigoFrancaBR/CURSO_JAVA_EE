@@ -2,12 +2,11 @@ package br.com.franca.web.rs;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 
 import javax.ws.rs.Path;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import br.com.franca.business.UnidadeBusiness;
 import br.com.franca.domain.Unidade;
@@ -24,8 +23,8 @@ public class UnidadeResource extends ResourceGeneric<Unidade> implements Unidade
 	}
 
 	@Override
-	public List<Unidade> findAll() {
-		return this.business.findAll();
+	public Response findAll() {
+		return Response.ok(business.findAll()).build();
 	}
 
 	@Override
@@ -34,11 +33,10 @@ public class UnidadeResource extends ResourceGeneric<Unidade> implements Unidade
 
 		if (domainIsNull(resposta)) {
 			// throw new WebApplicationException(404);
-			 throw new CustomNotFoundException("Item, " + resposta + ", is not found");
+			throw new CustomNotFoundException("Unidade, " + resposta + ", is not found");
 		}
 
 		return Response.ok(resposta).build();
-
 	}
 
 	@Override
@@ -51,18 +49,22 @@ public class UnidadeResource extends ResourceGeneric<Unidade> implements Unidade
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		return null;
+		// return null;
+		return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Não foi possível inserir a unidade").build();
 
 	}
 
 	@Override
-	public Unidade update(Unidade unidade) {
-		return this.business.update(unidade);
+	public Response update(Unidade unidade) {
+		return Response.ok(this.business.update(unidade)).build();
 	}
 
 	@Override
-	public Unidade delete(Long id) {
-		return this.business.delete(id);
+	public Response delete(Long id) {
+		Unidade resposta = this.business.delete(id);
+		return domainIsNull(resposta)
+				? Response.status(Status.INTERNAL_SERVER_ERROR).entity("Não foi possível remover a unidade").build()
+				: Response.ok(resposta).build();
 	}
 
 }

@@ -1,7 +1,5 @@
 package br.com.franca.web.api;
 
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -23,7 +21,7 @@ public interface UnidadeAPI {
 	// @Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Unidade> findAll();
+	public Response findAll();
 
 	@GET
 	@Path("/{id}/")
@@ -42,12 +40,12 @@ public interface UnidadeAPI {
 	// @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Unidade update(Unidade unidade);
+	public Response update(Unidade unidade);
 
 	@DELETE
 	@Path("/{id}/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Unidade delete(@PathParam("id") Long id);
+	public Response delete(@PathParam("id") Long id);
 
 }
