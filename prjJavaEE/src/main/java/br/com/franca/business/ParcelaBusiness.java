@@ -15,7 +15,7 @@ public class ParcelaBusiness {
 	}
 
 	public List<Parcela> findAll() {
-		this.dao.findAll();
+		// this.dao.findAll();
 		return null;
 	}
 

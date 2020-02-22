@@ -15,7 +15,7 @@ public class TurmaBusiness {
 	}
 
 	public List<Turma> findAll() {
-		this.dao.findAll();
+		// this.dao.findAll();
 		return null;
 	}
 

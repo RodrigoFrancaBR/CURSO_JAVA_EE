@@ -15,7 +15,7 @@ public class AlunoBusiness {
 	}
 	
 	public List<Aluno> findAll() {
-		this.dao.findAll();
+		// this.dao.findAll();
 		return null;
 	}
 

@@ -15,7 +15,7 @@ public class ContratoBusiness {
 	}
 
 	public List<Contrato> findAll() {
-		this.dao.findAll();
+		// this.dao.findAll();
 		return null;
 	}
 

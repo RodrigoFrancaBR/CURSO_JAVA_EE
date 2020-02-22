@@ -20,7 +20,7 @@ public class TestaUnidadeDAO {
 
 		UnidadeDAO dao = new UnidadeDAO();
 
-		dao.save(u);
+		// dao.save(u);
 
 		/*
 		 * Unidade u2 = new Unidade(); u2.setNome("MADUREIRA");

@@ -4,10 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.eclipse.persistence.annotations.CascadeOnDelete;
-
 import br.com.franca.dao.interfaces.CRUDI;
 import br.com.franca.util.EntityManagerUtil;
+import br.com.franca.web.exception.CursoDAOException;
 
 public class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 
@@ -18,17 +17,6 @@ public class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 	public DAOGeneric() {
 		this.em = EntityManagerUtil.getEntityManager();
 	}
-	/*
-	 * public Class<Dominio> getDominio() { return dominio; }
-	 * 
-	 * public void setDominio(Class<Dominio> dominio) { this.dominio = dominio; }
-	 * 
-	 * public <DAO extends DAOGeneric<Dominio, Id>> DAO getDAO(Class<DAO> dao) { DAO
-	 * daoInstance = null; try { Constructor<DAO> construtor =
-	 * dao.getDeclaredConstructor(DAOGeneric.class); construtor.setAccessible(true);
-	 * daoInstance = construtor.newInstance(this); } catch (Exception e) { } return
-	 * daoInstance; }
-	 */
 
 	public void roolback() {
 		if (!em.getTransaction().isActive()) {
@@ -36,83 +24,72 @@ public class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 		}
 		em.getTransaction().rollback();
 	}
-
-	public String getMensagem() {
-		return mensagem;
-	}
-
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
-	}
-
+	
 	@Override
-	public Dominio find(Id id) {
-		return em.find(dominio, id);
+	public Dominio find(Id id) throws CursoDAOException {
+		try {
+			return em.find(dominio, id);
+		} catch (Exception e) {
+			throw new CursoDAOException(e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Dominio> findAll() {
+	public List<Dominio> findAll() throws CursoDAOException {
 		/*
 		 * String jpql = "select u from " + dominio.getSimpleName() + " u"; Query query
 		 * = em.createQuery(jpql); List<Dominio> resultList = query.getResultList();
 		 * return resultList;
 		 */
 		// return em.createQuery("from " + dominio.getSimpleName()).getResultList();
-
-		return em.createQuery("select u from " + dominio.getSimpleName() + " u").getResultList();
+		try {
+			return em.createQuery("select u from " + dominio.getSimpleName() + " u").getResultList();
+		} catch (Exception e) {
+			throw new CursoDAOException(e);
+		}
 	}
 
-	@SuppressWarnings("finally")
 	@Override
-	public Dominio save(Dominio dominio) {
+	public Dominio save(Dominio dominio) throws CursoDAOException {
 		try {
 			em.getTransaction().begin();
 			em.persist(dominio);
 			em.getTransaction().commit();
-			this.setMensagem("Entidade persistida com sucesso!");
-			System.out.println(this.getMensagem());
-		} catch (Exception e) {
+		} catch (Exception ex) {
 			roolback();
-			this.setMensagem("Ocorreu um erro ao tentar persistir a Entidade.");
-			System.out.println(this.getMensagem());
-			e.getStackTrace();
-		} finally {
-			return dominio;
+			ex.getStackTrace();
+			throw new CursoDAOException(ex);
 		}
+		return dominio;
 	}
 
-	@SuppressWarnings("finally")
 	@Override
-	public Dominio update(Dominio dominio) {
+	public Dominio update(Dominio dominio) throws CursoDAOException {
 		try {
 			em.getTransaction().begin();
 			em.merge(dominio);
 			em.getTransaction().commit();
-			this.setMensagem("Entidade modificada com sucesso!");
-		} catch (Exception e) {
+		} catch (Exception ex) {
 			roolback();
-			this.setMensagem("Ocorreu um erro ao tentar modificar a Entidade.");
-			e.getStackTrace();
-		} finally {
-			return dominio;
+			ex.getStackTrace();
+			throw new CursoDAOException(ex);
 		}
+		return dominio;
 	}
 
 	@Override
-	public Dominio delete(Dominio dominio) {
+	public Dominio delete(Dominio dominio) throws CursoDAOException {
 		try {
 			em.getTransaction().begin();
 			em.remove(dominio);
 			em.getTransaction().commit();
-			this.setMensagem("Entidade removida: com sucesso!");
-			return dominio;
-		} catch (Exception e) {
+		} catch (Exception ex) {
 			roolback();
-			this.setMensagem("Ocorreu um erro ao tentar remover a Entidade.");
-			e.getStackTrace();
-			return null;
+			ex.getStackTrace();
+			throw new CursoDAOException(ex);
 		}
+		return dominio;
 	}
 
 }
