@@ -7,5 +7,6 @@ public class TurmaDAO extends DAOGeneric<Turma, Long> implements TurmaDAOI {
 
 	public TurmaDAO() {
 		super();
+		this.dominio =  Turma.class;
 	}
 }

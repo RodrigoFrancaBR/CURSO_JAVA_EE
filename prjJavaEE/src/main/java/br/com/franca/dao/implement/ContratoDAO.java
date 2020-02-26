@@ -7,5 +7,6 @@ public class ContratoDAO extends DAOGeneric<Contrato, Long> implements ContratoD
 
 	public ContratoDAO() {
 		super();
+		this.dominio = Contrato.class;
 	}
 }

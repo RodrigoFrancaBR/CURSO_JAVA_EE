@@ -2,9 +2,9 @@ package br.com.franca.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +20,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.franca.domain.enun.CondicaoContrato;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.franca.domain.enun.FormaPagamento;
 import br.com.franca.domain.enun.Matricula;
 
@@ -37,16 +38,22 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	//@JsonManagedReference(value = "contrato")
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "turma_id")
 	private Turma turma;
 
+	// @JsonManagedReference(value = "contrato-aluno")
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "aluno_id")
 	private Aluno aluno;
 
+	// @JsonManagedReference(value = "contrato-parcela")
+	// @JsonManagedReference
 	@OneToMany(mappedBy = "contrato")
-	private Set<Parcela> parcelas = new HashSet<Parcela>();
+	private List<Parcela> parcelas = new ArrayList<Parcela>();
 
 	@Column(name = "tx_matri")
 	private BigDecimal taxaMatricula = new BigDecimal(0);
@@ -77,9 +84,11 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 	@Column(name = "dt_matri")
 	private Calendar dataMatricula = Calendar.getInstance();
 
-	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "cond_contrato")
-	private CondicaoContrato condicaoContrato;
+	/*
+	 * @Enumerated(EnumType.ORDINAL)
+	 * 
+	 * @Column(name = "cond_contrato") private CondicaoContrato condicaoContrato;
+	 */
 
 	@Enumerated(EnumType.ORDINAL)
 	private Matricula matricula;
@@ -92,6 +101,7 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 		this.id = id;
 	}
 
+	//@JsonManagedReference(value = "contrato")
 	public Turma getTurma() {
 		return turma;
 	}
@@ -100,6 +110,7 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 		this.turma = turma;
 	}
 
+	@JsonManagedReference
 	public Aluno getAluno() {
 		return aluno;
 	}
@@ -108,11 +119,11 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 		this.aluno = aluno;
 	}
 
-	public Set<Parcela> getParcelas() {
+	public List<Parcela> getParcelas() {
 		return parcelas;
 	}
 
-	public void setParcelas(Set<Parcela> parcelas) {
+	public void setParcelas(List<Parcela> parcelas) {
 		this.parcelas = parcelas;
 	}
 
@@ -188,13 +199,12 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 		this.dataMatricula = dataMatricula;
 	}
 
-	public CondicaoContrato getCondicaoContrato() {
-		return condicaoContrato;
-	}
-
-	public void setCondicaoContrato(CondicaoContrato condicaoContrato) {
-		this.condicaoContrato = condicaoContrato;
-	}
+	/*
+	 * public CondicaoContrato getCondicaoContrato() { return condicaoContrato; }
+	 * 
+	 * public void setCondicaoContrato(CondicaoContrato condicaoContrato) {
+	 * this.condicaoContrato = condicaoContrato; }
+	 */
 
 	public Matricula getMatricula() {
 		return matricula;
@@ -235,8 +245,8 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 				+ ", taxaMatricula=" + taxaMatricula + ", valorCurso=" + valorCurso + ", descontoCurso=" + descontoCurso
 				+ ", qtdParcelasCurso=" + qtdParcelasCurso + ", qtdParcelasMaterial=" + qtdParcelasMaterial
 				+ ", valorMaterial=" + valorMaterial + ", formaPagamento=" + formaPagamento + ", diaVencimento="
-				+ diaVencimento + ", dataMatricula=" + dataMatricula + ", condicaoContrato=" + condicaoContrato
-				+ ", matricula=" + matricula + "]";
+				+ diaVencimento + ", dataMatricula=" + dataMatricula + ", condicaoContrato=" + ", matricula="
+				+ matricula + "]";
 	}
 
 }

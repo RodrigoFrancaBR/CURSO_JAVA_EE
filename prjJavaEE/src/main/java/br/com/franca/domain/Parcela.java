@@ -16,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import br.com.franca.domain.enun.SituacaoParcela;
 
@@ -32,6 +35,8 @@ public class Parcela implements BaseEntity<Long>, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	// @JsonBackReference(value = "contrato-parcela")
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "contrato_id")
 	private Contrato contrato;
@@ -60,6 +65,12 @@ public class Parcela implements BaseEntity<Long>, Serializable {
 	@Column(name = "sit_parc")
 	private SituacaoParcela situacao;
 
+	@Transient
+	private BigDecimal valorResidualParcelaCurso;
+
+	@Transient
+	private BigDecimal valorResidualParcelaMaterial;
+
 	public Long getId() {
 		return id;
 	}
@@ -68,6 +79,7 @@ public class Parcela implements BaseEntity<Long>, Serializable {
 		this.id = id;
 	}
 
+	//@JsonIgnore
 	public Contrato getContrato() {
 		return contrato;
 	}
@@ -130,6 +142,22 @@ public class Parcela implements BaseEntity<Long>, Serializable {
 
 	public void setSituacao(SituacaoParcela situacao) {
 		this.situacao = situacao;
+	}
+
+	public BigDecimal getValorResidualParcelaCurso() {
+		return valorResidualParcelaCurso;
+	}
+
+	public void setValorResidualParcelaCurso(BigDecimal valorResidualParcelaCurso) {
+		this.valorResidualParcelaCurso = valorResidualParcelaCurso;
+	}
+
+	public BigDecimal getValorResidualParcelaMaterial() {
+		return valorResidualParcelaMaterial;
+	}
+
+	public void setValorResidualParcelaMaterial(BigDecimal valorResidualParcelaMaterial) {
+		this.valorResidualParcelaMaterial = valorResidualParcelaMaterial;
 	}
 
 	@Override

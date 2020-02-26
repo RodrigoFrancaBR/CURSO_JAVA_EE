@@ -1,47 +1,127 @@
 package br.com.franca.web.rs;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import br.com.franca.business.ParcelaBusiness;
 import br.com.franca.domain.Parcela;
 import br.com.franca.web.api.ParcelaAPI;
+import br.com.franca.web.exception.CursoServiceException;
 
 @Path("parcelas")
-public class ParcelaResource implements ParcelaAPI {
+public class ParcelaResource extends ResourceGeneric<Parcela> implements ParcelaAPI {
 
 	private ParcelaBusiness business;
 
 	public ParcelaResource() {
-		super();
 		this.business = new ParcelaBusiness();
 	}
 
 	@Override
-	public List<Parcela> findAll() {
-		// this.business.findAll();
-		return null;
+	public Response findAll() {
+		List<Parcela> resposta = null;
+		try {
+
+			resposta = business.findAll();
+
+			return Response.ok(resposta).build();
+
+		} catch (CursoServiceException ex) {
+			ex.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
 	}
 
 	@Override
-	public Parcela find(Long id) {
-		return null;
+	public Response find(Long id) {
+		Parcela resposta = null;
+		try {
+
+			resposta = this.business.find(id);
+
+			if (domainIsNull(resposta)) {
+				// throw new WebApplicationException(404);
+				// throw new CustomNotFoundException("Parcela, " + resposta + ", is not found");
+				return Response.status(Status.NOT_FOUND).entity(resposta).build();
+			}
+
+			// return Response.ok(resposta).build();
+			return Response.status(Status.OK).entity(resposta).build();
+
+		} catch (CursoServiceException ex) {
+			ex.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
 	}
 
 	@Override
-	public Parcela insert(Parcela entity) {
-		return null;
+	public Response insert(Parcela parcela) {
+		Parcela resposta = null;
+
+		try {
+
+			resposta = this.business.insert(parcela);
+
+		} catch (CursoServiceException ex) {
+			ex.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
+
+		try {
+
+			URI uri = new URI(getUri("parcelas/") + resposta.getId());
+
+			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
+
+		} catch (URISyntaxException ex) {
+			ex.printStackTrace();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(resposta).build();
+		}
+		// return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Não foi possível
+		// inserir a parcela").build();
 	}
 
 	@Override
-	public Parcela update(Parcela entity) {
-		return null;
+	public Response update(Parcela parcela) {
+
+		Parcela resposta = null;
+
+		try {
+
+			// resposta = this.business.update(parcela);
+
+			return Response.ok(this.business.update(parcela)).build();
+
+		} catch (CursoServiceException ex) {
+			ex.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
 	}
 
 	@Override
-	public Parcela delete(Long id) {
-		return null;
-	}
+	public Response delete(Long id) {
 
+		Parcela resposta = null;
+
+		try {
+			resposta = this.business.delete(id);
+			return Response.ok(resposta).build();
+
+		} catch (CursoServiceException ex) {
+			ex.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
+		/*
+		 * return domainIsNull(resposta) ?
+		 * Response.status(Status.INTERNAL_SERVER_ERROR).
+		 * entity("Não foi possível remover a parcela").build() :
+		 * Response.ok(resposta).build();
+		 */
+	}
 }

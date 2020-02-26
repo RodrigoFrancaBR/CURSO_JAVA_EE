@@ -7,5 +7,6 @@ public class ParcelaDAO extends DAOGeneric<Parcela, Long> implements ParcelaDAOI
 
 	public ParcelaDAO() {
 		super();
+		this.dominio = Parcela.class;
 	}
 }

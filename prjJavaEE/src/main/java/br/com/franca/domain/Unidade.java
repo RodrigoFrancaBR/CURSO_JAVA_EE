@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.franca.domain.enun.Status;
 
 @Entity
@@ -35,6 +37,8 @@ public class Unidade implements BaseEntity<Long>, Serializable {
 	private Status status;
 
 	@OneToMany(mappedBy = "unidade")
+	@JsonManagedReference
+	//@JsonManagedReference(value = "unidade")
 	private List<Turma> turmas = new ArrayList<Turma>();
 
 	private String nome;
@@ -72,6 +76,7 @@ public class Unidade implements BaseEntity<Long>, Serializable {
 		this.status = status;
 	}
 
+	//@JsonManagedReference(value = "unidade")
 	public List<Turma> getTurmas() {
 		return turmas;
 	}

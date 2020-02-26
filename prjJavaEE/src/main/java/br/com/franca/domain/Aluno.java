@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.com.franca.domain.enun.Sexo;
 import br.com.franca.domain.enun.SituacaoAluno;
 
@@ -42,7 +44,9 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "sit_aluno")
 	private SituacaoAluno situacao;
-
+	
+	//@JsonBackReference(value = "contrato-aluno")
+	@JsonBackReference
 	@OneToMany(mappedBy = "aluno")
 	private Set<Contrato> contratos = new HashSet<>();
 
@@ -213,7 +217,8 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 	public void setSituacao(SituacaoAluno situacao) {
 		this.situacao = situacao;
 	}
-
+	
+	//@JsonBackReference
 	public Set<Contrato> getContratos() {
 		return contratos;
 	}

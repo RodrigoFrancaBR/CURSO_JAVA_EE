@@ -1,47 +1,128 @@
 package br.com.franca.web.rs;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import br.com.franca.business.AlunoBusiness;
 import br.com.franca.domain.Aluno;
 import br.com.franca.web.api.AlunoAPI;
+import br.com.franca.web.exception.CursoServiceException;
 
 @Path("alunos")
-public class AlunoResource implements AlunoAPI {
+public class AlunoResource extends ResourceGeneric<Aluno> implements AlunoAPI {
 
 	private AlunoBusiness business;
 
 	public AlunoResource() {
-		super();
-		// this.business = new AlunoBusiness();
+		this.business = new AlunoBusiness();
 	}
 
 	@Override
-	public List<Aluno> findAll() {
-		// this.business.findAll();
-		return null;
+	public Response findAll() {
+		List<Aluno> resposta = null;
+		try {
+
+			resposta = business.findAll();
+
+			return Response.ok(resposta).build();
+
+		} catch (CursoServiceException ex) {
+			ex.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
 	}
 
 	@Override
-	public Aluno find(Long id) {
-		return null;
+	public Response find(Long id) {
+		Aluno resposta = null;
+		try {
+
+			resposta = this.business.find(id);
+
+			if (domainIsNull(resposta)) {
+				// throw new WebApplicationException(404);
+				// throw new CustomNotFoundException("Aluno, " + resposta + ", is not found");
+				return Response.status(Status.NOT_FOUND).entity(resposta).build();
+			}
+
+			// return Response.ok(resposta).build();
+			return Response.status(Status.OK).entity(resposta).build();
+
+		} catch (CursoServiceException ex) {
+			ex.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
 	}
 
 	@Override
-	public Aluno insert(Aluno entity) {
-		return null;
+	public Response insert(Aluno aluno) {
+		Aluno resposta = null;
+
+		try {
+
+			resposta = this.business.insert(aluno);
+
+		} catch (CursoServiceException ex) {
+			ex.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
+
+		try {
+
+			URI uri = new URI(getUri("alunos/") + resposta.getId());
+
+			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
+
+		} catch (URISyntaxException ex) {
+			ex.printStackTrace();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(resposta).build();
+		}
+		// return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Não foi possível
+		// inserir a aluno").build();
 	}
 
 	@Override
-	public Aluno update(Aluno entity) {
-		return null;
+	public Response update(Aluno aluno) {
+
+		Aluno resposta = null;
+
+		try {
+
+			// resposta = this.business.update(aluno);
+
+			return Response.ok(this.business.update(aluno)).build();
+
+		} catch (CursoServiceException ex) {
+			ex.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
 	}
 
 	@Override
-	public Aluno delete(Long id) {
-		return null;
+	public Response delete(Long id) {
+
+		Aluno resposta = null;
+
+		try {
+			resposta = this.business.delete(id);
+			return Response.ok(resposta).build();
+
+		} catch (CursoServiceException ex) {
+			ex.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
+		/*
+		 * return domainIsNull(resposta) ?
+		 * Response.status(Status.INTERNAL_SERVER_ERROR).
+		 * entity("Não foi possível remover a aluno").build() :
+		 * Response.ok(resposta).build();
+		 */
 	}
 
 }

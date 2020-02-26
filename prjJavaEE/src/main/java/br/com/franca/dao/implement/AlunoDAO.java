@@ -7,5 +7,6 @@ public class AlunoDAO extends DAOGeneric<Aluno, Long> implements AlunoDAOI {
 
 	public AlunoDAO() {
 		super();
+		this.dominio = Aluno.class;
 	}
 }

@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.franca.domain.enun.Status;
 
 @Entity
@@ -34,10 +37,15 @@ public class Turma implements BaseEntity<Long>, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	//@JsonBackReference(value = "unidade")
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
 
+	// @JsonBackReference(value = "contrato")
+	// @JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "turma")
 	private Set<Contrato> contratos;
 
@@ -62,6 +70,7 @@ public class Turma implements BaseEntity<Long>, Serializable {
 		this.nome = nome;
 	}
 
+	//@JsonBackReference(value = "unidade")
 	public Unidade getUnidade() {
 		return unidade;
 	}
@@ -70,6 +79,8 @@ public class Turma implements BaseEntity<Long>, Serializable {
 		this.unidade = unidade;
 	}
 
+	// @JsonBackReference(value = "contrato")
+	//@JsonIgnore
 	public Set<Contrato> getContratos() {
 		return contratos;
 	}
