@@ -5,30 +5,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
 import br.com.franca.domain.enun.SituacaoParcela;
-import br.com.franca.domain.interfaces.CondicaoDeContrato;
 
-public class CursoMaterialAvista implements CondicaoDeContrato {
-
-	private List<Parcela> listaDeParcelas;
-
-	public List<Parcela> getListaDeParcelas() {
-		return listaDeParcelas;
-	}
-
-	public void setListaDeParcelas(List<Parcela> listaDeParcelas) {
-		this.listaDeParcelas = listaDeParcelas;
-	}
-
-	public CursoMaterialAvista(Contrato contrato) {
-		List<Parcela> listaDeParcelas = this.calculaParcelas(contrato);
-		this.setListaDeParcelas(listaDeParcelas);
-	}
-
-	public CursoMaterialAvista() {
-	}
+public class CursoMaterialAvista extends CondicaoDeContrato {
 
 	@Override
 	public List<Parcela> calculaParcelas(Contrato contrato) {

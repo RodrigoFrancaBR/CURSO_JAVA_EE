@@ -2,6 +2,8 @@ package br.com.franca.domain.enun;
 
 import java.util.Arrays;
 
+import br.com.franca.strategy.CursoMaterialAvista;
+
 public enum CondicaoContrato {
 	CURSO_AVISTA_MATERIAL_PARCELADO(1, "Curso Àvista e Material Parcelado"),
 	CURSO_MATERIAL_AVISTA(2, "Curso e Material Àvista"),
@@ -21,6 +23,14 @@ public enum CondicaoContrato {
 		return Arrays.asList(CondicaoContrato.values()).parallelStream().filter(e -> e.getChave() == chave).findFirst()
 				.orElse(CondicaoContrato.INVALIDO);
 	}
+	
+	public CondicaoContrato getCondicaoContrato(Integer qtdParcelasCurso, Integer qtdParcelasMaterial) {
+		if (qtdParcelasCurso == 1 && qtdParcelasMaterial == 1) {
+			return CURSO_MATERIAL_AVISTA;
+		}
+		return null;
+	}
+	
 
 	public int getChave() {
 		return chave;

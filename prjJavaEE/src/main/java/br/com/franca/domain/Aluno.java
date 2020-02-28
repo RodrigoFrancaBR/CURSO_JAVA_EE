@@ -18,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.franca.domain.enun.Sexo;
 import br.com.franca.domain.enun.SituacaoAluno;
@@ -46,7 +47,8 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 	private SituacaoAluno situacao;
 	
 	//@JsonBackReference(value = "contrato-aluno")
-	@JsonBackReference
+	// @JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "aluno")
 	private Set<Contrato> contratos = new HashSet<>();
 
@@ -217,7 +219,7 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 	public void setSituacao(SituacaoAluno situacao) {
 		this.situacao = situacao;
 	}
-	
+	@JsonIgnore
 	//@JsonBackReference
 	public Set<Contrato> getContratos() {
 		return contratos;

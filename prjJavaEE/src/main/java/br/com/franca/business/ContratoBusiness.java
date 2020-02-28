@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.franca.dao.implement.ContratoDAO;
+import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
 import br.com.franca.strategy.CursoMaterialAvista;
@@ -50,7 +51,19 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 			throw new CursoServiceException("Contrato não pode ser null.");
 		}
 
-		contrato.setParcelas(this.getCondicaoDoContrato(contrato));
+		/*
+		 * CondicaoDeContrato condicaoContrato =
+		 * CondicaoDeContrato.getCondicaoContrato(contrato.getQtdParcelasCurso(),
+		 * contrato.getQtdParcelasMaterial());
+		 * 
+		 * List<Parcela> listaDeParcelas = condicaoContrato.calculaParcelas(contrato);
+		 * 
+		 * contrato.setParcelas(listaDeParcelas);
+		 */
+
+		contrato.setParcelas(CondicaoDeContrato
+				.getCondicaoContrato(contrato.getQtdParcelasCurso(), contrato.getQtdParcelasMaterial())
+				.calculaParcelas(contrato));
 
 		try {
 			return this.dao.save(contrato);
@@ -92,24 +105,4 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 		}
 	}
 
-	public List<Parcela> getCondicaoDoContrato(Contrato contrato) {
-		// List<Parcela> listaDeParcelas = new ArrayList<Parcela>();
-		if (contrato.getQtdParcelasCurso() == 1 && contrato.getQtdParcelasMaterial() == 1) {
-			return new CursoMaterialAvista(contrato).getListaDeParcelas();
-
-			/*
-			 * } else if (qtdParcelasCurso == 1 && qtdParcelasMaterial >= 2) {
-			 * this.condicaoDoContrato = new CursoAvistaMaterialParcelado();
-			 * this.condicaoContratoEnum = CondicaoContrato.CURSO_AVISTA_MATERIAL_PARCELADO;
-			 * } else { if (qtdParcelasCurso >= 2 && qtdParcelasMaterial == 1) {
-			 * this.condicaoDoContrato = new CursoParceladoMaterialAvista();
-			 * this.condicaoContratoEnum = CondicaoContrato.CURSO_PARCELADO_MATERIAL_AVISTA;
-			 * } else { if (qtdParcelasCurso >= 2 && qtdParcelasMaterial >= 2) {
-			 * this.condicaoContratoEnum = CondicaoContrato.CURSO_MATERIAL_PARCELADO;
-			 * this.condicaoDoContrato = new CursoMaterialParcelado(); } }
-			 */
-
-		}
-		return new ArrayList<Parcela>();
-	}
 }

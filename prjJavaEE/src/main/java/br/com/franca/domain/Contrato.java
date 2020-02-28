@@ -38,7 +38,7 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	//@JsonManagedReference(value = "contrato")
+	// @JsonManagedReference(value = "contrato")
 	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "turma_id")
@@ -51,7 +51,7 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 	private Aluno aluno;
 
 	// @JsonManagedReference(value = "contrato-parcela")
-	// @JsonManagedReference
+	@JsonManagedReference
 	@OneToMany(mappedBy = "contrato")
 	private List<Parcela> parcelas = new ArrayList<Parcela>();
 
@@ -101,7 +101,8 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 		this.id = id;
 	}
 
-	//@JsonManagedReference(value = "contrato")
+	@JsonManagedReference
+	// @JsonManagedReference(value = "contrato")
 	public Turma getTurma() {
 		return turma;
 	}
@@ -119,6 +120,7 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 		this.aluno = aluno;
 	}
 
+	@JsonManagedReference
 	public List<Parcela> getParcelas() {
 		return parcelas;
 	}
@@ -198,13 +200,6 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 	public void setDataMatricula(Calendar dataMatricula) {
 		this.dataMatricula = dataMatricula;
 	}
-
-	/*
-	 * public CondicaoContrato getCondicaoContrato() { return condicaoContrato; }
-	 * 
-	 * public void setCondicaoContrato(CondicaoContrato condicaoContrato) {
-	 * this.condicaoContrato = condicaoContrato; }
-	 */
 
 	public Matricula getMatricula() {
 		return matricula;

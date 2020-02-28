@@ -38,7 +38,8 @@ public class Turma implements BaseEntity<Long>, Serializable {
 	private Long id;
 
 	//@JsonBackReference(value = "unidade")
-	@JsonBackReference
+	// @JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
@@ -69,7 +70,7 @@ public class Turma implements BaseEntity<Long>, Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	@JsonIgnore
 	//@JsonBackReference(value = "unidade")
 	public Unidade getUnidade() {
 		return unidade;
@@ -80,7 +81,7 @@ public class Turma implements BaseEntity<Long>, Serializable {
 	}
 
 	// @JsonBackReference(value = "contrato")
-	//@JsonIgnore
+	@JsonIgnore
 	public Set<Contrato> getContratos() {
 		return contratos;
 	}
