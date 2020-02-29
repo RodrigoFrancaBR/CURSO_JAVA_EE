@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
 
 @Path("parcelas")
@@ -47,4 +48,10 @@ public interface ParcelaAPI {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delete(@PathParam("id") Long id);
 
+	@GET
+	// @Path("/findAll")
+	@Path("/simular")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response simularParcelas(Contrato contrato);
 }

@@ -1,13 +1,9 @@
 package br.com.franca.business;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.franca.dao.implement.ContratoDAO;
-import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
-import br.com.franca.domain.Parcela;
-import br.com.franca.strategy.CursoMaterialAvista;
 import br.com.franca.web.exception.CursoDAOException;
 import br.com.franca.web.exception.CursoServiceException;
 
@@ -50,20 +46,6 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 		if (domainIsNull(contrato)) {
 			throw new CursoServiceException("Contrato não pode ser null.");
 		}
-
-		/*
-		 * CondicaoDeContrato condicaoContrato =
-		 * CondicaoDeContrato.getCondicaoContrato(contrato.getQtdParcelasCurso(),
-		 * contrato.getQtdParcelasMaterial());
-		 * 
-		 * List<Parcela> listaDeParcelas = condicaoContrato.calculaParcelas(contrato);
-		 * 
-		 * contrato.setParcelas(listaDeParcelas);
-		 */
-
-		contrato.setParcelas(CondicaoDeContrato
-				.getCondicaoContrato(contrato.getQtdParcelasCurso(), contrato.getQtdParcelasMaterial())
-				.calculaParcelas(contrato));
 
 		try {
 			return this.dao.save(contrato);

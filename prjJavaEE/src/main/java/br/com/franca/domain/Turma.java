@@ -1,7 +1,6 @@
 package br.com.franca.domain;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,12 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.franca.domain.enun.Status;
 
@@ -37,18 +32,9 @@ public class Turma implements BaseEntity<Long>, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	//@JsonBackReference(value = "unidade")
-	// @JsonBackReference
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
-
-	// @JsonBackReference(value = "contrato")
-	// @JsonBackReference
-	@JsonIgnore
-	@OneToMany(mappedBy = "turma")
-	private Set<Contrato> contratos;
 
 	@Enumerated(EnumType.ORDINAL)
 	private Status status;
@@ -70,24 +56,13 @@ public class Turma implements BaseEntity<Long>, Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	@JsonIgnore
-	//@JsonBackReference(value = "unidade")
+
 	public Unidade getUnidade() {
 		return unidade;
 	}
 
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
-	}
-
-	// @JsonBackReference(value = "contrato")
-	@JsonIgnore
-	public Set<Contrato> getContratos() {
-		return contratos;
-	}
-
-	public void setContratos(Set<Contrato> contratos) {
-		this.contratos = contratos;
 	}
 
 	public Status getStatus() {
@@ -121,12 +96,6 @@ public class Turma implements BaseEntity<Long>, Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Turma [id=" + id + ", unidade=" + unidade + ", contratos=" + contratos + ", status=" + status
-				+ ", nome=" + nome + "]";
 	}
 
 }

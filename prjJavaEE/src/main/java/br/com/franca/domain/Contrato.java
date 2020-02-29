@@ -2,9 +2,7 @@ package br.com.franca.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,15 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import br.com.franca.domain.enun.FormaPagamento;
-import br.com.franca.domain.enun.Matricula;
+import br.com.franca.domain.enun.SituacaoMatricula;
 
 @Table(name = "tb_contrato")
 @Entity
@@ -38,22 +33,13 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	// @JsonManagedReference(value = "contrato")
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "turma_id")
 	private Turma turma;
 
-	// @JsonManagedReference(value = "contrato-aluno")
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "aluno_id")
 	private Aluno aluno;
-
-	// @JsonManagedReference(value = "contrato-parcela")
-	@JsonManagedReference
-	@OneToMany(mappedBy = "contrato")
-	private List<Parcela> parcelas = new ArrayList<Parcela>();
 
 	@Column(name = "tx_matri")
 	private BigDecimal taxaMatricula = new BigDecimal(0);
@@ -84,14 +70,11 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 	@Column(name = "dt_matri")
 	private Calendar dataMatricula = Calendar.getInstance();
 
-	/*
-	 * @Enumerated(EnumType.ORDINAL)
-	 * 
-	 * @Column(name = "cond_contrato") private CondicaoContrato condicaoContrato;
-	 */
+	private String matricula;
 
 	@Enumerated(EnumType.ORDINAL)
-	private Matricula matricula;
+	@Column(name = "sit_matric")
+	SituacaoMatricula situacao;
 
 	public Long getId() {
 		return id;
@@ -101,8 +84,6 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 		this.id = id;
 	}
 
-	@JsonManagedReference
-	// @JsonManagedReference(value = "contrato")
 	public Turma getTurma() {
 		return turma;
 	}
@@ -111,22 +92,12 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 		this.turma = turma;
 	}
 
-	@JsonManagedReference
 	public Aluno getAluno() {
 		return aluno;
 	}
 
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
-	}
-
-	@JsonManagedReference
-	public List<Parcela> getParcelas() {
-		return parcelas;
-	}
-
-	public void setParcelas(List<Parcela> parcelas) {
-		this.parcelas = parcelas;
 	}
 
 	public BigDecimal getTaxaMatricula() {
@@ -201,12 +172,20 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 		this.dataMatricula = dataMatricula;
 	}
 
-	public Matricula getMatricula() {
+	public String getMatricula() {
 		return matricula;
 	}
 
-	public void setMatricula(Matricula matricula) {
+	public void setMatricula(String matricula) {
 		this.matricula = matricula;
+	}
+
+	public SituacaoMatricula getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(SituacaoMatricula situacao) {
+		this.situacao = situacao;
 	}
 
 	@Override
@@ -232,16 +211,6 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Contrato [id=" + id + ", turma=" + turma + ", aluno=" + aluno + ", parcelas=" + parcelas
-				+ ", taxaMatricula=" + taxaMatricula + ", valorCurso=" + valorCurso + ", descontoCurso=" + descontoCurso
-				+ ", qtdParcelasCurso=" + qtdParcelasCurso + ", qtdParcelasMaterial=" + qtdParcelasMaterial
-				+ ", valorMaterial=" + valorMaterial + ", formaPagamento=" + formaPagamento + ", diaVencimento="
-				+ diaVencimento + ", dataMatricula=" + dataMatricula + ", condicaoContrato=" + ", matricula="
-				+ matricula + "]";
 	}
 
 }

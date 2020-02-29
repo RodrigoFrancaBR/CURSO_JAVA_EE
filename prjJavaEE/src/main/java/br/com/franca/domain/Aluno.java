@@ -2,8 +2,6 @@ package br.com.franca.domain;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +10,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.franca.domain.enun.Sexo;
 import br.com.franca.domain.enun.SituacaoAluno;
@@ -37,6 +31,7 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 	private Long id;
 
 	@Temporal(TemporalType.DATE)
+	@Column(name = "dt_nasci")
 	private Calendar dataNascimento = Calendar.getInstance();
 
 	@Enumerated(EnumType.ORDINAL)
@@ -45,18 +40,16 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "sit_aluno")
 	private SituacaoAluno situacao;
-	
-	//@JsonBackReference(value = "contrato-aluno")
-	// @JsonBackReference
-	@JsonIgnore
-	@OneToMany(mappedBy = "aluno")
-	private Set<Contrato> contratos = new HashSet<>();
+
+	@Column(name = "org_exp")
+	private String orgaoExp;
+
+	@Column(name = "uf_rg")
+	private String ufRg;
 
 	private String nome;
 	private String cpf;
 	private String rg;
-	private String orgaoExp;
-	private String ufRg;
 	private String celular;
 	private String residencial;
 	private String email;
@@ -219,15 +212,6 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 	public void setSituacao(SituacaoAluno situacao) {
 		this.situacao = situacao;
 	}
-	@JsonIgnore
-	//@JsonBackReference
-	public Set<Contrato> getContratos() {
-		return contratos;
-	}
-
-	public void setContratos(Set<Contrato> contratos) {
-		this.contratos = contratos;
-	}
 
 	@Override
 	public int hashCode() {
@@ -254,12 +238,4 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Aluno [id=" + id + ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + ", situacao=" + situacao
-				+ ", contratos=" + contratos + ", nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", orgaoExp="
-				+ orgaoExp + ", ufRg=" + ufRg + ", celular=" + celular + ", residencial=" + residencial + ", email="
-				+ email + ", cep=" + cep + ", endereco=" + endereco + ", bairro=" + bairro + ", cidade=" + cidade
-				+ ", estado=" + estado + ", pai=" + pai + ", mae=" + mae + "]";
-	}
 }

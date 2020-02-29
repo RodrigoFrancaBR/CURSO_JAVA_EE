@@ -10,19 +10,26 @@ import br.com.franca.strategy.CursoParceladoMaterialAvista;
 public abstract class CondicaoDeContrato {
 
 	public final static CondicaoDeContrato getCondicaoContrato(Integer qtdParcelasCurso, Integer qtdParcelasMaterial) {
+		CondicaoDeContrato contrato = null;
+
 		if (qtdParcelasCurso == 1 && qtdParcelasMaterial == 1)
-			return new CursoMaterialAvista();
+			// return new CursoMaterialAvista();
+			contrato = new CursoMaterialAvista();
+		;
 
 		if (qtdParcelasCurso == 1 && qtdParcelasMaterial >= 2)
-			return new CursoAvistaMaterialParcelado();
+			contrato = new CursoAvistaMaterialParcelado();
+		// return new CursoAvistaMaterialParcelado();
 
 		if (qtdParcelasCurso >= 2 && qtdParcelasMaterial == 1)
-			return new CursoParceladoMaterialAvista();
+			contrato = new CursoParceladoMaterialAvista();
+		// return new CursoParceladoMaterialAvista();
 
 		if (qtdParcelasCurso >= 2 && qtdParcelasMaterial >= 2)
-			return new CursoMaterialParcelado();
+			contrato = new CursoMaterialParcelado();
+		// return new CursoMaterialParcelado();
 
-		return null;
+		return contrato;
 	}
 
 	public abstract List<Parcela> calculaParcelas(Contrato contrato);

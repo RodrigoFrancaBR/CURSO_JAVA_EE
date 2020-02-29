@@ -18,9 +18,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.com.franca.domain.enun.SituacaoParcela;
 
 @Table(name = "tb_parcela")
@@ -36,9 +33,6 @@ public class Parcela implements BaseEntity<Long>, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	// @JsonBackReference(value = "contrato-parcela")
-	@JsonIgnore
-	// @JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "contrato_id")
 	private Contrato contrato;
@@ -81,7 +75,6 @@ public class Parcela implements BaseEntity<Long>, Serializable {
 		this.id = id;
 	}
 
-	@JsonIgnore
 	public Contrato getContrato() {
 		return contrato;
 	}
@@ -185,14 +178,6 @@ public class Parcela implements BaseEntity<Long>, Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Parcela [id=" + id + ", contrato=" + contrato + ", dataVencimento=" + dataVencimento + ", valorPago="
-				+ valorPago + ", dataPagamento=" + dataPagamento + ", valorParcelaCurso=" + valorParcelaCurso
-				+ ", valorParcelaMaterial=" + valorParcelaMaterial + ", valorTotalParcela=" + valorTotalParcela
-				+ ", situacao=" + situacao + "]";
 	}
 
 }

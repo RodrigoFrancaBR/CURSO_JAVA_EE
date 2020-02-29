@@ -1,8 +1,6 @@
 package br.com.franca.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,11 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.franca.domain.enun.Status;
 
@@ -35,12 +30,7 @@ public class Unidade implements BaseEntity<Long>, Serializable {
 
 	@Enumerated(EnumType.ORDINAL)
 	private Status status;
-
-	@OneToMany(mappedBy = "unidade")
-	@JsonManagedReference
-	//@JsonManagedReference(value = "unidade")
-	private List<Turma> turmas = new ArrayList<Turma>();
-
+	
 	private String nome;
 	private String endereco;
 
@@ -76,26 +66,6 @@ public class Unidade implements BaseEntity<Long>, Serializable {
 		this.status = status;
 	}
 
-	//@JsonManagedReference(value = "unidade")
-	public List<Turma> getTurmas() {
-		return turmas;
-	}
-
-	public void setTurmas(List<Turma> turmas) {
-		this.turmas = turmas;
-	}
-
-	public Unidade() {
-	}
-
-	public Unidade(Long id, Status status, String nome, String endereco, List<Turma> turmas) {
-		this.id = id;
-		this.status = status;
-		this.nome = nome;
-		this.endereco = endereco;
-		this.turmas = turmas;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -119,12 +89,6 @@ public class Unidade implements BaseEntity<Long>, Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Unidade [id=" + id + ", status=" + status + ", turmas=" + turmas + ", nome=" + nome + ", endereco="
-				+ endereco + "]";
 	}
 
 }
