@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 import br.com.franca.domain.enun.FormaPagamento;
 import br.com.franca.domain.enun.SituacaoMatricula;
 
-@Table(name = "tb_contrato")
+@Table(name = "TB_CONTRATO")
 @Entity
 public class Contrato implements BaseEntity<Long>, Serializable {
 
@@ -32,14 +32,6 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@ManyToOne
-	@JoinColumn(name = "turma_id")
-	private Turma turma;
-
-	@ManyToOne
-	@JoinColumn(name = "aluno_id")
-	private Aluno aluno;
 
 	@Column(name = "tx_matri")
 	private BigDecimal taxaMatricula = new BigDecimal(0);
@@ -59,22 +51,30 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 	@Column(name = "vlr_mate")
 	private BigDecimal valorMaterial;
 
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	@Column(name = "forma_pg")
 	private FormaPagamento formaPagamento;
 
 	@Column(name = "dia_venc")
 	private Integer diaVencimento;
 
+	private String matricula;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dt_matri")
 	private Calendar dataMatricula = Calendar.getInstance();
 
-	private String matricula;
-
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	@Column(name = "sit_matric")
 	SituacaoMatricula situacao;
+
+	@ManyToOne
+	@JoinColumn(name = "aluno_id")
+	private Aluno aluno;
+
+	@ManyToOne
+	@JoinColumn(name = "turma_id")
+	private Turma turma;
 
 	public Long getId() {
 		return id;

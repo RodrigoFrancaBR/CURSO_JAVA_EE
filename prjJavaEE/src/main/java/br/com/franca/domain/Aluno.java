@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 import br.com.franca.domain.enun.Sexo;
 import br.com.franca.domain.enun.SituacaoAluno;
 
-@Table(name = "tb_aluno")
+@Table(name = "TB_ALUNO")
 @Entity
 public class Aluno implements BaseEntity<Long>, Serializable {
 
@@ -30,26 +30,23 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "dt_nasci")
-	private Calendar dataNascimento = Calendar.getInstance();
-
-	@Enumerated(EnumType.ORDINAL)
-	private Sexo sexo;
-
-	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "sit_aluno")
-	private SituacaoAluno situacao;
-
-	@Column(name = "org_exp")
-	private String orgaoExp;
+	private String nome;
+	private String cpf;
+	private String rg;
 
 	@Column(name = "uf_rg")
 	private String ufRg;
 
-	private String nome;
-	private String cpf;
-	private String rg;
+	@Column(name = "org_exp")
+	private String orgaoExpedidor;
+
+	@Enumerated(EnumType.STRING)
+	private Sexo sexo;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dt_nasci")
+	private Calendar dataNascimento = Calendar.getInstance();
+
 	private String celular;
 	private String residencial;
 	private String email;
@@ -60,6 +57,10 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 	private String estado;
 	private String pai;
 	private String mae;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "sit_aluno")
+	private SituacaoAluno situacao;
 
 	public Long getId() {
 		return id;
@@ -93,20 +94,36 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 		this.rg = rg;
 	}
 
-	public String getOrgaoExp() {
-		return orgaoExp;
-	}
-
-	public void setOrgaoExp(String orgaoExp) {
-		this.orgaoExp = orgaoExp;
-	}
-
 	public String getUfRg() {
 		return ufRg;
 	}
 
 	public void setUfRg(String ufRg) {
 		this.ufRg = ufRg;
+	}
+
+	public String getOrgaoExpedidor() {
+		return orgaoExpedidor;
+	}
+
+	public void setOrgaoExpedidor(String orgaoExpedidor) {
+		this.orgaoExpedidor = orgaoExpedidor;
+	}
+
+	public Sexo getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
+	}
+
+	public Calendar getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Calendar dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String getCelular() {
@@ -187,22 +204,6 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 
 	public void setMae(String mae) {
 		this.mae = mae;
-	}
-
-	public Calendar getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Calendar dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
-	public Sexo getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
 	}
 
 	public SituacaoAluno getSituacao() {

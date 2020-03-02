@@ -3,21 +3,23 @@ package br.com.franca.business;
 import java.util.List;
 
 import br.com.franca.dao.implement.ContratoDAO;
+import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
+import br.com.franca.domain.Parcela;
 import br.com.franca.web.exception.CursoDAOException;
 import br.com.franca.web.exception.CursoServiceException;
 
 public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 
-	private ContratoDAO dao;
+	private ContratoDAO contratoDAO;
 
 	public ContratoBusiness() {
-		this.dao = new ContratoDAO();
+		this.contratoDAO = new ContratoDAO();
 	}
 
 	public List<Contrato> findAll() throws CursoServiceException {
 		try {
-			return this.dao.findAll();
+			return this.contratoDAO.findAll();
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -31,7 +33,7 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 		}
 
 		try {
-			return this.dao.find(id);
+			return this.contratoDAO.find(id);
 			// contrato = this.dao.find(id);
 			// return domainIsNull(contrato) ? null : contrato;
 		} catch (CursoDAOException ex) {
@@ -41,17 +43,45 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 
 	}
 
-	public Contrato insert(Contrato contrato) throws CursoServiceException {
+	public Contrato save(Contrato contrato) throws CursoServiceException {
 
-		if (domainIsNull(contrato)) {
-			throw new CursoServiceException("Contrato não pode ser null.");
+		/*
+		 * if (domainIsNull(contrato)) { throw new
+		 * CursoServiceException("Contrato não pode ser null."); }
+		 */
+
+		if (contrato.getDiaVencimento() == null)
+			throw new CursoServiceException("Dia de vencimento é obrigatório");
+
+		if (contrato.getFormaPagamento() == null)
+			throw new CursoServiceException("Forma de pagamento é obrigatório");
+
+		if (contrato.getQtdParcelasCurso() == null)
+			throw new CursoServiceException("Parcelas de curso é obrigatório");
+
+		if (contrato.getQtdParcelasMaterial() == null)
+			throw new CursoServiceException("Parcelas de material é obrigatório");
+
+		if (idIsNull(contrato.getAluno().getId()))
+			throw new CursoServiceException("Aluno é obrigatório");
+
+		if (idIsNull(contrato.getTurma().getId()))
+			throw new CursoServiceException("Turma é obrigatório");
+
+		List<Parcela> listaDeParcelas = this.obterParcelas(contrato);
+
+		boolean todosCombinam = listaDeParcelas.parallelStream()
+				.allMatch(p -> p.getContrato().getId().equals(contrato.getId()));
+
+		if (!todosCombinam) {
+			throw new CursoServiceException("Todas as parcelas devem pertencer ao mesmo contrato");
 		}
 
 		try {
-			return this.dao.save(contrato);
-		} catch (CursoDAOException ex) {
-			ex.printStackTrace();
-			throw new CursoServiceException(ex);
+			return this.contratoDAO.save(contrato, listaDeParcelas);
+		} catch (CursoDAOException e) {
+			e.printStackTrace();
+			throw new CursoServiceException(e);
 		}
 	}
 
@@ -65,7 +95,7 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 			throw new RuntimeException("ID não pode ser null.");
 		}
 		try {
-			return contrato = this.dao.update(contrato);
+			return contrato = this.contratoDAO.update(contrato);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -80,11 +110,16 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 		 */
 		Contrato contrato = this.find(id);
 		try {
-			return domainIsNull(contrato) ? null : this.dao.delete(contrato);
+			return domainIsNull(contrato) ? null : this.contratoDAO.delete(contrato);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
 		}
+	}
+
+	private List<Parcela> obterParcelas(Contrato contrato) {
+		return CondicaoDeContrato.getCondicaoContrato(contrato.getQtdParcelasCurso(), contrato.getQtdParcelasMaterial())
+				.calculaParcelas(contrato);
 	}
 
 }

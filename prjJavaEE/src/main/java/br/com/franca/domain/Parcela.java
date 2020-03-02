@@ -20,7 +20,7 @@ import javax.persistence.Transient;
 
 import br.com.franca.domain.enun.SituacaoParcela;
 
-@Table(name = "tb_parcela")
+@Table(name = "TB_PARCELA")
 @Entity
 public class Parcela implements BaseEntity<Long>, Serializable {
 
@@ -32,10 +32,6 @@ public class Parcela implements BaseEntity<Long>, Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@ManyToOne
-	@JoinColumn(name = "contrato_id")
-	private Contrato contrato;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dt_venc")
@@ -66,6 +62,10 @@ public class Parcela implements BaseEntity<Long>, Serializable {
 
 	@Transient
 	private BigDecimal valorResidualParcelaMaterial;
+
+	@ManyToOne
+	@JoinColumn(name = "contrato_id")
+	private Contrato contrato;
 
 	public Long getId() {
 		return id;

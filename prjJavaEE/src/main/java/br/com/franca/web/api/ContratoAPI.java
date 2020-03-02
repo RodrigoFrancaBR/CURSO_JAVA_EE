@@ -34,7 +34,7 @@ public interface ContratoAPI {
 	// @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response insert(Contrato contrato);
+	public Response save(Contrato contrato);
 
 	@PUT
 	// @Path("/")

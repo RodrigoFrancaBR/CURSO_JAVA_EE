@@ -8,7 +8,7 @@ import br.com.franca.dao.interfaces.CRUDI;
 import br.com.franca.util.EntityManagerUtil;
 import br.com.franca.web.exception.CursoDAOException;
 
-public class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
+public abstract class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 
 	public EntityManager em;
 	public Class<Dominio> dominio;

@@ -62,12 +62,12 @@ public class ContratoResource extends ResourceGeneric<Contrato> implements Contr
 	}
 
 	@Override
-	public Response insert(Contrato contrato) {
+	public Response save(Contrato contrato) {
 		Contrato resposta = null;
 
 		try {
 
-			resposta = this.business.insert(contrato);
+			resposta = this.business.save(contrato);
 
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();

@@ -48,6 +48,8 @@ public class CursoMaterialAvista extends CondicaoDeContrato {
 
 		parcela.setSituacao(SituacaoParcela.PAGO);
 
+		parcela.setContrato(contrato);
+
 		parcelas.add(parcela);
 
 		return parcelas;

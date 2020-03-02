@@ -1,5 +1,6 @@
 package br.com.franca.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.franca.dao.implement.ParcelaDAO;
@@ -122,5 +123,20 @@ public class ParcelaBusiness extends BusinessGeneric<Parcela, Long> {
 				contrato.getQtdParcelasMaterial());
 		return condicaoContrato.calculaParcelas(contrato);
 
+	}
+
+	public List<Parcela> inserir(Contrato contrato) throws CursoServiceException {
+		List<Parcela> listaDeParcelas = this.simularParcelas(contrato);
+		List<Parcela> listaDeParcelasSalva = new ArrayList<>();
+		for (Parcela parcela : listaDeParcelas) {
+			try {
+				Parcela parcelaSalva = this.dao.save(parcela);
+				listaDeParcelasSalva.add(parcelaSalva);
+			} catch (CursoDAOException e) {
+				e.printStackTrace();
+				throw new CursoServiceException(e);
+			}
+		}
+		return listaDeParcelasSalva;
 	}
 }

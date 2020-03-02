@@ -137,4 +137,16 @@ public class ParcelaResource extends ResourceGeneric<Parcela> implements Parcela
 			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
 		}
 	}
+
+	@Override
+	public Response inserir(Contrato contrato) {
+		List<Parcela> resposta = null;
+		try {
+			resposta = this.business.inserir(contrato);
+			return Response.status(Status.OK).entity(resposta).build();
+		} catch (CursoServiceException e) {
+			e.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
+	}
 }

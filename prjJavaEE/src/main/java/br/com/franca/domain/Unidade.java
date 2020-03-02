@@ -15,7 +15,7 @@ import br.com.franca.domain.enun.Status;
 
 @Entity
 //definindo um index name unique: "nome_endereco_UK" para as colunas: nome, endereco
-@Table(name = "tb_unidade", uniqueConstraints = @UniqueConstraint(columnNames = { "nome",
+@Table(name = "TB_UNIDADE", uniqueConstraints = @UniqueConstraint(columnNames = { "nome",
 		"endereco" }, name = "nome_endereco_UK"))
 public class Unidade implements BaseEntity<Long>, Serializable {
 
@@ -26,13 +26,14 @@ public class Unidade implements BaseEntity<Long>, Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	@Enumerated(EnumType.ORDINAL)
-	private Status status;
+	private Long id;	
 	
 	private String nome;
+	
 	private String endereco;
+	
+	@Enumerated(EnumType.STRING)
+	private Status status;
 
 	public Long getId() {
 		return id;
