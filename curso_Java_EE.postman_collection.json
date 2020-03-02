@@ -1,0 +1,457 @@
+{
+	"variables": [],
+	"info": {
+		"name": "curso_Java_EE",
+		"_postman_id": "cdb1639f-eb3b-105d-a83e-011bf1ed7d19",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "unidade",
+			"description": "",
+			"item": [
+				{
+					"name": "delete",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/unidades/1",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/unidades",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/unidades",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\":\"CXASCADURA\",\n\t\"endereco\":\"RUA QUINTÃO 153\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/unidades/1",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/unidades/",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"status\": \"ATIVA\",\r\n    \"turmas\": [],\r\n    \"nome\": \"MADUREIRA\",\r\n    \"endereco\": \"RUA DA ABOLIÇÃO 900\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "turma",
+			"description": "",
+			"item": [
+				{
+					"name": "delete",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/turmas/1",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/turmas",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/turmas",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\":\"1002\",\n \"unidade\" :    {\n        \"id\": 1,\n        \"nome\": \"CASCADURA\",\n        \"endereco\": \"RUA QUINTÃO 153\",\n        \"status\": \"ATIVA\"\n    }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/turmas/2",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/turmas/",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"nome\": \"1003\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "aluno",
+			"description": "",
+			"item": [
+				{
+					"name": "update",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/turmas/",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"nome\": \"1003\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/alunos/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/alunos",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nome\": \"FABIANO\",\r\n        \"cpf\": \"107.669.177-37\",\r\n        \"rg\": \"20.524.877-7\",\r\n        \"orgaoExpedidor\": \"DETRAN\",\r\n        \"ufRg\": \"RJ\",\r\n        \"dataNascimento\":\"1985-09-04\",\r\n        \"sexo\": \"MASCULINO\",\r\n        \"celular\": \"2198488-0409\",\r\n        \"residencial\": \"213276-8531\",\r\n        \"email\": \"RFRANCA@GMAIL.COM\",\r\n        \"cep\": \"21381-050\",\r\n        \"endereco\": \"QUINTÃO 153\",\r\n        \"bairro\": \"CASCADURA\",\r\n        \"cidade\": \"RIO DE JANEIRO\",\r\n        \"estado\": \"RJ\",\r\n        \"pai\": \"DARCY\",\r\n        \"mae\": \"FATIMA\",\r\n        \"situacao\": \"INATIVO\"\r\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/alunos/1",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/alunos",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "contrato",
+			"description": "",
+			"item": [
+				{
+					"name": "update",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/contratos/",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"nome\": \"1003\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/contratos",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/contratos/2",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/contratos",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"taxaMatricula\": 100,\n        \"valorCurso\": 1000,\n        \"descontoCurso\": 0.1,\n        \"qtdParcelasCurso\": 1,\n        \"qtdParcelasMaterial\": 1,\n        \"valorMaterial\": 500,\n        \"formaPagamento\": \"DINHEIRO\",\n        \"diaVencimento\": 1,\n        \"matricula\": \"20201071001\",\n        \"dataMatricula\": 1577847600000,\n        \"situacao\": \"ATIVA\",\n        \n        \"aluno\":  {\n        \"id\": 1,\n        \"nome\": \"RODRIGO\",\n        \"cpf\": \"107.669.177-38\",\n        \"rg\": \"20.524.877-8\",\n        \"ufRg\": \"RJ\",\n        \"orgaoExpedidor\": \"DETRAN\",\n        \"sexo\": \"MASCULINO\",\n        \"dataNascimento\": 494640000000,\n        \"celular\": \"2198488-0409\",\n        \"residencial\": \"213276-8531\",\n        \"email\": \"FFRANCACOSTA@GMAIL.COM\",\n        \"cep\": \"21381-050\",\n        \"endereco\": \"QUINTÃO 153\",\n        \"bairro\": \"CASCADURA\",\n        \"cidade\": \"RIO DE JANEIRO\",\n        \"estado\": \"RJ\",\n        \"pai\": \"DARCY\",\n        \"mae\": \"FATIMA\",\n        \"situacao\": \"INATIVO\"\n    },\n        \n        \"turma\":     {\n        \"id\": 2,\n        \"nome\": \"1002\",\n        \"status\": \"ATIVA\",\n        \"unidade\": {\n            \"id\": 1,\n            \"nome\": \"CASCADURA\",\n            \"endereco\": \"RUA QUINTÃO 153\",\n            \"status\": \"ATIVA\"\n        }\n    }\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/contratos/1",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "parcela",
+			"description": "",
+			"item": [
+				{
+					"name": "update",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/unidades/",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"status\": \"ATIVA\",\r\n    \"turmas\": [],\r\n    \"nome\": \"MADUREIRA\",\r\n    \"endereco\": \"RUA DA ABOLIÇÃO 900\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/unidades",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\":\"MADUREIRA\",\n\t\"endereco\":\"RUA DA ABOLIÇÃO 200\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/unidades/1",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/parcelas/simular",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"taxaMatricula\": 100,\n        \"valorCurso\": 1000,\n        \"descontoCurso\": 0.1,\n        \"qtdParcelasCurso\": 1,\n        \"qtdParcelasMaterial\": 1,\n        \"valorMaterial\": 500,\n        \"formaPagamento\": \"DINHEIRO\",\n        \"diaVencimento\": 1,\n        \"matricula\": \"20201071001\",\n        \"dataMatricula\": 1577847600000,\n        \"situacao\": \"ATIVA\",\n        \n        \"aluno\":  {\n        \"id\": 1,\n        \"nome\": \"RODRIGO\",\n        \"cpf\": \"107.669.177-38\",\n        \"rg\": \"20.524.877-8\",\n        \"ufRg\": \"RJ\",\n        \"orgaoExpedidor\": \"DETRAN\",\n        \"sexo\": \"MASCULINO\",\n        \"dataNascimento\": 494640000000,\n        \"celular\": \"2198488-0409\",\n        \"residencial\": \"213276-8531\",\n        \"email\": \"FFRANCACOSTA@GMAIL.COM\",\n        \"cep\": \"21381-050\",\n        \"endereco\": \"QUINTÃO 153\",\n        \"bairro\": \"CASCADURA\",\n        \"cidade\": \"RIO DE JANEIRO\",\n        \"estado\": \"RJ\",\n        \"pai\": \"DARCY\",\n        \"mae\": \"FATIMA\",\n        \"situacao\": \"INATIVO\"\n    },\n        \n        \"turma\":     {\n        \"id\": 2,\n        \"nome\": \"1002\",\n        \"status\": \"ATIVA\",\n        \"unidade\": {\n            \"id\": 1,\n            \"nome\": \"CASCADURA\",\n            \"endereco\": \"RUA QUINTÃO 153\",\n            \"status\": \"ATIVA\"\n        }\n    }\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"url": "http://localhost:8080/curso/resources/unidades/1",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
