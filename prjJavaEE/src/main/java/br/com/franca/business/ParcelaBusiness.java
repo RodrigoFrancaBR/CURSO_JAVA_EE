@@ -1,11 +1,8 @@
 package br.com.franca.business;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.franca.dao.implement.ParcelaDAO;
-import br.com.franca.domain.CondicaoDeContrato;
-import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
 import br.com.franca.domain.enun.SituacaoParcela;
 import br.com.franca.web.exception.CursoDAOException;
@@ -93,50 +90,43 @@ public class ParcelaBusiness extends BusinessGeneric<Parcela, Long> {
 		}
 	}
 
-	public List<Parcela> simularParcelas(Contrato contrato) throws CursoServiceException {
+	/*
+	 * public List<Parcela> simularParcelas(Contrato contrato) throws
+	 * CursoServiceException {
+	 * 
+	 * if (contrato.getDiaVencimento() == null) { throw new
+	 * CursoServiceException("Dia de vencimento é obrigatório"); }
+	 * 
+	 * if (contrato.getAluno().getCpf() == null) { throw new
+	 * CursoServiceException("CPF é obrigatório"); }
+	 * 
+	 * if (contrato.getTurma() == null) { throw new
+	 * CursoServiceException("Turma é obrigatório"); }
+	 * 
+	 * if (contrato.getFormaPagamento() == null) { throw new
+	 * CursoServiceException("Forma de pagamento é obrigatório"); }
+	 * 
+	 * if (contrato.getQtdParcelasCurso() == null) { throw new
+	 * CursoServiceException("Parcelas de curso é obrigatório"); }
+	 * 
+	 * if (contrato.getQtdParcelasMaterial() == null) { throw new
+	 * CursoServiceException("Parcelas de material é obrigatório"); }
+	 * 
+	 * CondicaoDeContrato condicaoContrato =
+	 * CondicaoDeContrato.getCondicaoContrato(contrato.getQtdParcelasCurso(),
+	 * contrato.getQtdParcelasMaterial()); return
+	 * condicaoContrato.calculaParcelas(contrato);
+	 * 
+	 * }
+	 */
 
-		if (contrato.getDiaVencimento() == null) {
-			throw new CursoServiceException("Dia de vencimento é obrigatório");
-		}
-
-		if (contrato.getAluno().getCpf() == null) {
-			throw new CursoServiceException("CPF é obrigatório");
-		}
-
-		if (contrato.getTurma() == null) {
-			throw new CursoServiceException("Turma é obrigatório");
-		}
-
-		if (contrato.getFormaPagamento() == null) {
-			throw new CursoServiceException("Forma de pagamento é obrigatório");
-		}
-
-		if (contrato.getQtdParcelasCurso() == null) {
-			throw new CursoServiceException("Parcelas de curso é obrigatório");
-		}
-
-		if (contrato.getQtdParcelasMaterial() == null) {
-			throw new CursoServiceException("Parcelas de material é obrigatório");
-		}
-
-		CondicaoDeContrato condicaoContrato = CondicaoDeContrato.getCondicaoContrato(contrato.getQtdParcelasCurso(),
-				contrato.getQtdParcelasMaterial());
-		return condicaoContrato.calculaParcelas(contrato);
-
-	}
-
-	public List<Parcela> inserir(Contrato contrato) throws CursoServiceException {
-		List<Parcela> listaDeParcelas = this.simularParcelas(contrato);
-		List<Parcela> listaDeParcelasSalva = new ArrayList<>();
-		for (Parcela parcela : listaDeParcelas) {
-			try {
-				Parcela parcelaSalva = this.dao.save(parcela);
-				listaDeParcelasSalva.add(parcelaSalva);
-			} catch (CursoDAOException e) {
-				e.printStackTrace();
-				throw new CursoServiceException(e);
-			}
-		}
-		return listaDeParcelasSalva;
-	}
+	/*
+	 * public List<Parcela> inserir(Contrato contrato) throws CursoServiceException
+	 * { List<Parcela> listaDeParcelas = this.simularParcelas(contrato);
+	 * List<Parcela> listaDeParcelasSalva = new ArrayList<>(); for (Parcela parcela
+	 * : listaDeParcelas) { try { Parcela parcelaSalva = this.dao.save(parcela);
+	 * listaDeParcelasSalva.add(parcelaSalva); } catch (CursoDAOException e) {
+	 * e.printStackTrace(); throw new CursoServiceException(e); } } return
+	 * listaDeParcelasSalva; }
+	 */
 }

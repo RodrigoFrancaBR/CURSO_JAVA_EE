@@ -29,6 +29,12 @@ public interface ContratoAPI {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response find(@PathParam("id") Long id);
+	
+	@GET
+	@Path("/simular")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response simularContrato(Contrato contrato);
 
 	@POST
 	// @Path("/")

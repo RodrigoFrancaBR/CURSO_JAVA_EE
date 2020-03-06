@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import br.com.franca.domain.enun.FormaPagamento;
 import br.com.franca.domain.enun.SituacaoMatricula;
@@ -41,11 +42,13 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 
 	@Column(name = "desc_curso")
 	private Double descontoCurso;
-
-	@Column(name = "qtd_parc_curso")
+	
+	@Transient
+	// @Column(name = "qtd_parc_curso")
 	private Integer qtdParcelasCurso;
-
-	@Column(name = "qtd_parc_mate")
+	
+	@Transient
+	// @Column(name = "qtd_parc_mate")
 	private Integer qtdParcelasMaterial;
 
 	@Column(name = "vlr_mate")

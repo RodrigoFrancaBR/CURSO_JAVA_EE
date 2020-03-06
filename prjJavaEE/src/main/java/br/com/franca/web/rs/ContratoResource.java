@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response.Status;
 
 import br.com.franca.business.ContratoBusiness;
 import br.com.franca.domain.Contrato;
+import br.com.franca.domain.Parcela;
 import br.com.franca.web.api.ContratoAPI;
 import br.com.franca.web.exception.CursoServiceException;
 
@@ -57,6 +58,19 @@ public class ContratoResource extends ResourceGeneric<Contrato> implements Contr
 
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
+	}
+
+
+	@Override
+	public Response simularContrato(Contrato contrato) {
+		List<Parcela> resposta = null;
+		try {
+			resposta = this.business.simularContrato(contrato);
+			return Response.status(Status.OK).entity(resposta).build();
+		} catch (CursoServiceException e) {
+			e.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
 		}
 	}

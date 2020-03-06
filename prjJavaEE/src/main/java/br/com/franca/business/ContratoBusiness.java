@@ -50,32 +50,35 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 		 * CursoServiceException("Contrato não pode ser null."); }
 		 */
 
-		if (contrato.getDiaVencimento() == null)
-			throw new CursoServiceException("Dia de vencimento é obrigatório");
+//		  if (contrato.getDiaVencimento() == null) throw new
+//		  CursoServiceException("Dia de vencimento é obrigatório");
+//		  
+//		  if (contrato.getFormaPagamento() == null) throw new
+//		  CursoServiceException("Forma de pagamento é obrigatório");
+//		  
+//		  if (contrato.getQtdParcelasCurso() == null) throw new
+//		  CursoServiceException("Parcelas de curso é obrigatório");
+//		  
+//		  if (contrato.getQtdParcelasMaterial() == null) throw new
+//		  CursoServiceException("Parcelas de material é obrigatório");
+//		  
+//		  if (idIsNull(contrato.getAluno().getId())) throw new
+//		  CursoServiceException("Aluno é obrigatório");
+//		  
+//		  if (idIsNull(contrato.getTurma().getId())) throw new
+//		  CursoServiceException("Turma é obrigatório");
+		List<Parcela> listaDeParcelas = this.simularContrato(contrato);
 
-		if (contrato.getFormaPagamento() == null)
-			throw new CursoServiceException("Forma de pagamento é obrigatório");
+//		List<Parcela> listaDeParcelas = this.obterParcelas(contrato);
 
-		if (contrato.getQtdParcelasCurso() == null)
-			throw new CursoServiceException("Parcelas de curso é obrigatório");
-
-		if (contrato.getQtdParcelasMaterial() == null)
-			throw new CursoServiceException("Parcelas de material é obrigatório");
-
-		if (idIsNull(contrato.getAluno().getId()))
-			throw new CursoServiceException("Aluno é obrigatório");
-
-		if (idIsNull(contrato.getTurma().getId()))
-			throw new CursoServiceException("Turma é obrigatório");
-
-		List<Parcela> listaDeParcelas = this.obterParcelas(contrato);
-
-		boolean todosCombinam = listaDeParcelas.parallelStream()
-				.allMatch(p -> p.getContrato().getId().equals(contrato.getId()));
-
-		if (!todosCombinam) {
-			throw new CursoServiceException("Todas as parcelas devem pertencer ao mesmo contrato");
-		}
+		/*
+		 * boolean todosCombinam = listaDeParcelas.parallelStream() .allMatch(p ->
+		 * p.getContrato().getId().equals(contrato.getId()));
+		 * 
+		 * if (!todosCombinam) { throw new
+		 * CursoServiceException("Todas as parcelas devem pertencer ao mesmo contrato");
+		 * }
+		 */
 
 		try {
 			return this.contratoDAO.save(contrato, listaDeParcelas);
@@ -115,6 +118,29 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
 		}
+	}
+
+	public List<Parcela> simularContrato(Contrato contrato) throws CursoServiceException {
+		if (contrato.getDiaVencimento() == null)
+			throw new CursoServiceException("Dia de vencimento é obrigatório");
+
+		if (contrato.getFormaPagamento() == null)
+			throw new CursoServiceException("Forma de pagamento é obrigatório");
+
+		if (contrato.getQtdParcelasCurso() == null)
+			throw new CursoServiceException("Parcelas de curso é obrigatório");
+
+		if (contrato.getQtdParcelasMaterial() == null)
+			throw new CursoServiceException("Parcelas de material é obrigatório");
+
+		if (idIsNull(contrato.getAluno().getId()))
+			throw new CursoServiceException("Aluno é obrigatório");
+
+		if (idIsNull(contrato.getTurma().getId()))
+			throw new CursoServiceException("Turma é obrigatório");
+
+		return this.obterParcelas(contrato);
+
 	}
 
 	private List<Parcela> obterParcelas(Contrato contrato) {
