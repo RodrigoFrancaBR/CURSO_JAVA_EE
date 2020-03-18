@@ -2,19 +2,16 @@ package br.com.franca.business;
 
 import java.util.List;
 
+import br.com.franca.business.exceptions.CursoServiceException;
+import br.com.franca.dao.exceptions.CursoDAOException;
 import br.com.franca.dao.implement.AlunoDAO;
+import br.com.franca.dao.implement.DAOGeneric;
 import br.com.franca.domain.Aluno;
 import br.com.franca.domain.enun.SituacaoAluno;
-import br.com.franca.web.exception.CursoDAOException;
-import br.com.franca.web.exception.CursoServiceException;
 
 public class AlunoBusiness extends BusinessGeneric<Aluno, Long> {
 
-	private AlunoDAO dao;
-
-	public AlunoBusiness() {
-		this.dao = new AlunoDAO();
-	}
+	private DAOGeneric<Aluno> dao = new AlunoDAO();
 
 	public List<Aluno> findAll() throws CursoServiceException {
 		try {
@@ -26,15 +23,12 @@ public class AlunoBusiness extends BusinessGeneric<Aluno, Long> {
 	}
 
 	public Aluno find(Long id) throws CursoServiceException {
-		// Aluno aluno;
 		if (idIsNull(id)) {
 			throw new CursoServiceException("ID não pode ser null.");
 		}
 
 		try {
 			return this.dao.find(id);
-			// aluno = this.dao.find(id);
-			// return domainIsNull(aluno) ? null : aluno;
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -80,11 +74,6 @@ public class AlunoBusiness extends BusinessGeneric<Aluno, Long> {
 	}
 
 	public Aluno delete(Long id) throws CursoServiceException {
-		/*
-		 * if (idIsNull(id)) { throw new RuntimeException("ID não pode ser null."); }
-		 * 
-		 * Aluno aluno = this.dao.find(id);
-		 */
 		Aluno aluno = this.find(id);
 		try {
 			return domainIsNull(aluno) ? null : this.dao.delete(aluno);

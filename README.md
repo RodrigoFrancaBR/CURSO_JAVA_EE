@@ -1,2 +1,9 @@
-# CURSO_JAVA_EE
-Back-End com as tecnologias Maven, Java, JPA, RESTfull, Jersey, MySQL
+#Curso de Java
+Trabalhando com multi-módulos
+Tecnologias envolvidas: 
+Java 8,
+Maven,
+JPA,
+ECLIPSE-LINK,
+MYSQL,
+JAX-RS COM jersey

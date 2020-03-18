@@ -1,4 +1,4 @@
-package br.com.franca.web.api;
+package br.com.franca.web.api.interfaces;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -11,10 +11,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.franca.domain.Contrato;
+import br.com.franca.domain.Unidade;
 
-@Path("contratos")
-public interface ContratoAPI {
+@Path("unidades")
+public interface UnidadeAPI {
 
 	@GET
 	// @Path("/findAll")
@@ -29,24 +29,18 @@ public interface ContratoAPI {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response find(@PathParam("id") Long id);
-	
-	@GET
-	@Path("/simular")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response simularContrato(Contrato contrato);
 
 	@POST
 	// @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response save(Contrato contrato);
+	public Response insert(Unidade unidade);
 
 	@PUT
 	// @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(Contrato contrato);
+	public Response update(Unidade unidade);
 
 	@DELETE
 	@Path("/{id}/")

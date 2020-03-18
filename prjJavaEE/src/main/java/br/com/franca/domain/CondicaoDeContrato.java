@@ -2,11 +2,6 @@ package br.com.franca.domain;
 
 import java.util.List;
 
-import br.com.franca.strategy.CursoAvistaMaterialParcelado;
-import br.com.franca.strategy.CursoMaterialAvista;
-import br.com.franca.strategy.CursoMaterialParcelado;
-import br.com.franca.strategy.CursoParceladoMaterialAvista;
-
 public abstract class CondicaoDeContrato {
 
 	public final static CondicaoDeContrato getCondicaoContrato(Integer qtdParcelasCurso, Integer qtdParcelasMaterial) {

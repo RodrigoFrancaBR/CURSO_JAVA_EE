@@ -2,7 +2,7 @@ package br.com.franca.dao.interfaces;
 
 import java.util.List;
 
-import br.com.franca.web.exception.CursoDAOException;
+import br.com.franca.dao.exceptions.CursoDAOException;
 
 public interface CRUDI<Dominio, Id> {
 

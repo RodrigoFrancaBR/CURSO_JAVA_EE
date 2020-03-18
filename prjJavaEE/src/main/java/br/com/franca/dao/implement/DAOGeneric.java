@@ -4,18 +4,16 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.franca.dao.interfaces.CRUDI;
-import br.com.franca.util.EntityManagerUtil;
-import br.com.franca.web.exception.CursoDAOException;
+import br.com.franca.dao.exceptions.CursoDAOException;
 
-public abstract class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
+public abstract class DAOGeneric<Dominio> {
 
-	public EntityManager em;
-	public Class<Dominio> dominio;
-	public String mensagem = "";
+	private Class<Dominio> dominio;
+	private EntityManager em;
 
-	public DAOGeneric() {
-		this.em = EntityManagerUtil.getEntityManager();
+	public DAOGeneric(Class<Dominio> dominio, EntityManager em) {
+		this.dominio = dominio;
+		this.em = em;
 	}
 
 	public void roolback() {
@@ -24,9 +22,8 @@ public abstract class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 		}
 		em.getTransaction().rollback();
 	}
-	
-	@Override
-	public Dominio find(Id id) throws CursoDAOException {
+
+	public Dominio find(Long id) throws CursoDAOException {
 		try {
 			return em.find(dominio, id);
 		} catch (Exception e) {
@@ -35,7 +32,6 @@ public abstract class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Dominio> findAll() throws CursoDAOException {
 		/*
 		 * String jpql = "select u from " + dominio.getSimpleName() + " u"; Query query
@@ -50,7 +46,6 @@ public abstract class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 		}
 	}
 
-	@Override
 	public Dominio save(Dominio dominio) throws CursoDAOException {
 		try {
 			em.getTransaction().begin();
@@ -64,7 +59,6 @@ public abstract class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 		return dominio;
 	}
 
-	@Override
 	public Dominio update(Dominio dominio) throws CursoDAOException {
 		try {
 			em.getTransaction().begin();
@@ -78,7 +72,6 @@ public abstract class DAOGeneric<Dominio, Id> implements CRUDI<Dominio, Id> {
 		return dominio;
 	}
 
-	@Override
 	public Dominio delete(Dominio dominio) throws CursoDAOException {
 		try {
 			em.getTransaction().begin();

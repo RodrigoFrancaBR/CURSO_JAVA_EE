@@ -1,4 +1,4 @@
-package br.com.franca.web.rs;
+package br.com.franca.web.api.implement;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -9,23 +9,21 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.franca.business.TurmaBusiness;
-import br.com.franca.domain.Turma;
-import br.com.franca.web.api.TurmaAPI;
-import br.com.franca.web.exception.CursoServiceException;
+import br.com.franca.business.ContratoBusiness;
+import br.com.franca.business.exceptions.CursoServiceException;
+import br.com.franca.domain.Contrato;
+import br.com.franca.domain.Parcela;
+import br.com.franca.web.api.interfaces.ContratoAPI;
 
-@Path("turmas")
-public class TurmaResource extends ResourceGeneric<Turma> implements TurmaAPI {
+@Path("contratos")
 
-	private TurmaBusiness business;
+public class ContratoResource extends ResourceGeneric<Contrato> implements ContratoAPI {
 
-	public TurmaResource() {
-		this.business = new TurmaBusiness();
-	}
+	private ContratoBusiness business = new ContratoBusiness();
 
 	@Override
 	public Response findAll() {
-		List<Turma> resposta = null;
+		List<Contrato> resposta = null;
 		try {
 
 			resposta = business.findAll();
@@ -40,14 +38,15 @@ public class TurmaResource extends ResourceGeneric<Turma> implements TurmaAPI {
 
 	@Override
 	public Response find(Long id) {
-		Turma resposta = null;
+		Contrato resposta = null;
 		try {
 
 			resposta = this.business.find(id);
 
 			if (domainIsNull(resposta)) {
 				// throw new WebApplicationException(404);
-				// throw new CustomNotFoundException("Turma, " + resposta + ", is not found");
+				// throw new CustomNotFoundException("Contrato, " + resposta + ", is not
+				// found");
 				return Response.status(Status.NOT_FOUND).entity(resposta).build();
 			}
 
@@ -61,12 +60,24 @@ public class TurmaResource extends ResourceGeneric<Turma> implements TurmaAPI {
 	}
 
 	@Override
-	public Response insert(Turma turma) {
-		Turma resposta = null;
+	public Response simularContrato(Contrato contrato) {
+		List<Parcela> resposta = null;
+		try {
+			resposta = this.business.simularContrato(contrato);
+			return Response.status(Status.OK).entity(resposta).build();
+		} catch (CursoServiceException e) {
+			e.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
+		}
+	}
+
+	@Override
+	public Response save(Contrato contrato) {
+		Contrato resposta = null;
 
 		try {
 
-			resposta = this.business.insert(turma);
+			resposta = this.business.save(contrato);
 
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
@@ -75,7 +86,7 @@ public class TurmaResource extends ResourceGeneric<Turma> implements TurmaAPI {
 
 		try {
 
-			URI uri = new URI(getUri("turmas/") + resposta.getId());
+			URI uri = new URI(getUri("contratos/") + resposta.getId());
 
 			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
 
@@ -84,19 +95,19 @@ public class TurmaResource extends ResourceGeneric<Turma> implements TurmaAPI {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(resposta).build();
 		}
 		// return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Não foi possível
-		// inserir a turma").build();
+		// inserir a contrato").build();
 	}
 
 	@Override
-	public Response update(Turma turma) {
+	public Response update(Contrato contrato) {
 
-		Turma resposta = null;
+		Contrato resposta = null;
 
 		try {
 
-			// resposta = this.business.update(turma);
+			// resposta = this.business.update(contrato);
 
-			return Response.ok(this.business.update(turma)).build();
+			return Response.ok(this.business.update(contrato)).build();
 
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
@@ -107,7 +118,7 @@ public class TurmaResource extends ResourceGeneric<Turma> implements TurmaAPI {
 	@Override
 	public Response delete(Long id) {
 
-		Turma resposta = null;
+		Contrato resposta = null;
 
 		try {
 			resposta = this.business.delete(id);
@@ -120,7 +131,7 @@ public class TurmaResource extends ResourceGeneric<Turma> implements TurmaAPI {
 		/*
 		 * return domainIsNull(resposta) ?
 		 * Response.status(Status.INTERNAL_SERVER_ERROR).
-		 * entity("Não foi possível remover a turma").build() :
+		 * entity("Não foi possível remover a contrato").build() :
 		 * Response.ok(resposta).build();
 		 */
 	}

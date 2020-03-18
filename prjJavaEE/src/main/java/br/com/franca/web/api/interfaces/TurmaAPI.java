@@ -1,4 +1,4 @@
-package br.com.franca.web.api;
+package br.com.franca.web.api.interfaces;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;

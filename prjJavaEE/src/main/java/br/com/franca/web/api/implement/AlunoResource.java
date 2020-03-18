@@ -1,4 +1,4 @@
-package br.com.franca.web.rs;
+package br.com.franca.web.api.implement;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,18 +10,15 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.com.franca.business.AlunoBusiness;
+import br.com.franca.business.exceptions.CursoServiceException;
 import br.com.franca.domain.Aluno;
-import br.com.franca.web.api.AlunoAPI;
-import br.com.franca.web.exception.CursoServiceException;
+import br.com.franca.web.api.interfaces.AlunoAPI;
 
 @Path("alunos")
+
 public class AlunoResource extends ResourceGeneric<Aluno> implements AlunoAPI {
 
-	private AlunoBusiness business;
-
-	public AlunoResource() {
-		this.business = new AlunoBusiness();
-	}
+	private AlunoBusiness business = new AlunoBusiness();
 
 	@Override
 	public Response findAll() {
@@ -46,12 +43,9 @@ public class AlunoResource extends ResourceGeneric<Aluno> implements AlunoAPI {
 			resposta = this.business.find(id);
 
 			if (domainIsNull(resposta)) {
-				// throw new WebApplicationException(404);
-				// throw new CustomNotFoundException("Aluno, " + resposta + ", is not found");
 				return Response.status(Status.NOT_FOUND).entity(resposta).build();
 			}
 
-			// return Response.ok(resposta).build();
 			return Response.status(Status.OK).entity(resposta).build();
 
 		} catch (CursoServiceException ex) {
@@ -83,8 +77,6 @@ public class AlunoResource extends ResourceGeneric<Aluno> implements AlunoAPI {
 			ex.printStackTrace();
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(resposta).build();
 		}
-		// return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Não foi possível
-		// inserir a aluno").build();
 	}
 
 	@Override
@@ -93,8 +85,6 @@ public class AlunoResource extends ResourceGeneric<Aluno> implements AlunoAPI {
 		Aluno resposta = null;
 
 		try {
-
-			// resposta = this.business.update(aluno);
 
 			return Response.ok(this.business.update(aluno)).build();
 
@@ -117,12 +107,6 @@ public class AlunoResource extends ResourceGeneric<Aluno> implements AlunoAPI {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(resposta).build();
 		}
-		/*
-		 * return domainIsNull(resposta) ?
-		 * Response.status(Status.INTERNAL_SERVER_ERROR).
-		 * entity("Não foi possível remover a aluno").build() :
-		 * Response.ok(resposta).build();
-		 */
 	}
 
 }

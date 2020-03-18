@@ -23,6 +23,10 @@
 		</plugins>
 	</build>
 
+		<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
 
 	<repositories>
 		<repository>
@@ -42,6 +46,15 @@
 			I'm running inside a Java EE container </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/javax/javaee-web-api -->
+
+				<dependency>
+			<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet -->
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core" -->
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>2.23</version>
+		</dependency>
+
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
@@ -92,6 +105,25 @@
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>5.5.2</version>
 			<scope>test</scope>
+		</dependency>
+
+			<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet</artifactId>
+			<version>2.3.5.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.ext.cdi</groupId>
+			<artifactId>jersey-cdi1x</artifactId>
+			<version>2.23</version>
+		</dependency>
+
+			<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
 		</dependency>
 
 

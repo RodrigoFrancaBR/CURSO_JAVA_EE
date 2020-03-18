@@ -1,4 +1,4 @@
-package br.com.franca.web.api;
+package br.com.franca.web.api.interfaces;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -11,10 +11,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.franca.domain.Parcela;
+import br.com.franca.domain.Aluno;
 
-@Path("parcelas")
-public interface ParcelaAPI {
+@Path("alunos")
+public interface AlunoAPI {
+
 	@GET
 	// @Path("/findAll")
 	// @Path("/")
@@ -33,13 +34,13 @@ public interface ParcelaAPI {
 	// @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response insert(Parcela parcela);
+	public Response insert(Aluno aluno);
 
 	@PUT
 	// @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(Parcela parcela);
+	public Response update(Aluno aluno);
 
 	@DELETE
 	@Path("/{id}/")
@@ -47,24 +48,4 @@ public interface ParcelaAPI {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delete(@PathParam("id") Long id);
 
-	/*
-	 * @POST // @Path("/findAll")
-	 * 
-	 * @Path("/simular")
-	 * 
-	 * @Consumes(MediaType.APPLICATION_JSON)
-	 * 
-	 * @Produces(MediaType.APPLICATION_JSON) public Response
-	 * simularParcelas(Contrato contrato);
-	 */
-	/*
-	 * @POST // @Path("/findAll")
-	 * 
-	 * @Path("/")
-	 * 
-	 * @Consumes(MediaType.APPLICATION_JSON)
-	 * 
-	 * @Produces(MediaType.APPLICATION_JSON) public Response inserir(Contrato
-	 * contrato);
-	 */
 }

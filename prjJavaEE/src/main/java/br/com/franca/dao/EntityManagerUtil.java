@@ -1,12 +1,12 @@
-package br.com.franca.util;
+package br.com.franca.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 /**
  * 
- * @author rfranca
- * PADRAO SIGLETON
+ * @author rfranca PADRAO SIGLETON
  */
 public class EntityManagerUtil {
 	private static EntityManagerFactory emf = null;

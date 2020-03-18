@@ -2,19 +2,16 @@ package br.com.franca.business;
 
 import java.util.List;
 
+import br.com.franca.business.exceptions.CursoServiceException;
+import br.com.franca.dao.exceptions.CursoDAOException;
+import br.com.franca.dao.implement.DAOGeneric;
 import br.com.franca.dao.implement.TurmaDAO;
 import br.com.franca.domain.Turma;
 import br.com.franca.domain.enun.Status;
-import br.com.franca.web.exception.CursoDAOException;
-import br.com.franca.web.exception.CursoServiceException;
 
 public class TurmaBusiness extends BusinessGeneric<Turma, Long> {
 
-	private TurmaDAO dao;
-
-	public TurmaBusiness() {
-		this.dao = new TurmaDAO();
-	}
+	private DAOGeneric<Turma> dao= new TurmaDAO();
 
 	public List<Turma> findAll() throws CursoServiceException {
 		try {

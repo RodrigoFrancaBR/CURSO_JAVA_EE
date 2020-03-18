@@ -60,12 +60,12 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 
 	@Column(name = "dia_venc")
 	private Integer diaVencimento;
-
-	private String matricula;
-
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dt_matri")
 	private Calendar dataMatricula = Calendar.getInstance();
+
+	private String matricula;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "sit_matric")
