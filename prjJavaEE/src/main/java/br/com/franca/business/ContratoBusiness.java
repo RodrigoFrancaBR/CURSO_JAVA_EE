@@ -2,9 +2,10 @@ package br.com.franca.business;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import br.com.franca.business.exceptions.CursoServiceException;
 import br.com.franca.dao.exceptions.CursoDAOException;
-import br.com.franca.dao.implement.ContratoDAO;
 import br.com.franca.dao.interfaces.ContratoDAOI;
 import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
@@ -12,9 +13,11 @@ import br.com.franca.domain.Parcela;
 
 public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 
-	private ContratoDAOI dao = new ContratoDAO();
+	@Inject
+	private ContratoDAOI dao;
 
 	public List<Contrato> findAll() throws CursoServiceException {
+
 		try {
 			return this.dao.findAll();
 		} catch (CursoDAOException ex) {
@@ -24,6 +27,7 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 	}
 
 	public Contrato find(Long id) throws CursoServiceException {
+
 		if (idIsNull(id)) {
 			throw new CursoServiceException("ID não pode ser null.");
 		}
@@ -66,10 +70,20 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 		}
 	}
 
-	public Contrato delete(Long id) throws CursoServiceException {
+	public void delete(Long id) throws CursoServiceException {
+
+		if (idIsNull(id)) {
+			throw new CursoServiceException("ID não pode ser null.");
+		}
+
 		Contrato contrato = this.find(id);
+
+		if (domainIsNull(contrato)) {
+			throw new CursoServiceException("Contrato não pode ser null.");
+		}
+
 		try {
-			return domainIsNull(contrato) ? null : this.dao.delete(contrato);
+			dao.delete(contrato);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);

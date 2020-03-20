@@ -2,16 +2,18 @@ package br.com.franca.business;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import br.com.franca.business.exceptions.CursoServiceException;
 import br.com.franca.dao.exceptions.CursoDAOException;
-import br.com.franca.dao.implement.AlunoDAO;
 import br.com.franca.dao.implement.DAOGeneric;
 import br.com.franca.domain.Aluno;
 import br.com.franca.domain.enun.SituacaoAluno;
 
 public class AlunoBusiness extends BusinessGeneric<Aluno, Long> {
 
-	private DAOGeneric<Aluno> dao = new AlunoDAO();
+	@Inject
+	private DAOGeneric<Aluno> dao;
 
 	public List<Aluno> findAll() throws CursoServiceException {
 		try {
@@ -23,6 +25,7 @@ public class AlunoBusiness extends BusinessGeneric<Aluno, Long> {
 	}
 
 	public Aluno find(Long id) throws CursoServiceException {
+
 		if (idIsNull(id)) {
 			throw new CursoServiceException("ID não pode ser null.");
 		}
@@ -59,11 +62,11 @@ public class AlunoBusiness extends BusinessGeneric<Aluno, Long> {
 	public Aluno update(Aluno aluno) throws CursoServiceException {
 
 		if (domainIsNull(aluno)) {
-			throw new RuntimeException("Aluno não pode ser null.");
+			throw new CursoServiceException("Aluno não pode ser null.");
 		}
 
 		if (idIsNull(aluno.getId())) {
-			throw new RuntimeException("ID não pode ser null.");
+			throw new CursoServiceException("ID não pode ser null.");
 		}
 		try {
 			return aluno = this.dao.update(aluno);
@@ -73,10 +76,20 @@ public class AlunoBusiness extends BusinessGeneric<Aluno, Long> {
 		}
 	}
 
-	public Aluno delete(Long id) throws CursoServiceException {
+	public void delete(Long id) throws CursoServiceException {
+
+		if (idIsNull(id)) {
+			throw new CursoServiceException("ID não pode ser null.");
+		}
+
 		Aluno aluno = this.find(id);
+
+		if (domainIsNull(aluno)) {
+			throw new CursoServiceException("Aluno não pode ser null.");
+		}
+
 		try {
-			return domainIsNull(aluno) ? null : this.dao.delete(aluno);
+			this.dao.delete(aluno);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);

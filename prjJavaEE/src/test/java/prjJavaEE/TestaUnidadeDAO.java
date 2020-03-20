@@ -3,7 +3,6 @@ package prjJavaEE;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import br.com.franca.business.UnidadeBusiness;
 import br.com.franca.dao.implement.UnidadeDAO;
 import br.com.franca.domain.Unidade;
 import br.com.franca.domain.enun.Status;
