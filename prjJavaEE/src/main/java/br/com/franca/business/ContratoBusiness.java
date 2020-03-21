@@ -2,19 +2,26 @@ package br.com.franca.business;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import br.com.franca.business.exceptions.CursoServiceException;
 import br.com.franca.dao.exceptions.CursoDAOException;
-import br.com.franca.dao.implement.ContratoDAO;
 import br.com.franca.dao.interfaces.ContratoDAOI;
 import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
 
-public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
+public class ContratoBusiness extends BusinessGeneric<Contrato> {
 
-	private ContratoDAOI dao = new ContratoDAO();
+	@Inject
+	private ContratoDAOI dao;
+
+	public ContratoBusiness() {
+		super(Contrato.class);
+	}
 
 	public List<Contrato> findAll() throws CursoServiceException {
+
 		try {
 			return this.dao.findAll();
 		} catch (CursoDAOException ex) {
@@ -24,6 +31,7 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 	}
 
 	public Contrato find(Long id) throws CursoServiceException {
+
 		if (idIsNull(id)) {
 			throw new CursoServiceException("ID não pode ser null.");
 		}
@@ -52,12 +60,13 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 	public Contrato update(Contrato contrato) throws CursoServiceException {
 
 		if (domainIsNull(contrato)) {
-			throw new RuntimeException("Contrato não pode ser null.");
+			throw new CursoServiceException("Contrato não pode ser null.");
 		}
 
 		if (idIsNull(contrato.getId())) {
-			throw new RuntimeException("ID não pode ser null.");
+			throw new CursoServiceException("ID não pode ser null.");
 		}
+
 		try {
 			return contrato = this.dao.update(contrato);
 		} catch (CursoDAOException ex) {
@@ -66,10 +75,18 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 		}
 	}
 
-	public Contrato delete(Long id) throws CursoServiceException {
-		Contrato contrato = this.find(id);
+	public void delete(Long id) throws CursoServiceException {
+
 		try {
-			return domainIsNull(contrato) ? null : this.dao.delete(contrato);
+
+			Contrato contrato = find(id);
+
+			if (domainIsNull(contrato)) {
+				throw new CursoServiceException("Contrato não pode ser null");
+			}
+
+			dao.delete(contrato);
+
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -77,6 +94,10 @@ public class ContratoBusiness extends BusinessGeneric<Contrato, Long> {
 	}
 
 	public List<Parcela> simularContrato(Contrato contrato) throws CursoServiceException {
+
+		if (domainIsNull(contrato))
+			throw new CursoServiceException("Contrato não pode ser null");
+
 		if (contrato.getDiaVencimento() == null)
 			throw new CursoServiceException("Dia de vencimento é obrigatório");
 

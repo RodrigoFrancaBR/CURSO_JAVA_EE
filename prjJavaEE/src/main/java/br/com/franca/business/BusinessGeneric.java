@@ -1,12 +1,18 @@
 package br.com.franca.business;
 
-public abstract class BusinessGeneric<Dominio, Id> {
+public abstract class BusinessGeneric<Dominio> {
+
+	private Class<Dominio> dominio;
+
+	public BusinessGeneric(Class<Dominio> dominio) {
+		this.dominio = dominio;
+	}
 
 	protected boolean domainIsNull(Dominio dominio) {
 		return dominio == null ? true : false;
 	}
 
-	protected boolean idIsNull(Id id) {
+	protected boolean idIsNull(Long id) {
 		return id == null ? true : false;
 	}
 
@@ -16,6 +22,6 @@ public abstract class BusinessGeneric<Dominio, Id> {
 
 	protected boolean enderecoIsInvalid(String endereco) {
 		return endereco == null || endereco.trim().equals("") ? true : false;
-	}	
+	}
 
 }

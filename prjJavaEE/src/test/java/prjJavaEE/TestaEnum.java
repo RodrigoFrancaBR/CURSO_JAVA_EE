@@ -17,22 +17,18 @@ public class TestaEnum {
 
 		u.setId(1l);
 		u.setNome("CASCADURA");
-		u.setEndereco("Quint„o 153");
+		u.setEndereco("Quint√£o 153");
 		u.setStatus(Status.ATIVA);
 
 		assertEquals(1, u.getId());
 		assertEquals("CASCADURA", u.getNome());
-		assertEquals("Quint„o 153", u.getEndereco());
+		assertEquals("Quint√£o 153", u.getEndereco());
 		assertEquals("Ativa", u.getStatus().getValor());
 		assertEquals(1, u.getStatus().getChave());
 
 		assertEquals(Status.ATIVA, u.getStatus().getStatus(1));
 		assertEquals(Status.DESATIVADA, u.getStatus().getStatus(0));
-		
-		
-		
+
 	}
-	
-	
 
 }

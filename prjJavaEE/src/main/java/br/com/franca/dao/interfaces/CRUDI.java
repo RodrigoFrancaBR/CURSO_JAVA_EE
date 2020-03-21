@@ -14,6 +14,6 @@ public interface CRUDI<Dominio, Id> {
 
 	public Dominio update(Dominio dominio) throws CursoDAOException;
 
-	public Dominio delete(Dominio id) throws CursoDAOException;
+	public void delete(Dominio id) throws CursoDAOException;
 
 }

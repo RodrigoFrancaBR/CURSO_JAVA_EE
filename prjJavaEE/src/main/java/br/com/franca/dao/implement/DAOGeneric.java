@@ -72,7 +72,7 @@ public abstract class DAOGeneric<Dominio> {
 		return dominio;
 	}
 
-	public Dominio delete(Dominio dominio) throws CursoDAOException {
+	public void delete(Dominio dominio) throws CursoDAOException {
 		try {
 			em.getTransaction().begin();
 			em.remove(dominio);
@@ -82,7 +82,6 @@ public abstract class DAOGeneric<Dominio> {
 			ex.getStackTrace();
 			throw new CursoDAOException(ex);
 		}
-		return dominio;
 	}
 
 }

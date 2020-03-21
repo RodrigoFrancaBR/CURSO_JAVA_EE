@@ -15,5 +15,5 @@ public interface ContratoDAOI {
 
 	Contrato update(Contrato contrato) throws CursoDAOException;
 
-	Contrato delete(Contrato contrato) throws CursoDAOException;
+	void delete(Contrato contrato) throws CursoDAOException;
 }

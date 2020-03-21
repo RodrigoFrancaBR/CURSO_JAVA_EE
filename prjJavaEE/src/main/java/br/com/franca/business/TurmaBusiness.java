@@ -2,18 +2,25 @@ package br.com.franca.business;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import br.com.franca.business.exceptions.CursoServiceException;
 import br.com.franca.dao.exceptions.CursoDAOException;
 import br.com.franca.dao.implement.DAOGeneric;
-import br.com.franca.dao.implement.TurmaDAO;
 import br.com.franca.domain.Turma;
 import br.com.franca.domain.enun.Status;
 
-public class TurmaBusiness extends BusinessGeneric<Turma, Long> {
+public class TurmaBusiness extends BusinessGeneric<Turma> {
 
-	private DAOGeneric<Turma> dao= new TurmaDAO();
+	@Inject
+	private DAOGeneric<Turma> dao;
+
+	public TurmaBusiness() {
+		super(Turma.class);
+	}
 
 	public List<Turma> findAll() throws CursoServiceException {
+
 		try {
 			return this.dao.findAll();
 		} catch (CursoDAOException ex) {
@@ -23,15 +30,13 @@ public class TurmaBusiness extends BusinessGeneric<Turma, Long> {
 	}
 
 	public Turma find(Long id) throws CursoServiceException {
-		// Turma turma;
+
 		if (idIsNull(id)) {
 			throw new CursoServiceException("ID não pode ser null.");
 		}
 
 		try {
 			return this.dao.find(id);
-			// turma = this.dao.find(id);
-			// return domainIsNull(turma) ? null : turma;
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -62,12 +67,13 @@ public class TurmaBusiness extends BusinessGeneric<Turma, Long> {
 	public Turma update(Turma turma) throws CursoServiceException {
 
 		if (domainIsNull(turma)) {
-			throw new RuntimeException("Turma não pode ser null.");
+			throw new CursoServiceException("Turma não pode ser null.");
 		}
 
 		if (idIsNull(turma.getId())) {
-			throw new RuntimeException("ID não pode ser null.");
+			throw new CursoServiceException("ID não pode ser null.");
 		}
+		
 		try {
 			return turma = this.dao.update(turma);
 		} catch (CursoDAOException ex) {
@@ -76,19 +82,20 @@ public class TurmaBusiness extends BusinessGeneric<Turma, Long> {
 		}
 	}
 
-	public Turma delete(Long id) throws CursoServiceException {
-		/*
-		 * if (idIsNull(id)) { throw new RuntimeException("ID não pode ser null."); }
-		 * 
-		 * Turma turma = this.dao.find(id);
-		 */
-		Turma turma = this.find(id);
+	public void delete(Long id) throws CursoServiceException {
+
 		try {
-			return domainIsNull(turma) ? null : this.dao.delete(turma);
+			
+			Turma turma = find(id);
+			
+			if (idIsNull(id)) {
+				throw new RuntimeException("ID não pode ser null.");
+			}
+			
+			dao.delete(turma);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
 		}
 	}
-
 }

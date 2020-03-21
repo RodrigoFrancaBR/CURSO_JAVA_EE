@@ -4,13 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.com.franca.dao.EntityManagerUtil;
 import br.com.franca.dao.interfaces.ParcelaDAOI;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
 
 public class ParcelaDAO extends DAOGeneric<Parcela> implements ParcelaDAOI {
 
-	private static EntityManager em;
+	private static EntityManager em = EntityManagerUtil.getEntityManager();
 
 	public ParcelaDAO() {
 		super(Parcela.class, em);
