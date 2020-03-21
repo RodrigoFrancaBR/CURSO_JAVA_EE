@@ -1,15 +1,14 @@
-package br.com.franca.dao.implement;
+package br.com.franca.dao;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.franca.dao.EntityManagerUtil;
-import br.com.franca.dao.interfaces.ParcelaDAOI;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
+import br.com.franca.repository.ParcelaRepository;
 
-public class ParcelaDAO extends DAOGeneric<Parcela> implements ParcelaDAOI {
+public class ParcelaDAO extends DAOGeneric<Parcela> implements ParcelaRepository {
 
 	private static EntityManager em = EntityManagerUtil.getEntityManager();
 

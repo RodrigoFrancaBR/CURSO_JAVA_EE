@@ -1,16 +1,16 @@
-package br.com.franca.dao.implement;
+package br.com.franca.dao;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import br.com.franca.dao.exceptions.CursoDAOException;
-import br.com.franca.dao.interfaces.ContratoDAOI;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
+import br.com.franca.repository.ContratoRepository;
 
 // public class ContratoDAO extends DAOGeneric<Contrato> implements ContratoDAOI {
-public class ContratoDAO extends DAOGeneric<Contrato> implements ContratoDAOI {
+public class ContratoDAO extends DAOGeneric<Contrato> implements ContratoRepository {
 	private static EntityManager em;
 
 	public ContratoDAO() {

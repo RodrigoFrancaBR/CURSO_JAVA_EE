@@ -1,12 +1,10 @@
-package br.com.franca.dao.implement;
+package br.com.franca.dao;
 
 import javax.persistence.EntityManager;
 
-import br.com.franca.dao.EntityManagerUtil;
-import br.com.franca.dao.interfaces.UnidadeDAOI;
 import br.com.franca.domain.Unidade;
 
-public class UnidadeDAO extends DAOGeneric<Unidade> implements UnidadeDAOI {
+public class UnidadeDAO extends DAOGeneric<Unidade> {
 
 	private static EntityManager em = EntityManagerUtil.getEntityManager();
 

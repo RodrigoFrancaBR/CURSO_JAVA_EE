@@ -1,4 +1,4 @@
-package br.com.franca.dao.implement;
+package br.com.franca.dao;
 
 import java.util.List;
 

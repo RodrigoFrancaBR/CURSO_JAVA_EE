@@ -1,12 +1,10 @@
-package br.com.franca.dao.implement;
+package br.com.franca.dao;
 
 import javax.persistence.EntityManager;
 
-import br.com.franca.dao.EntityManagerUtil;
-import br.com.franca.dao.interfaces.AlunoDAOI;
 import br.com.franca.domain.Aluno;
 
-public class AlunoDAO extends DAOGeneric<Aluno> implements AlunoDAOI {
+public class AlunoDAO extends DAOGeneric<Aluno> {
 
 	private static EntityManager em = EntityManagerUtil.getEntityManager();
 

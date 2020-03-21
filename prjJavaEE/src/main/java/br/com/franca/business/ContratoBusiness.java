@@ -5,8 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.franca.business.exceptions.CursoServiceException;
+import br.com.franca.dao.ContratoDAO;
 import br.com.franca.dao.exceptions.CursoDAOException;
-import br.com.franca.dao.interfaces.ContratoDAOI;
 import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
@@ -14,7 +14,7 @@ import br.com.franca.domain.Parcela;
 public class ContratoBusiness extends BusinessGeneric<Contrato> {
 
 	@Inject
-	private ContratoDAOI dao;
+	private ContratoDAO dao;
 
 	public ContratoBusiness() {
 		super(Contrato.class);
@@ -23,7 +23,7 @@ public class ContratoBusiness extends BusinessGeneric<Contrato> {
 	public List<Contrato> findAll() throws CursoServiceException {
 
 		try {
-			return this.dao.findAll();
+			return dao.findAll();
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -37,7 +37,7 @@ public class ContratoBusiness extends BusinessGeneric<Contrato> {
 		}
 
 		try {
-			return this.dao.find(id);
+			return dao.find(id);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -50,7 +50,7 @@ public class ContratoBusiness extends BusinessGeneric<Contrato> {
 		List<Parcela> listaDeParcelas = this.simularContrato(contrato);
 
 		try {
-			return this.dao.save(contrato, listaDeParcelas);
+			return dao.save(contrato, listaDeParcelas);
 		} catch (CursoDAOException e) {
 			e.printStackTrace();
 			throw new CursoServiceException(e);
@@ -68,7 +68,7 @@ public class ContratoBusiness extends BusinessGeneric<Contrato> {
 		}
 
 		try {
-			return contrato = this.dao.update(contrato);
+			return contrato = dao.update(contrato);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -116,7 +116,7 @@ public class ContratoBusiness extends BusinessGeneric<Contrato> {
 		if (idIsNull(contrato.getTurma().getId()))
 			throw new CursoServiceException("Turma é obrigatório");
 
-		return this.obterParcelas(contrato);
+		return obterParcelas(contrato);
 
 	}
 
