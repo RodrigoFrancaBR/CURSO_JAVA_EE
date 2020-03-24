@@ -1,9 +1,9 @@
 #Curso de Java
-Trabalhando com multi-módulos
 Tecnologias envolvidas: 
 Java 8,
 Maven,
-JPA,
-ECLIPSE-LINK,
+JPA com ECLIPSE-LINK,
+JAX-RS COM jersey,
+CDI com WELD
 MYSQL,
-JAX-RS COM jersey
+Tom cat
