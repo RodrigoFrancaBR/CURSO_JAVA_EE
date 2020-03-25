@@ -1,25 +1,25 @@
-package br.com.franca.business;
+package br.com.franca.service;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import br.com.franca.business.exceptions.CursoServiceException;
+import br.com.franca.dao.DAOGeneric;
 import br.com.franca.dao.exceptions.CursoDAOException;
-import br.com.franca.dao.implement.DAOGeneric;
-import br.com.franca.domain.Turma;
+import br.com.franca.domain.Unidade;
 import br.com.franca.domain.enun.Status;
 
-public class TurmaBusiness extends BusinessGeneric<Turma> {
+public class UnidadeService extends ServiceGeneric<Unidade> {
 
 	@Inject
-	private DAOGeneric<Turma> dao;
+	private DAOGeneric<Unidade> dao;
 
-	public TurmaBusiness() {
-		super(Turma.class);
+	public UnidadeService() {
+		super(Unidade.class);
 	}
 
-	public List<Turma> findAll() throws CursoServiceException {
+	public List<Unidade> findAll() throws CursoServiceException {
 
 		try {
 			return this.dao.findAll();
@@ -29,7 +29,7 @@ public class TurmaBusiness extends BusinessGeneric<Turma> {
 		}
 	}
 
-	public Turma find(Long id) throws CursoServiceException {
+	public Unidade find(Long id) throws CursoServiceException {
 
 		if (idIsNull(id)) {
 			throw new CursoServiceException("ID não pode ser null.");
@@ -44,38 +44,42 @@ public class TurmaBusiness extends BusinessGeneric<Turma> {
 
 	}
 
-	public Turma insert(Turma turma) throws CursoServiceException {
+	public Unidade insert(Unidade unidade) throws CursoServiceException {
 
-		if (domainIsNull(turma)) {
-			throw new CursoServiceException("Turma não pode ser null.");
+		if (domainIsNull(unidade)) {
+			throw new CursoServiceException("Unidade não pode ser null.");
 		}
 
-		if (nomeIsInvalid(turma.getNome())) {
+		if (nomeIsInvalid(unidade.getNome())) {
 			throw new CursoServiceException("Nome não pode ser null.");
 		}
 
-		turma.setStatus(Status.ATIVA);
+		if (enderecoIsInvalid(unidade.getEndereco())) {
+			throw new CursoServiceException("Endereço não pode ser null.");
+		}
+
+		unidade.setStatus(Status.ATIVA);
 
 		try {
-			return this.dao.save(turma);
+			return this.dao.insert(unidade);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
 		}
 	}
 
-	public Turma update(Turma turma) throws CursoServiceException {
+	public Unidade update(Unidade unidade) throws CursoServiceException {
 
-		if (domainIsNull(turma)) {
-			throw new CursoServiceException("Turma não pode ser null.");
+		if (domainIsNull(unidade)) {
+			throw new CursoServiceException("Unidade não pode ser null.");
 		}
 
-		if (idIsNull(turma.getId())) {
+		if (idIsNull(unidade.getId())) {
 			throw new CursoServiceException("ID não pode ser null.");
 		}
-		
+
 		try {
-			return turma = this.dao.update(turma);
+			return unidade = this.dao.update(unidade);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -85,14 +89,15 @@ public class TurmaBusiness extends BusinessGeneric<Turma> {
 	public void delete(Long id) throws CursoServiceException {
 
 		try {
-			
-			Turma turma = find(id);
-			
-			if (idIsNull(id)) {
-				throw new RuntimeException("ID não pode ser null.");
+
+			Unidade unidade = find(id);
+
+			if (domainIsNull(unidade)) {
+				throw new CursoServiceException("Unidade não pode ser null");
 			}
-			
-			dao.delete(turma);
+
+			dao.delete(unidade);
+
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);

@@ -1,10 +1,10 @@
-package br.com.franca.business;
+package br.com.franca.service;
 
-public abstract class BusinessGeneric<Dominio> {
+public abstract class ServiceGeneric<Dominio> {
 
 	private Class<Dominio> dominio;
 
-	public BusinessGeneric(Class<Dominio> dominio) {
+	public ServiceGeneric(Class<Dominio> dominio) {
 		this.dominio = dominio;
 	}
 

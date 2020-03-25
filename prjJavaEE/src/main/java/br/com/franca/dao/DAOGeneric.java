@@ -46,7 +46,7 @@ public abstract class DAOGeneric<Dominio> {
 		}
 	}
 
-	public Dominio save(Dominio dominio) throws CursoDAOException {
+	public Dominio insert(Dominio dominio) throws CursoDAOException {
 		try {
 			em.getTransaction().begin();
 			em.persist(dominio);

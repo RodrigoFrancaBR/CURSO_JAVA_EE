@@ -1,4 +1,4 @@
-package br.com.franca.web.api.interfaces;
+package br.com.franca.web.api;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -11,42 +11,31 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.franca.domain.Contrato;
+import br.com.franca.domain.Aluno;
 
-@Path("contratos")
-public interface ContratoAPI {
+@Path("alunos")
+public interface AlunoInterfaceAPI {
 
 	@GET
-	// @Path("/findAll")
-	// @Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response findAll();
 
 	@GET
 	@Path("/{id}/")
-	// @Path("/find/{id}/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response find(@PathParam("id") Long id);
-	
-	@GET
-	@Path("/simular")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response simularContrato(Contrato contrato);
 
 	@POST
-	// @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response save(Contrato contrato);
+	public Response insert(Aluno aluno);
 
 	@PUT
-	// @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(Contrato contrato);
+	public Response update(Aluno aluno);
 
 	@DELETE
 	@Path("/{id}/")

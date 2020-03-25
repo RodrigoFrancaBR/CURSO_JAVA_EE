@@ -1,4 +1,4 @@
-package br.com.franca.business;
+package br.com.franca.service;
 
 import java.util.List;
 
@@ -11,12 +11,12 @@ import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
 
-public class ContratoBusiness extends BusinessGeneric<Contrato> {
+public class ContratoService extends ServiceGeneric<Contrato> {
 
 	@Inject
 	private ContratoDAO dao;
 
-	public ContratoBusiness() {
+	public ContratoService() {
 		super(Contrato.class);
 	}
 

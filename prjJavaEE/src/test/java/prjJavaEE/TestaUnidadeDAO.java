@@ -3,10 +3,10 @@ package prjJavaEE;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import br.com.franca.business.UnidadeBusiness;
 import br.com.franca.dao.UnidadeDAO;
 import br.com.franca.domain.Unidade;
 import br.com.franca.domain.enun.Status;
+import br.com.franca.service.UnidadeService;
 
 public class TestaUnidadeDAO {
 	@DisplayName("Teste de UnidadeDao")

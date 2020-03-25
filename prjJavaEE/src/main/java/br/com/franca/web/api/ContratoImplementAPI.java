@@ -1,25 +1,22 @@
-package br.com.franca.web.api.implement;
+package br.com.franca.web.api;
 
 import java.net.URI;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.franca.business.ContratoBusiness;
 import br.com.franca.business.exceptions.CursoServiceException;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
-import br.com.franca.web.api.interfaces.ContratoAPI;
+import br.com.franca.service.ContratoService;
 
-@Path("contratos")
-public class ContratoResource extends ResourceGeneric<Contrato> implements ContratoAPI {
+public class ContratoImplementAPI extends WebAPIGeneric<Contrato> implements ContratoInterfaceAPI {
 
 	@Inject
-	private ContratoBusiness business;
+	private ContratoService business;
 
 	@Override
 	public Response findAll() {

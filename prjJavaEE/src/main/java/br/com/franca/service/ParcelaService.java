@@ -1,4 +1,4 @@
-package br.com.franca.business;
+package br.com.franca.service;
 
 import java.util.List;
 
@@ -10,12 +10,12 @@ import br.com.franca.dao.exceptions.CursoDAOException;
 import br.com.franca.domain.Parcela;
 import br.com.franca.domain.enun.SituacaoParcela;
 
-public class ParcelaBusiness extends BusinessGeneric<Parcela> {
+public class ParcelaService extends ServiceGeneric<Parcela> {
 
 	@Inject
 	private DAOGeneric<Parcela> dao;
 
-	public ParcelaBusiness() {
+	public ParcelaService() {
 		super(Parcela.class);
 	}
 
@@ -53,7 +53,7 @@ public class ParcelaBusiness extends BusinessGeneric<Parcela> {
 		parcela.setSituacao(SituacaoParcela.A_VENCER);
 
 		try {
-			return this.dao.save(parcela);
+			return this.dao.insert(parcela);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);

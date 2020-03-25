@@ -1,4 +1,4 @@
-package br.com.franca.web.api.interfaces;
+package br.com.franca.web.api;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -11,36 +11,37 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.franca.domain.Turma;
+import br.com.franca.domain.Contrato;
 
-@Path("turmas")
-public interface TurmaAPI {
+@Path("contratos")
+public interface ContratoInterfaceAPI {
 
 	@GET
-	// @Path("/findAll")
-	// @Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response findAll();
 
 	@GET
 	@Path("/{id}/")
-	// @Path("/find/{id}/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response find(@PathParam("id") Long id);
+	
+	@GET
+	@Path("/simular")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response simularContrato(Contrato contrato);
 
 	@POST
-	// @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response insert(Turma turma);
+	public Response save(Contrato contrato);
 
 	@PUT
-	// @Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(Turma turma);
+	public Response update(Contrato contrato);
 
 	@DELETE
 	@Path("/{id}/")
