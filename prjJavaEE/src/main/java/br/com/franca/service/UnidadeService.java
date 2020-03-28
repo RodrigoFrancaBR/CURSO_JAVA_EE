@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.com.franca.business.exceptions.CursoServiceException;
 import br.com.franca.dao.DAOGeneric;
 import br.com.franca.dao.exceptions.CursoDAOException;
 import br.com.franca.domain.Unidade;
 import br.com.franca.domain.enun.Status;
+import br.com.franca.service.exceptions.CursoServiceException;
 
 public class UnidadeService extends ServiceGeneric<Unidade> {
 

@@ -7,20 +7,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.franca.business.exceptions.CursoServiceException;
 import br.com.franca.domain.Turma;
 import br.com.franca.service.TurmaService;
+import br.com.franca.service.exceptions.CursoServiceException;
 
 public class TurmaImplementAPI extends WebAPIGeneric<Turma> implements TurmaInterfaceAPI {
 
 	@Inject
-	private TurmaService business;
+	private TurmaService service;
 
 	@Override
 	public Response findAll() {
 
 		try {
-			return Response.ok(business.findAll()).build();
+			return Response.ok(service.findAll()).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -34,7 +34,7 @@ public class TurmaImplementAPI extends WebAPIGeneric<Turma> implements TurmaInte
 	public Response find(Long id) {
 
 		try {
-			Turma resposta = this.business.find(id);
+			Turma resposta = this.service.find(id);
 			if (domainIsNull(resposta)) {
 				return Response.status(Status.NOT_FOUND).entity(resposta).build();
 			}
@@ -52,7 +52,7 @@ public class TurmaImplementAPI extends WebAPIGeneric<Turma> implements TurmaInte
 	public Response insert(Turma turma) {
 
 		try {
-			Turma resposta = this.business.insert(turma);
+			Turma resposta = this.service.insert(turma);
 			URI uri = new URI(getUri("turmas/") + resposta.getId());
 			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
 		} catch (CursoServiceException ex) {
@@ -68,7 +68,7 @@ public class TurmaImplementAPI extends WebAPIGeneric<Turma> implements TurmaInte
 	public Response update(Turma turma) {
 
 		try {
-			return Response.ok(this.business.update(turma)).build();
+			return Response.ok(this.service.update(turma)).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -82,7 +82,7 @@ public class TurmaImplementAPI extends WebAPIGeneric<Turma> implements TurmaInte
 	public Response delete(Long id) {
 
 		try {
-			this.business.delete(id);
+			this.service.delete(id);
 			return Response.ok().build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();

@@ -8,21 +8,21 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.franca.business.exceptions.CursoServiceException;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
 import br.com.franca.service.ContratoService;
+import br.com.franca.service.exceptions.CursoServiceException;
 
 public class ContratoImplementAPI extends WebAPIGeneric<Contrato> implements ContratoInterfaceAPI {
 
 	@Inject
-	private ContratoService business;
+	private ContratoService service;
 
 	@Override
 	public Response findAll() {
 
 		try {
-			return Response.ok(business.findAll()).build();
+			return Response.ok(service.findAll()).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -37,7 +37,7 @@ public class ContratoImplementAPI extends WebAPIGeneric<Contrato> implements Con
 
 		try {
 
-			Contrato resposta = business.find(id);
+			Contrato resposta = service.find(id);
 
 			if (domainIsNull(resposta)) {
 				return Response.status(Status.NOT_FOUND).entity(id).build();
@@ -58,7 +58,7 @@ public class ContratoImplementAPI extends WebAPIGeneric<Contrato> implements Con
 	public Response simularContrato(Contrato contrato) {
 
 		try {
-			List<Parcela> resposta = business.simularContrato(contrato);
+			List<Parcela> resposta = service.simularContrato(contrato);
 			return Response.status(Status.OK).entity(resposta).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
@@ -73,7 +73,7 @@ public class ContratoImplementAPI extends WebAPIGeneric<Contrato> implements Con
 	public Response save(Contrato contrato) {
 
 		try {
-			Contrato resposta = business.save(contrato);
+			Contrato resposta = service.save(contrato);
 			URI uri = new URI(getUri("contratos/") + resposta.getId());
 			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
 		} catch (CursoServiceException ex) {
@@ -89,7 +89,7 @@ public class ContratoImplementAPI extends WebAPIGeneric<Contrato> implements Con
 	public Response update(Contrato contrato) {
 
 		try {
-			return Response.ok(business.update(contrato)).build();
+			return Response.ok(service.update(contrato)).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -103,7 +103,7 @@ public class ContratoImplementAPI extends WebAPIGeneric<Contrato> implements Con
 	public Response delete(Long id) {
 
 		try {
-			business.delete(id);
+			service.delete(id);
 			return Response.ok().build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();

@@ -7,24 +7,24 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.franca.business.exceptions.CursoServiceException;
 import br.com.franca.domain.Unidade;
 import br.com.franca.service.UnidadeService;
+import br.com.franca.service.exceptions.CursoServiceException;
 
 public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements UnidadeInterfaceAPI {
 
-	private UnidadeService business;
+	private UnidadeService service;
 
 	@Inject
-	public UnidadeImplementAPI(UnidadeService business) {
-		this.business = business;
+	public UnidadeImplementAPI(UnidadeService service) {
+		this.service = service;
 	}
 
 	@Override
 	public Response findAll() {
 
 		try {
-			return Response.ok(business.findAll()).build();
+			return Response.ok(service.findAll()).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -39,7 +39,7 @@ public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements Unida
 
 		try {
 			
-			Unidade resposta = business.find(id);
+			Unidade resposta = service.find(id);
 			
 			if (domainIsNull(resposta)) {
 				return Response.status(Status.NOT_FOUND).entity(id).build();
@@ -63,7 +63,7 @@ public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements Unida
 	public Response insert(Unidade unidade) {
 
 		try {
-			Unidade resposta = business.insert(unidade);
+			Unidade resposta = service.insert(unidade);
 			URI uri = new URI(getUri("unidades/") + resposta.getId());
 			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
 		} catch (CursoServiceException ex) {
@@ -79,7 +79,7 @@ public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements Unida
 	public Response update(Unidade unidade) {
 
 		try {
-			return Response.ok(business.update(unidade)).build();
+			return Response.ok(service.update(unidade)).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -93,7 +93,7 @@ public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements Unida
 	public Response delete(Long id) {
 
 		try {
-			business.delete(id);
+			service.delete(id);
 			return Response.ok().build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();

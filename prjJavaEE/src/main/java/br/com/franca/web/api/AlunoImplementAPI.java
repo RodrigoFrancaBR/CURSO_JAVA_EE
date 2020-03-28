@@ -7,20 +7,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.franca.business.exceptions.CursoServiceException;
 import br.com.franca.domain.Aluno;
 import br.com.franca.service.AlunoService;
+import br.com.franca.service.exceptions.CursoServiceException;
 
 public class AlunoImplementAPI extends WebAPIGeneric<Aluno> implements AlunoInterfaceAPI {
 
 	@Inject
-	private AlunoService business;
+	private AlunoService service;
 
 	@Override
 	public Response findAll() {
 
 		try {
-			return Response.ok(business.findAll()).build();
+			return Response.ok(service.findAll()).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -32,7 +32,7 @@ public class AlunoImplementAPI extends WebAPIGeneric<Aluno> implements AlunoInte
 
 		try {
 
-			Aluno resposta = business.find(id);
+			Aluno resposta = service.find(id);
 
 			if (domainIsNull(resposta)) {
 				return Response.status(Status.NOT_FOUND).entity(id).build();
@@ -53,7 +53,7 @@ public class AlunoImplementAPI extends WebAPIGeneric<Aluno> implements AlunoInte
 	public Response insert(Aluno aluno) {
 
 		try {
-			Aluno resposta = business.insert(aluno);
+			Aluno resposta = service.insert(aluno);
 			URI uri = new URI(getUri("alunos/") + resposta.getId());
 			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
 		} catch (CursoServiceException ex) {
@@ -69,7 +69,7 @@ public class AlunoImplementAPI extends WebAPIGeneric<Aluno> implements AlunoInte
 	public Response update(Aluno aluno) {
 
 		try {
-			return Response.ok(business.update(aluno)).build();
+			return Response.ok(service.update(aluno)).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -83,7 +83,7 @@ public class AlunoImplementAPI extends WebAPIGeneric<Aluno> implements AlunoInte
 	public Response delete(Long id) {
 
 		try {
-			business.delete(id);
+			service.delete(id);
 			return Response.ok().build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();

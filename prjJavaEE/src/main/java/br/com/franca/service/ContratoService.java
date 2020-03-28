@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.com.franca.business.exceptions.CursoServiceException;
 import br.com.franca.dao.ContratoDAO;
 import br.com.franca.dao.exceptions.CursoDAOException;
 import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
+import br.com.franca.service.exceptions.CursoServiceException;
 
 public class ContratoService extends ServiceGeneric<Contrato> {
 

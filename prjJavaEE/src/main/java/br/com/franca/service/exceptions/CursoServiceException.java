@@ -1,4 +1,4 @@
-package br.com.franca.business.exceptions;
+package br.com.franca.service.exceptions;
 
 public class CursoServiceException extends Exception {
 	/**

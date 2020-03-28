@@ -17,7 +17,13 @@ public class TurmaDAO extends DAOGeneric<Turma> implements TurmaRepository {
 
 	@Override
 	public List<Turma> findAllTurmasByUnidadeId(Long unidadeId) {
-		// TODO Auto-generated method stub
+		// SELECT COUNT(*) FROM TB_UNIDADE AS U INNER JOIN TB_TURMA AS T ON U.ID=T.UNIDADE_ID AND U.ID = 1;
+		// SELECT U.NOME AS NOME_UNIDADE FROM TB_UNIDADE as U INNER JOIN TB_TURMA AS T ON U.ID = T.UNIDADE_ID AND T.ID=2;
+		String jpql="select t.unidade.nome from Turma t";
+		List<String> resultList = em.createQuery(jpql, String.class).getResultList();
+		for (String string : resultList) {
+			System.out.println(string);
+		}
 		return null;
 	}
 }
