@@ -11,7 +11,8 @@ import br.com.franca.repository.ContratoRepository;
 
 // public class ContratoDAO extends DAOGeneric<Contrato> implements ContratoDAOI {
 public class ContratoDAO extends DAOGeneric<Contrato> implements ContratoRepository {
-	private static EntityManager em;
+	
+	private static EntityManager em = EntityManagerUtil.getEntityManager();
 
 	public ContratoDAO() {
 		super(Contrato.class, em);

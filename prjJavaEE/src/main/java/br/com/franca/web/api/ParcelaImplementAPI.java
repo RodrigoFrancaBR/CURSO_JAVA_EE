@@ -49,10 +49,10 @@ public class ParcelaImplementAPI extends WebAPIGeneric<Parcela> implements Parce
 	}
 
 	@Override
-	public Response insert(Parcela parcela) {
+	public Response save(Parcela parcela) {
 
 		try {
-			Parcela resposta = service.insert(parcela);
+			Parcela resposta = service.save(parcela);
 			URI uri = new URI(getUri("parcelas/") + resposta.getId());
 			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
 		} catch (CursoServiceException ex) {

@@ -30,7 +30,7 @@ public interface AlunoInterfaceAPI {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response insert(Aluno aluno);
+	public Response save(Aluno aluno);
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)

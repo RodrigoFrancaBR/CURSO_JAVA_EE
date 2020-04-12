@@ -33,11 +33,11 @@ public class ContratoImplementAPI extends WebAPIGeneric<Contrato> implements Con
 	}
 
 	@Override
-	public Response find(Long id) {
+	public Response findById(Long id) {
 
 		try {
 
-			Contrato resposta = service.find(id);
+			Contrato resposta = service.findById(id);
 
 			if (domainIsNull(resposta)) {
 				return Response.status(Status.NOT_FOUND).entity(id).build();

@@ -25,12 +25,12 @@ public interface TurmaInterfaceAPI {
 	@Path("/{id}/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response find(@PathParam("id") Long id);
+	public Response findById(@PathParam("id") Long id);
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response insert(Turma turma);
+	public Response save(Turma turma);
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)

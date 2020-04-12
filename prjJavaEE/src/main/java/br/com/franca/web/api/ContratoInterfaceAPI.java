@@ -25,7 +25,7 @@ public interface ContratoInterfaceAPI {
 	@Path("/{id}/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response find(@PathParam("id") Long id);
+	public Response findById(@PathParam("id") Long id);
 	
 	@GET
 	@Path("/simular")

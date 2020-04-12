@@ -25,12 +25,12 @@ public interface UnidadeInterfaceAPI {
 	@Path("/{id}/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response find(@PathParam("id") Long id);
+	public Response findById(@PathParam("id") Long id);
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response insert(Unidade unidade);
+	public Response save(Unidade unidade);
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)

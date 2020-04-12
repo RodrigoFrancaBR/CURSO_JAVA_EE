@@ -35,11 +35,11 @@ public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements Unida
 	}
 
 	@Override
-	public Response find(Long id) {
+	public Response findById(Long id) {
 
 		try {
 			
-			Unidade resposta = service.find(id);
+			Unidade resposta = service.findById(id);
 			
 			if (domainIsNull(resposta)) {
 				return Response.status(Status.NOT_FOUND).entity(id).build();
@@ -60,10 +60,10 @@ public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements Unida
 	}
 
 	@Override
-	public Response insert(Unidade unidade) {
+	public Response save(Unidade unidade) {
 
 		try {
-			Unidade resposta = service.insert(unidade);
+			Unidade resposta = service.save(unidade);
 			URI uri = new URI(getUri("unidades/") + resposta.getId());
 			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
 		} catch (CursoServiceException ex) {

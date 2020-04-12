@@ -23,7 +23,7 @@ public abstract class DAOGeneric<Dominio> {
 		em.getTransaction().rollback();
 	}
 
-	public Dominio find(Long id) throws CursoDAOException {
+	public Dominio fimdById(Long id) throws CursoDAOException {
 		try {
 			return em.find(dominio, id);
 		} catch (Exception e) {
@@ -46,7 +46,7 @@ public abstract class DAOGeneric<Dominio> {
 		}
 	}
 
-	public Dominio insert(Dominio dominio) throws CursoDAOException {
+	public Dominio save(Dominio dominio) throws CursoDAOException {
 		try {
 			em.getTransaction().begin();
 			em.persist(dominio);

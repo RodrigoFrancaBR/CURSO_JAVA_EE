@@ -36,7 +36,7 @@ public class ParcelaService extends ServiceGeneric<Parcela> {
 		}
 
 		try {
-			return this.dao.find(id);
+			return this.dao.fimdById(id);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -44,7 +44,7 @@ public class ParcelaService extends ServiceGeneric<Parcela> {
 
 	}
 
-	public Parcela insert(Parcela parcela) throws CursoServiceException {
+	public Parcela save(Parcela parcela) throws CursoServiceException {
 
 		if (domainIsNull(parcela)) {
 			throw new CursoServiceException("Parcela não pode ser null.");
@@ -53,7 +53,7 @@ public class ParcelaService extends ServiceGeneric<Parcela> {
 		parcela.setSituacao(SituacaoParcela.A_VENCER);
 
 		try {
-			return this.dao.insert(parcela);
+			return this.dao.save(parcela);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);

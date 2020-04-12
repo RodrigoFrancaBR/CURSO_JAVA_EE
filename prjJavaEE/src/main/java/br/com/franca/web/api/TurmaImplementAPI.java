@@ -31,10 +31,10 @@ public class TurmaImplementAPI extends WebAPIGeneric<Turma> implements TurmaInte
 	}
 
 	@Override
-	public Response find(Long id) {
+	public Response findById(Long id) {
 
 		try {
-			Turma resposta = this.service.find(id);
+			Turma resposta = this.service.findById(id);
 			if (domainIsNull(resposta)) {
 				return Response.status(Status.NOT_FOUND).entity(resposta).build();
 			}
@@ -49,10 +49,10 @@ public class TurmaImplementAPI extends WebAPIGeneric<Turma> implements TurmaInte
 	}
 
 	@Override
-	public Response insert(Turma turma) {
+	public Response save(Turma turma) {
 
 		try {
-			Turma resposta = this.service.insert(turma);
+			Turma resposta = this.service.save(turma);
 			URI uri = new URI(getUri("turmas/") + resposta.getId());
 			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
 		} catch (CursoServiceException ex) {

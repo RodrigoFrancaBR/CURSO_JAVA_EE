@@ -30,7 +30,7 @@ public interface ParcelaInterfaceAPI {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response insert(Parcela parcela);
+	public Response save(Parcela parcela);
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)

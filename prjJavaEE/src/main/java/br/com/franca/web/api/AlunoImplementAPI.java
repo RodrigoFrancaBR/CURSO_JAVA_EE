@@ -50,10 +50,10 @@ public class AlunoImplementAPI extends WebAPIGeneric<Aluno> implements AlunoInte
 	}
 
 	@Override
-	public Response insert(Aluno aluno) {
+	public Response save(Aluno aluno) {
 
 		try {
-			Aluno resposta = service.insert(aluno);
+			Aluno resposta = service.save(aluno);
 			URI uri = new URI(getUri("alunos/") + resposta.getId());
 			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
 		} catch (CursoServiceException ex) {

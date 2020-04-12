@@ -35,7 +35,7 @@ public class AlunoService extends ServiceGeneric<Aluno> {
 		}
 
 		try {
-			return dao.find(id);
+			return dao.fimdById(id);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -43,7 +43,7 @@ public class AlunoService extends ServiceGeneric<Aluno> {
 
 	}
 
-	public Aluno insert(Aluno aluno) throws CursoServiceException {
+	public Aluno save(Aluno aluno) throws CursoServiceException {
 
 		if (domainIsNull(aluno)) {
 			throw new CursoServiceException("Aluno não pode ser null.");
@@ -55,7 +55,7 @@ public class AlunoService extends ServiceGeneric<Aluno> {
 		aluno.setSituacao(SituacaoAluno.INATIVO);
 
 		try {
-			return dao.insert(aluno);
+			return dao.save(aluno);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);

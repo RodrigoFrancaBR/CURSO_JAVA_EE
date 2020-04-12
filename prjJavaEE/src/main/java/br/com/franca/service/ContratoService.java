@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.franca.dao.ContratoDAO;
+import br.com.franca.dao.DAOGeneric;
 import br.com.franca.dao.exceptions.CursoDAOException;
 import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
@@ -15,7 +16,8 @@ public class ContratoService extends ServiceGeneric<Contrato> {
 
 	@Inject
 	private ContratoDAO dao;
-
+	// private DAOGeneric<Contrato> dao;
+	
 	public ContratoService() {
 		super(Contrato.class);
 	}
@@ -30,14 +32,14 @@ public class ContratoService extends ServiceGeneric<Contrato> {
 		}
 	}
 
-	public Contrato find(Long id) throws CursoServiceException {
+	public Contrato findById(Long id) throws CursoServiceException {
 
 		if (idIsNull(id)) {
 			throw new CursoServiceException("ID não pode ser null.");
 		}
 
 		try {
-			return dao.find(id);
+			return dao.fimdById(id);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -79,7 +81,7 @@ public class ContratoService extends ServiceGeneric<Contrato> {
 
 		try {
 
-			Contrato contrato = find(id);
+			Contrato contrato = findById(id);
 
 			if (domainIsNull(contrato)) {
 				throw new CursoServiceException("Contrato não pode ser null");

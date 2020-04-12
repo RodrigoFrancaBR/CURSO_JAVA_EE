@@ -29,14 +29,14 @@ public class UnidadeService extends ServiceGeneric<Unidade> {
 		}
 	}
 
-	public Unidade find(Long id) throws CursoServiceException {
+	public Unidade findById(Long id) throws CursoServiceException {
 
 		if (idIsNull(id)) {
 			throw new CursoServiceException("ID não pode ser null.");
 		}
 
 		try {
-			return this.dao.find(id);
+			return this.dao.fimdById(id);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -44,7 +44,7 @@ public class UnidadeService extends ServiceGeneric<Unidade> {
 
 	}
 
-	public Unidade insert(Unidade unidade) throws CursoServiceException {
+	public Unidade save(Unidade unidade) throws CursoServiceException {
 
 		if (domainIsNull(unidade)) {
 			throw new CursoServiceException("Unidade não pode ser null.");
@@ -61,7 +61,7 @@ public class UnidadeService extends ServiceGeneric<Unidade> {
 		unidade.setStatus(Status.ATIVA);
 
 		try {
-			return this.dao.insert(unidade);
+			return this.dao.save(unidade);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -90,7 +90,7 @@ public class UnidadeService extends ServiceGeneric<Unidade> {
 
 		try {
 
-			Unidade unidade = find(id);
+			Unidade unidade = findById(id);
 
 			if (domainIsNull(unidade)) {
 				throw new CursoServiceException("Unidade não pode ser null");

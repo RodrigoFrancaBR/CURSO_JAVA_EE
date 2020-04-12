@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.com.franca.dao.DAOGeneric;
+import br.com.franca.dao.TurmaDAO;
 import br.com.franca.dao.exceptions.CursoDAOException;
 import br.com.franca.domain.Turma;
 import br.com.franca.domain.enun.Status;
@@ -13,7 +13,7 @@ import br.com.franca.service.exceptions.CursoServiceException;
 public class TurmaService extends ServiceGeneric<Turma> {
 
 	@Inject
-	private DAOGeneric<Turma> dao;
+	private TurmaDAO dao;
 
 	public TurmaService() {
 		super(Turma.class);
@@ -29,14 +29,14 @@ public class TurmaService extends ServiceGeneric<Turma> {
 		}
 	}
 
-	public Turma find(Long id) throws CursoServiceException {
+	public Turma findById(Long id) throws CursoServiceException {
 
 		if (idIsNull(id)) {
 			throw new CursoServiceException("ID não pode ser null.");
 		}
 
 		try {
-			return this.dao.find(id);
+			return this.dao.fimdById(id);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -44,7 +44,8 @@ public class TurmaService extends ServiceGeneric<Turma> {
 
 	}
 
-	public Turma insert(Turma turma) throws CursoServiceException {
+	public Turma save(Turma turma) throws CursoServiceException {
+		
 
 		if (domainIsNull(turma)) {
 			throw new CursoServiceException("Turma não pode ser null.");
@@ -57,7 +58,7 @@ public class TurmaService extends ServiceGeneric<Turma> {
 		turma.setStatus(Status.ATIVA);
 
 		try {
-			return this.dao.insert(turma);
+			return this.dao.save(turma);
 		} catch (CursoDAOException ex) {
 			ex.printStackTrace();
 			throw new CursoServiceException(ex);
@@ -86,7 +87,7 @@ public class TurmaService extends ServiceGeneric<Turma> {
 
 		try {
 
-			Turma turma = find(id);
+			Turma turma = findById(id);
 
 			if (idIsNull(id)) {
 				throw new RuntimeException("ID não pode ser null.");
