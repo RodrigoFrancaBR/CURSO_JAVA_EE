@@ -1,4 +1,4 @@
-package br.com.franca.dao.exceptions;
+package br.com.franca.exceptions;
 
 public class CursoDAOException extends Exception {
 	/**
@@ -16,6 +16,10 @@ public class CursoDAOException extends Exception {
 
 	public CursoDAOException(Throwable e) {
 		super(e);
+	}
+
+	public CursoDAOException(String message, IllegalArgumentException illegalArgumentEx) {
+		super(message, illegalArgumentEx);
 	}
 
 }

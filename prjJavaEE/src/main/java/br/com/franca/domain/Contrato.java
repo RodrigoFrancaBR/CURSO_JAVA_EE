@@ -42,11 +42,11 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 
 	@Column(name = "desc_curso")
 	private Double descontoCurso;
-	
+
 	@Transient
 	// @Column(name = "qtd_parc_curso")
 	private Integer qtdParcelasCurso;
-	
+
 	@Transient
 	// @Column(name = "qtd_parc_mate")
 	private Integer qtdParcelasMaterial;
@@ -60,7 +60,7 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 
 	@Column(name = "dia_venc")
 	private Integer diaVencimento;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dt_matri")
 	private Calendar dataMatricula = Calendar.getInstance();
@@ -69,7 +69,7 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "sit_matric")
-	SituacaoMatricula situacao;
+	SituacaoMatricula SituacaoMatricula;
 
 	@ManyToOne
 	@JoinColumn(name = "aluno_id")
@@ -85,22 +85,6 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Turma getTurma() {
-		return turma;
-	}
-
-	public void setTurma(Turma turma) {
-		this.turma = turma;
-	}
-
-	public Aluno getAluno() {
-		return aluno;
-	}
-
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
 	}
 
 	public BigDecimal getTaxaMatricula() {
@@ -183,12 +167,28 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 		this.matricula = matricula;
 	}
 
-	public SituacaoMatricula getSituacao() {
-		return situacao;
+	public SituacaoMatricula getSituacaoMatricula() {
+		return SituacaoMatricula;
 	}
 
-	public void setSituacao(SituacaoMatricula situacao) {
-		this.situacao = situacao;
+	public void setSituacaoMatricula(SituacaoMatricula situacaoMatricula) {
+		SituacaoMatricula = situacaoMatricula;
+	}
+
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
 	}
 
 	@Override
@@ -214,6 +214,16 @@ public class Contrato implements BaseEntity<Long>, Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Contrato [id=" + id + ", taxaMatricula=" + taxaMatricula + ", valorCurso=" + valorCurso
+				+ ", descontoCurso=" + descontoCurso + ", qtdParcelasCurso=" + qtdParcelasCurso
+				+ ", qtdParcelasMaterial=" + qtdParcelasMaterial + ", valorMaterial=" + valorMaterial
+				+ ", formaPagamento=" + formaPagamento + ", diaVencimento=" + diaVencimento + ", dataMatricula="
+				+ dataMatricula + ", matricula=" + matricula + ", SituacaoMatricula=" + SituacaoMatricula + ", aluno="
+				+ aluno + ", turma=" + turma + "]";
 	}
 
 }

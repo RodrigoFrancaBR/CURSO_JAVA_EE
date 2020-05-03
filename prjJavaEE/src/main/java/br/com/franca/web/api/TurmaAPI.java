@@ -11,10 +11,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.franca.domain.Unidade;
+import br.com.franca.domain.Turma;
 
-@Path("unidades")
-public interface UnidadeInterfaceAPI {
+@Path("turmas")
+public interface TurmaAPI {
 
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -30,12 +30,12 @@ public interface UnidadeInterfaceAPI {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response save(Unidade unidade);
+	public Response save(Turma turma);
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(Unidade unidade);
+	public Response update(Turma turma);
 
 	@DELETE
 	@Path("/{id}/")

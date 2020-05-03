@@ -1,122 +1,104 @@
 package br.com.franca.service;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import br.com.franca.dao.ContratoDAO;
-import br.com.franca.dao.DAOGeneric;
-import br.com.franca.dao.exceptions.CursoDAOException;
+import br.com.franca.domain.Aluno;
 import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
-import br.com.franca.service.exceptions.CursoServiceException;
+import br.com.franca.domain.Turma;
+import br.com.franca.domain.enun.SituacaoMatricula;
+import br.com.franca.exceptions.CursoDAOException;
+import br.com.franca.exceptions.CursoServiceException;
+import br.com.franca.msg.Mensagem;
 
-public class ContratoService extends ServiceGeneric<Contrato> {
+public class ContratoService extends CommonServiceValidations {
 
 	@Inject
 	private ContratoDAO dao;
+	// private ContratoRepository dao;
 	// private DAOGeneric<Contrato> dao;
-	
-	public ContratoService() {
-		super(Contrato.class);
+
+	@Inject
+	private AlunoService alunoService;
+
+	@Inject
+	TurmaService turmaService;
+
+	public List<Contrato> findAll() throws CursoDAOException {
+		return dao.findAll();
 	}
 
-	public List<Contrato> findAll() throws CursoServiceException {
+	public Contrato findById(Long id) throws CursoServiceException, CursoDAOException {
 
-		try {
-			return dao.findAll();
-		} catch (CursoDAOException ex) {
-			ex.printStackTrace();
-			throw new CursoServiceException(ex);
-		}
+		if (id == null)
+			throw new CursoServiceException(Mensagem.getMessage("id_fornecido_null"));
+
+		return dao.fimdById(id);
 	}
 
-	public Contrato findById(Long id) throws CursoServiceException {
+	public Contrato save(Contrato contrato) throws CursoServiceException, CursoDAOException {
 
-		if (idIsNull(id)) {
-			throw new CursoServiceException("ID não pode ser null.");
-		}
+		Aluno aluno = alunoService.findById(contrato.getAluno().getId());
+		Turma turma = turmaService.findById(contrato.getTurma().getId());
 
-		try {
-			return dao.fimdById(id);
-		} catch (CursoDAOException ex) {
-			ex.printStackTrace();
-			throw new CursoServiceException(ex);
-		}
+		if (aluno == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
 
-	}
+		if (turma == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
 
-	public Contrato save(Contrato contrato) throws CursoServiceException {
+		contrato.setAluno(aluno);
+		contrato.setTurma(turma);
+		contrato.setMatricula(obterMatricula(contrato));
 
 		List<Parcela> listaDeParcelas = this.simularContrato(contrato);
 
-		try {
-			return dao.save(contrato, listaDeParcelas);
-		} catch (CursoDAOException e) {
-			e.printStackTrace();
-			throw new CursoServiceException(e);
-		}
+		return dao.save(contrato, listaDeParcelas);
 	}
 
-	public Contrato update(Contrato contrato) throws CursoServiceException {
-
-		if (domainIsNull(contrato)) {
-			throw new CursoServiceException("Contrato não pode ser null.");
-		}
-
-		if (idIsNull(contrato.getId())) {
-			throw new CursoServiceException("ID não pode ser null.");
-		}
-
-		try {
-			return contrato = dao.update(contrato);
-		} catch (CursoDAOException ex) {
-			ex.printStackTrace();
-			throw new CursoServiceException(ex);
-		}
+	private String obterMatricula(Contrato contrato) {
+		int anoAtual = contrato.getDataMatricula().get(Calendar.YEAR);
+		String cpfInicio = contrato.getAluno().getCpf().substring(0, 3);
+		String turmaNome = contrato.getTurma().getNome();
+		String matricula = anoAtual + cpfInicio + turmaNome;
+		return matricula;
 	}
 
-	public void delete(Long id) throws CursoServiceException {
+	public void delete(Long id) throws CursoServiceException, CursoDAOException {
 
-		try {
+		Contrato contratoEncontrado = null;
 
-			Contrato contrato = findById(id);
+		contratoEncontrado = findById(id);
 
-			if (domainIsNull(contrato)) {
-				throw new CursoServiceException("Contrato não pode ser null");
-			}
+		if (contratoEncontrado == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
 
-			dao.delete(contrato);
+		contratoEncontrado.setSituacaoMatricula(SituacaoMatricula.CANCELADA);
 
-		} catch (CursoDAOException ex) {
-			ex.printStackTrace();
-			throw new CursoServiceException(ex);
-		}
+		dao.delete(contratoEncontrado);
 	}
 
 	public List<Parcela> simularContrato(Contrato contrato) throws CursoServiceException {
 
-		if (domainIsNull(contrato))
-			throw new CursoServiceException("Contrato não pode ser null");
+		if (contrato == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
 
 		if (contrato.getDiaVencimento() == null)
-			throw new CursoServiceException("Dia de vencimento é obrigatório");
+			throw new CursoServiceException(Mensagem.getMessage("dia_vencimento_null"));
 
 		if (contrato.getFormaPagamento() == null)
-			throw new CursoServiceException("Forma de pagamento é obrigatório");
+			throw new CursoServiceException(Mensagem.getMessage("forma_pagamento_null"));
 
 		if (contrato.getQtdParcelasCurso() == null)
-			throw new CursoServiceException("Parcelas de curso é obrigatório");
+			throw new CursoServiceException(Mensagem.getMessage("qtd_parc_curso_null"));
 
 		if (contrato.getQtdParcelasMaterial() == null)
-			throw new CursoServiceException("Parcelas de material é obrigatório");
-
-		if (idIsNull(contrato.getAluno().getId()))
-			throw new CursoServiceException("Aluno é obrigatório");
-
-		if (idIsNull(contrato.getTurma().getId()))
-			throw new CursoServiceException("Turma é obrigatório");
+			throw new CursoServiceException(Mensagem.getMessage("qtd_parc_material_null"));
 
 		return obterParcelas(contrato);
 

@@ -6,95 +6,71 @@ import javax.inject.Inject;
 
 import br.com.franca.dao.AlunoDAO;
 import br.com.franca.dao.DAOGeneric;
-import br.com.franca.dao.exceptions.CursoDAOException;
 import br.com.franca.domain.Aluno;
 import br.com.franca.domain.enun.SituacaoAluno;
-import br.com.franca.service.exceptions.CursoServiceException;
+import br.com.franca.exceptions.CursoDAOException;
+import br.com.franca.exceptions.CursoServiceException;
+import br.com.franca.msg.Mensagem;
 
-public class AlunoService extends ServiceGeneric<Aluno> {
+public class AlunoService extends CommonServiceValidations {
 
 	@Inject
 	private DAOGeneric<Aluno> dao = new AlunoDAO();
 
-	public AlunoService() {
-		super(Aluno.class);
+	public List<Aluno> findAll() throws CursoDAOException {
+		return dao.findAll();
 	}
 
-	public List<Aluno> findAll() throws CursoServiceException {
-		try {
-			return dao.findAll();
-		} catch (CursoDAOException ex) {
-			ex.printStackTrace();
-			throw new CursoServiceException(ex);
-		}
+	public Aluno findById(Long id) throws CursoServiceException, CursoDAOException {
+
+		if (id == null)
+			throw new CursoServiceException(Mensagem.getMessage("id_fornecido_null"));
+
+		return dao.fimdById(id);
 	}
 
-	public Aluno find(Long id) throws CursoServiceException {
-		if (idIsNull(id)) {
-			throw new CursoServiceException("ID não pode ser null.");
-		}
+	public Aluno save(Aluno aluno) throws CursoServiceException, CursoDAOException {
 
-		try {
-			return dao.fimdById(id);
-		} catch (CursoDAOException ex) {
-			ex.printStackTrace();
-			throw new CursoServiceException(ex);
-		}
+		if (aluno == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
 
+		if (nomeIsInvalid(aluno.getNome()))
+			throw new CursoServiceException(Mensagem.getMessage("nome_fornecido_null"));
+
+		// outras validações de negócio os campos not-null e unique
+
+		aluno.setSituacao(SituacaoAluno.ATIVO);
+
+		return dao.save(aluno);
 	}
 
-	public Aluno save(Aluno aluno) throws CursoServiceException {
+	public Aluno update(Aluno aluno) throws CursoServiceException, CursoDAOException {
 
-		if (domainIsNull(aluno)) {
-			throw new CursoServiceException("Aluno não pode ser null.");
-		}
-		if (nomeIsInvalid(aluno.getNome())) {
-			throw new CursoServiceException("Nome não pode ser null.");
-		}
+		Aluno alunoEncontrado = null;
 
-		aluno.setSituacao(SituacaoAluno.INATIVO);
+		if (aluno == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
 
-		try {
-			return dao.save(aluno);
-		} catch (CursoDAOException ex) {
-			ex.printStackTrace();
-			throw new CursoServiceException(ex);
-		}
+		alunoEncontrado = findById(aluno.getId());
+
+		if (alunoEncontrado == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
+
+		return dao.update(aluno);
 	}
 
-	public Aluno update(Aluno aluno) throws CursoServiceException {
+	public void delete(Long id) throws CursoServiceException, CursoDAOException {
 
-		if (domainIsNull(aluno)) {
-			throw new CursoServiceException("Aluno não pode ser null.");
-		}
+		Aluno alunoEncontrado = null;
 
-		if (idIsNull(aluno.getId())) {
-			throw new CursoServiceException("ID não pode ser null.");
-		}
-		try {
-			return aluno = dao.update(aluno);
-		} catch (CursoDAOException ex) {
-			ex.printStackTrace();
-			throw new CursoServiceException(ex);
-		}
-	}
+		alunoEncontrado = findById(id);
 
-	public void delete(Long id) throws CursoServiceException {
+		if (alunoEncontrado == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
 
-		try {
+		alunoEncontrado.setSituacao(SituacaoAluno.INATIVO);
 
-			Aluno aluno = find(id);
-
-			if (domainIsNull(aluno)) {
-				throw new CursoServiceException("Aluno não pode ser null");
-			}
-
-			dao.delete(aluno);
-
-		} catch (CursoDAOException ex) {
-			ex.printStackTrace();
-			throw new CursoServiceException(ex);
-		}
+		dao.delete(alunoEncontrado);
 	}
 
 }

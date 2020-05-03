@@ -1,33 +1,31 @@
 package br.com.franca.web.api;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.franca.domain.Unidade;
-import br.com.franca.service.UnidadeService;
-import br.com.franca.service.exceptions.CursoServiceException;
+import br.com.franca.domain.Aluno;
+import br.com.franca.exceptions.CursoServiceException;
+import br.com.franca.service.AlunoService;
 
-public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements UnidadeInterfaceAPI {
-
-	private UnidadeService service;
+public class AlunoController extends CommonController implements AlunoAPI {
 
 	@Inject
-	public UnidadeImplementAPI(UnidadeService service) {
-		this.service = service;
-	}
+	private AlunoService service;
 
 	@Override
 	public Response findAll() {
-
 		try {
-			return Response.ok(service.findAll()).build();
-		} catch (CursoServiceException ex) {
-			ex.printStackTrace();
-			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
+			List<Aluno> resposta = service.findAll();
+
+			if (resposta.size() == 0)
+				return Response.status(Status.NOT_FOUND).entity(resposta).build();
+
+			return Response.status(Status.OK).entity(resposta).build();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex.getMessage()).build();
@@ -38,18 +36,12 @@ public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements Unida
 	public Response findById(Long id) {
 
 		try {
-			
-			Unidade resposta = service.findById(id);
-			
-			if (domainIsNull(resposta)) {
+			Aluno resposta = service.findById(id);
+
+			if (resposta == null)
 				return Response.status(Status.NOT_FOUND).entity(id).build();
-				// throw new WebApplicationException(404);
-				// throw new CustomNotFoundException("Unidade, " + resposta + ", is not found");
-			}
-			
+
 			return Response.status(Status.OK).entity(resposta).build();
-			// return Response.ok(resposta).build();
-			
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -60,12 +52,14 @@ public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements Unida
 	}
 
 	@Override
-	public Response save(Unidade unidade) {
+	public Response save(Aluno aluno) {
 
 		try {
-			Unidade resposta = service.save(unidade);
-			URI uri = new URI(getUri("unidades/") + resposta.getId());
+			Aluno resposta = service.save(aluno);
+
+			URI uri = new URI(getUri("alunos/") + resposta.getId());
 			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
+
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -76,10 +70,11 @@ public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements Unida
 	}
 
 	@Override
-	public Response update(Unidade unidade) {
+	public Response update(Aluno aluno) {
 
 		try {
-			return Response.ok(service.update(unidade)).build();
+			Aluno resposta = service.update(aluno);
+			return Response.status(Status.OK).entity(resposta).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -94,7 +89,7 @@ public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements Unida
 
 		try {
 			service.delete(id);
-			return Response.ok().build();
+			return Response.status(Status.OK).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -103,4 +98,5 @@ public class UnidadeImplementAPI extends WebAPIGeneric<Unidade> implements Unida
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex.getMessage()).build();
 		}
 	}
+
 }

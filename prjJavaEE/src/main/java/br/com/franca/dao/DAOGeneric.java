@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.franca.dao.exceptions.CursoDAOException;
+import br.com.franca.exceptions.CursoDAOException;
 
 public abstract class DAOGeneric<Dominio> {
 
@@ -25,9 +25,9 @@ public abstract class DAOGeneric<Dominio> {
 
 	public Dominio fimdById(Long id) throws CursoDAOException {
 		try {
-			return em.find(dominio, id);
-		} catch (Exception e) {
-			throw new CursoDAOException(e);
+			return em.find(dominio, id);		
+		} catch (Exception ex) {
+			throw new CursoDAOException(ex);
 		}
 	}
 
@@ -41,8 +41,8 @@ public abstract class DAOGeneric<Dominio> {
 		// return em.createQuery("from " + dominio.getSimpleName()).getResultList();
 		try {
 			return em.createQuery("select u from " + dominio.getSimpleName() + " u").getResultList();
-		} catch (Exception e) {
-			throw new CursoDAOException(e);
+		} catch (Exception ex) {
+			throw new CursoDAOException(ex);
 		}
 	}
 
@@ -75,7 +75,8 @@ public abstract class DAOGeneric<Dominio> {
 	public void delete(Dominio dominio) throws CursoDAOException {
 		try {
 			em.getTransaction().begin();
-			em.remove(dominio);
+			em.merge(dominio);
+			// em.remove(dominio);
 			em.getTransaction().commit();
 		} catch (Exception ex) {
 			roolback();

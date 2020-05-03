@@ -239,4 +239,15 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Aluno [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", ufRg=" + ufRg
+				+ ", orgaoExpedidor=" + orgaoExpedidor + ", sexo=" + sexo + ", dataNascimento=" + dataNascimento
+				+ ", celular=" + celular + ", residencial=" + residencial + ", email=" + email + ", cep=" + cep
+				+ ", endereco=" + endereco + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado
+				+ ", pai=" + pai + ", mae=" + mae + ", situacao=" + situacao + "]";
+	}
+	
+	
+
 }

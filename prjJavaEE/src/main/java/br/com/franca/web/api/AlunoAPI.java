@@ -11,11 +11,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.franca.domain.Parcela;
+import br.com.franca.domain.Aluno;
 
-@Path("parcelas")
-public interface ParcelaInterfaceAPI {
-	
+@Path("alunos")
+public interface AlunoAPI {
+
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -25,17 +25,17 @@ public interface ParcelaInterfaceAPI {
 	@Path("/{id}/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response find(@PathParam("id") Long id);
+	public Response findById(@PathParam("id") Long id);
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response save(Parcela parcela);
+	public Response save(Aluno aluno);
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(Parcela parcela);
+	public Response update(Aluno aluno);
 
 	@DELETE
 	@Path("/{id}/")

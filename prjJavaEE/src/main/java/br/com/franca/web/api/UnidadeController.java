@@ -1,45 +1,50 @@
 package br.com.franca.web.api;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.franca.domain.Aluno;
-import br.com.franca.service.AlunoService;
-import br.com.franca.service.exceptions.CursoServiceException;
+import br.com.franca.domain.Unidade;
+import br.com.franca.exceptions.CursoServiceException;
+import br.com.franca.service.UnidadeService;
 
-public class AlunoImplementAPI extends WebAPIGeneric<Aluno> implements AlunoInterfaceAPI {
+public class UnidadeController extends CommonController implements UnidadeAPI {
+
+	private UnidadeService service;
 
 	@Inject
-	private AlunoService service;
+	public UnidadeController(UnidadeService service) {
+		this.service = service;
+	}
 
 	@Override
 	public Response findAll() {
-
 		try {
-			return Response.ok(service.findAll()).build();
-		} catch (CursoServiceException ex) {
-			ex.printStackTrace();
-			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
-		}
-	}
+			List<Unidade> resposta = service.findAll();
 
-	@Override
-	public Response find(Long id) {
-
-		try {
-
-			Aluno resposta = service.find(id);
-
-			if (domainIsNull(resposta)) {
-				return Response.status(Status.NOT_FOUND).entity(id).build();
-			}
+			if (resposta.size() == 0)
+				return Response.status(Status.NOT_FOUND).entity(resposta).build();
 
 			return Response.status(Status.OK).entity(resposta).build();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex.getMessage()).build();
+		}
+	}
 
+	@Override
+	public Response findById(Long id) {
+		try {
+			Unidade resposta = service.findById(id);
+
+			if (resposta == null)
+				return Response.status(Status.NOT_FOUND).entity(id).build();
+
+			return Response.status(Status.OK).entity(resposta).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -50,12 +55,14 @@ public class AlunoImplementAPI extends WebAPIGeneric<Aluno> implements AlunoInte
 	}
 
 	@Override
-	public Response save(Aluno aluno) {
+	public Response save(Unidade unidade) {
 
 		try {
-			Aluno resposta = service.save(aluno);
-			URI uri = new URI(getUri("alunos/") + resposta.getId());
+			Unidade resposta = service.save(unidade);
+
+			URI uri = new URI(getUri("unidades/") + resposta.getId());
 			return Response.created(uri).entity(resposta).type(MediaType.APPLICATION_JSON_TYPE).build();
+
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -66,10 +73,11 @@ public class AlunoImplementAPI extends WebAPIGeneric<Aluno> implements AlunoInte
 	}
 
 	@Override
-	public Response update(Aluno aluno) {
+	public Response update(Unidade unidade) {
 
 		try {
-			return Response.ok(service.update(aluno)).build();
+			Unidade resposta = service.update(unidade);
+			return Response.status(Status.OK).entity(resposta).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -84,7 +92,7 @@ public class AlunoImplementAPI extends WebAPIGeneric<Aluno> implements AlunoInte
 
 		try {
 			service.delete(id);
-			return Response.ok().build();
+			return Response.status(Status.OK).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();
 			return Response.status(Status.BAD_REQUEST).entity(ex.getMessage()).build();
@@ -93,5 +101,4 @@ public class AlunoImplementAPI extends WebAPIGeneric<Aluno> implements AlunoInte
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex.getMessage()).build();
 		}
 	}
-
 }

@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.franca.dao.exceptions.CursoDAOException;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
+import br.com.franca.exceptions.CursoDAOException;
 import br.com.franca.repository.ContratoRepository;
 
 // public class ContratoDAO extends DAOGeneric<Contrato> implements ContratoDAOI {

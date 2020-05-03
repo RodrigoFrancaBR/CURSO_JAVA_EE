@@ -11,10 +11,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.franca.domain.Contrato;
+import br.com.franca.domain.Unidade;
 
-@Path("contratos")
-public interface ContratoInterfaceAPI {
+@Path("unidades")
+public interface UnidadeAPI {
 
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -26,22 +26,16 @@ public interface ContratoInterfaceAPI {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response findById(@PathParam("id") Long id);
-	
-	@GET
-	@Path("/simular")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response simularContrato(Contrato contrato);
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response save(Contrato contrato);
+	public Response save(Unidade unidade);
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(Contrato contrato);
+	public Response update(Unidade unidade);
 
 	@DELETE
 	@Path("/{id}/")
