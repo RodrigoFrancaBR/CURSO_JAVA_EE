@@ -34,9 +34,20 @@ public class AlunoService extends CommonServiceValidations {
 		if (aluno == null)
 			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
 
-		if (nomeIsInvalid(aluno.getNome()))
+		if (nomeInvalido(aluno.getNome()))
 			throw new CursoServiceException(Mensagem.getMessage("nome_fornecido_null"));
-
+		
+		String cpf = aluno.getCpf();
+		Long parseLong = Long.parseLong(cpf);
+		System.out.println(parseLong);
+		
+//		if (aluno.getCpf() == null || aluno.getCpf().trim().equals("") || aluno.getCpf().trim().length() != 11) {
+//			throw new CursoServiceException(Mensagem.getMessage("cpf_invalido"));
+//		}
+		
+//		if (aluno.getRg() != null && !aluno.getRg().trim().equals("") && aluno.getCpf().length() == 11) {
+//			throw new CursoServiceException(Mensagem.getMessage("cpf_invalido"));
+//		}
 		// outras validações de negócio os campos not-null e unique
 
 		aluno.setSituacao(SituacaoAluno.ATIVO);

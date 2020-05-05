@@ -33,10 +33,10 @@ public class UnidadeService extends CommonServiceValidations {
 		if (unidade == null)
 			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
 
-		if (nomeIsInvalid(unidade.getNome()))
+		if (nomeInvalido(unidade.getNome()))
 			throw new CursoServiceException(Mensagem.getMessage("nome_fornecido_null"));
 
-		if (enderecoIsInvalid(unidade.getEndereco()))
+		if (enderecoInvalido(unidade.getEndereco()))
 			throw new CursoServiceException(Mensagem.getMessage("endereco_fornecido_null"));
 
 		// aplicar regras de unique
@@ -58,10 +58,10 @@ public class UnidadeService extends CommonServiceValidations {
 		if (unidadeEncontrada == null)
 			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
 
-		if (nomeIsInvalid(unidade.getNome()))
+		if (nomeInvalido(unidade.getNome()))
 			throw new CursoServiceException(Mensagem.getMessage("nome_fornecido_null"));
 
-		if (enderecoIsInvalid(unidade.getEndereco()))
+		if (enderecoInvalido(unidade.getEndereco()))
 			throw new CursoServiceException(Mensagem.getMessage("endereco_fornecido_null"));
 
 		if (statusInvalido(unidade.getStatus()))

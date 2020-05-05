@@ -18,16 +18,16 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/curso/unidades/2",
+							"raw": "http://localhost:8081/curso/unidades/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"unidades",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -39,12 +39,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/curso/unidades",
+							"raw": "http://localhost:8081/curso/unidades",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"unidades"
@@ -65,15 +65,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\":\"MADUREIRA\",\n\t\"endereco\":\"RUA CAROLINA MACHADO 700\"\n}"
+							"raw": "{\n    \"status\": \"ATIVA\",\n    \"nome\": \"ABOLIÇÃO\",\n    \"endereco\": \"RUA MACHADO 700\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/curso/unidades",
+							"raw": "http://localhost:8081/curso/unidades",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"unidades"
@@ -117,15 +117,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n        \"id\": 1,\r\n        \"nome\": \"CASCADURA\",\r\n        \"endereco\": \"RUA QUINTÃO 153\",\r\n        \"status\": \"ATIVA\"\r\n    }"
+							"raw": "{\r\n        \"id\": 9,\r\n        \"nome\": \"ABOLIÇÃO2\",\r\n        \"endereco\": \"RUA MACHADO 700\",\r\n        \"status\": \"ATIVA\"\r\n    }"
 						},
 						"url": {
-							"raw": "http://localhost:8080/curso/unidades/",
+							"raw": "http://localhost:8081/curso/unidades/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"unidades",
@@ -151,12 +151,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/curso/turmas/1",
+							"raw": "http://localhost:8081/curso/turmas/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"turmas",
@@ -172,12 +172,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/curso/turmas",
+							"raw": "http://localhost:8081/curso/turmas",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"turmas"
@@ -198,15 +198,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\": \"1001\",\n    \"unidade\": {\n        \"id\": 1\n    }\n}"
+							"raw": "{\n    \"nome\": \"1000\",\n    \"unidade\": {\n        \"id\": 4\n    }\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/curso/turmas",
+							"raw": "http://localhost:8081/curso/turmas",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"turmas"
@@ -221,16 +221,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/curso/turmas/1",
+							"raw": "http://localhost:8081/curso/turmas/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"turmas",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -250,15 +250,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 4,\n    \"nome\": \"5\",\n    \"status\": \"ATIVA\",\n    \"unidade\": {\n        \"id\": 1\n    }\n}"
+							"raw": " {\r\n        \"id\": 3,\r\n        \"nome\": \"1\",\r\n        \"status\": \"ATIVA\",\r\n        \"unidade\": {\r\n            \"id\": 4,\r\n            \"nome\": \"CASCADURA\",\r\n            \"endereco\": \"RUA QUINTÃO 700\",\r\n            \"status\": \"DESATIVADA\"\r\n        }\r\n    }"
 						},
 						"url": {
-							"raw": "http://localhost:8080/curso/turmas/",
+							"raw": "http://localhost:8081/curso/turmas/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"turmas",
@@ -288,15 +288,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 6,\n    \"nome\": \"x\",\n    \"cpf\": \"107.669.277-27\",\n    \"rg\": \"20.524.277-5\",\n    \"ufRg\": \"RJ\",\n    \"orgaoExpedidor\": \"DETRAN\",\n    \"sexo\": \"MASCULINO\",\n    \"dataNascimento\": 494640000000,\n    \"celular\": \"2198488-0409\",\n    \"residencial\": \"213276-8531\",\n    \"email\": \"RFRANCA@GMAIL.COM\",\n    \"cep\": \"21381-050\",\n    \"endereco\": \"QUINTÃO 153\",\n    \"bairro\": \"CASCADURA\",\n    \"cidade\": \"RIO DE JANEIRO\",\n    \"estado\": \"RJ\",\n    \"pai\": \"DARCY\",\n    \"mae\": \"FATIMA\",\n    \"situacao\": \"INATIVO\"\n}"
+							"raw": " {\r\n        \"id\": 1,\r\n        \"nome\": \"x\",\r\n        \"cpf\": \"107.669.277-27\",\r\n        \"rg\": \"20.524.277-5\",\r\n        \"ufRg\": \"RJ\",\r\n        \"orgaoExpedidor\": \"DETRAN\",\r\n        \"sexo\": \"MASCULINO\",\r\n        \"dataNascimento\": 494564400000,\r\n        \"celular\": \"2198488-0409\",\r\n        \"residencial\": \"213276-8531\",\r\n        \"email\": \"RFRANCA@GMAIL.COM\",\r\n        \"cep\": \"21381-050\",\r\n        \"endereco\": \"QUINTÃO 153\",\r\n        \"bairro\": \"CASCADURA\",\r\n        \"cidade\": \"RIO DE JANEIRO\",\r\n        \"estado\": \"RJ\",\r\n        \"pai\": \"DARCY\",\r\n        \"mae\": \"FATIMA\",\r\n        \"situacao\": \"ATIVO\"\r\n    }"
 						},
 						"url": {
-							"raw": "http://localhost:8080/curso/alunos/",
+							"raw": "http://localhost:8081/curso/alunos/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"alunos",
@@ -312,16 +312,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/curso/alunos/1",
+							"raw": "http://localhost:8081/curso/alunos/500",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"alunos",
-								"1"
+								"500"
 							]
 						}
 					},
@@ -339,15 +339,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n        \"nome\": \"CCCC\",\r\n        \"cpf\": \"107.669.277-27\",\r\n        \"rg\": \"20.524.277-5\",\r\n        \"orgaoExpedidor\": \"DETRAN\",\r\n        \"ufRg\": \"RJ\",\r\n        \"dataNascimento\":\"1985-09-04\",\r\n        \"sexo\": \"MASCULINO\",\r\n        \"celular\": \"2198488-0409\",\r\n        \"residencial\": \"213276-8531\",\r\n        \"email\": \"RFRANCA@GMAIL.COM\",\r\n        \"cep\": \"21381-050\",\r\n        \"endereco\": \"QUINTÃO 153\",\r\n        \"bairro\": \"CASCADURA\",\r\n        \"cidade\": \"RIO DE JANEIRO\",\r\n        \"estado\": \"RJ\",\r\n        \"pai\": \"DARCY\",\r\n        \"mae\": \"FATIMA\",\r\n        \"situacao\": \"INATIVO\"\r\n    }"
+							"raw": " {\r\n        \"nome\": \"rossy\",\r\n        \"cpf\": \"107.669.277-31\",\r\n        \"rg\": \"20.524.277-11\",\r\n        \"orgaoExpedidor\": \"DETRAN\",\r\n        \"ufRg\": \"RJ\",\r\n        \"dataNascimento\":\"1985-09-04\",\r\n        \"sexo\": \"MASCULINO\",\r\n        \"celular\": \"2198488-0409\",\r\n        \"residencial\": \"213276-8531\",\r\n        \"email\": \"RFRANCA@GMAIL.COM\",\r\n        \"cep\": \"21381-050\",\r\n        \"endereco\": \"QUINTÃO 153\",\r\n        \"bairro\": \"CASCADURA\",\r\n        \"cidade\": \"RIO DE JANEIRO\",\r\n        \"estado\": \"RJ\",\r\n        \"pai\": \"DARCY\",\r\n        \"mae\": \"FATIMA\"\r\n    }"
 						},
 						"url": {
-							"raw": "http://localhost:8080/curso/alunos",
+							"raw": "http://localhost:8081/curso/alunos",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"alunos"
@@ -366,16 +366,16 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/curso/alunos/6",
+							"raw": "http://localhost:8081/curso/alunos/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"alunos",
-								"6"
+								"1"
 							]
 						}
 					},
@@ -387,12 +387,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/curso/alunos",
+							"raw": "http://localhost:8081/curso/alunos",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"alunos"
@@ -413,12 +413,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/curso/contratos",
+							"raw": "http://localhost:8081/curso/contratos",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"contratos"
@@ -444,7 +444,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"taxaMatricula\": 100,\n    \"valorCurso\": 1000,\n    \"descontoCurso\": 0.1,\n    \"valorMaterial\": 500,\n    \"formaPagamento\": \"DINHEIRO\",\n    \"diaVencimento\": 1,\n    \"matricula\": \"20201071006\",\n    \"dataMatricula\": 1577847600000,\n    \"situacao\": \"ATIVA\",\n    \"qtdParcelasCurso\": 1,\n    \"qtdParcelasMaterial\": 1,\n    \"aluno\": {\n        \"id\": 2,\n        \"nome\": \"RODRIGO\",\n        \"cpf\": \"107.669.177-38\",\n        \"rg\": \"20.524.877-8\",\n        \"ufRg\": \"RJ\",\n        \"orgaoExpedidor\": \"DETRAN\",\n        \"sexo\": \"MASCULINO\",\n        \"dataNascimento\": 494640000000,\n        \"celular\": \"2198488-0409\",\n        \"residencial\": \"213276-8531\",\n        \"email\": \"RFRANCA@GMAIL.COM\",\n        \"cep\": \"21381-050\",\n        \"endereco\": \"QUINTÃO 153\",\n        \"bairro\": \"CASCADURA\",\n        \"cidade\": \"RIO DE JANEIRO\",\n        \"estado\": \"RJ\",\n        \"pai\": \"DARCY\",\n        \"mae\": \"FATIMA\",\n        \"situacao\": \"INATIVO\"\n    },\n    \"turma\": {\n        \"id\": 1,\n        \"nome\": \"1002\",\n        \"status\": \"ATIVA\",\n        \"unidade\": {\n            \"id\": 1,\n            \"nome\": \"CXASCADURA\",\n            \"endereco\": \"RUA QUINTÃO 153\",\n            \"status\": \"ATIVA\"\n        }\n    }\n}",
+							"raw": "{\n    \"taxaMatricula\": 100,\n    \"valorCurso\": 1000,\n    \"descontoCurso\": 0.1,\n    \"valorMaterial\": 500,\n    \"formaPagamento\": \"DINHEIRO\",\n    \"diaVencimento\": 1,\n    \"matricula\": \"20201071006\",\n    \"dataMatricula\": 1577847600000,\n    \"situacao\": \"ATIVA\",\n    \"qtdParcelasCurso\": 1,\n    \"qtdParcelasMaterial\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -452,12 +452,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/curso/contratos/simular",
+							"raw": "http://localhost:8081/curso/contratos/simular",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"contratos",
@@ -473,12 +473,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/curso/contratos/1",
+							"raw": "http://localhost:8081/curso/contratos/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"contratos",
@@ -500,15 +500,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"taxaMatricula\": 100,\n    \"valorCurso\": 1000,\n    \"descontoCurso\": 0.1,\n    \"valorMaterial\": 500,\n    \"formaPagamento\": \"DINHEIRO\",\n    \"diaVencimento\": 1,\n    \"matricula\": \"20201081001\",\n    \"dataMatricula\": 1577847600000,\n    \"situacao\": \"ATIVA\",\n    \"qtdParcelasCurso\": 1,\n    \"qtdParcelasMaterial\": 1,\n    \"aluno\": {\n        \"id\": 7\n    },\n    \"turma\": {\n        \"id\": 1,\n        \"nome\": \"1002\",\n        \"status\": \"ATIVA\",\n        \"unidade\": {\n            \"id\": 1,\n            \"nome\": \"CXASCADURA\",\n            \"endereco\": \"RUA QUINTÃO 153\",\n            \"status\": \"ATIVA\"\n        }\n    }\n}"
+							"raw": "{\n    \"taxaMatricula\": 100,\n    \"valorCurso\": 1000,\n    \"descontoCurso\": 0.1,\n    \"valorMaterial\": 500,\n    \"formaPagamento\": \"DINHEIRO\",\n    \"diaVencimento\": 1,\n    \"dataMatricula\": 1577847600000,\n    \"situacao\": \"ATIVA\",\n    \"qtdParcelasCurso\": 1,\n    \"qtdParcelasMaterial\": 1,\n    \"aluno\": {\n        \"id\": 4\n    },\n    \"turma\": {\n        \"id\": 1,\n        \"unidade\": {\n            \"id\": 4\n        }\n    }\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/curso/contratos",
+							"raw": "http://localhost:8081/curso/contratos",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
 								"contratos"
