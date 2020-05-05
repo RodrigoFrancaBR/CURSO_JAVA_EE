@@ -3,7 +3,7 @@ package br.com.franca.domain.enun;
 import java.util.Arrays;
 
 public enum Sexo {
-	MASCULINO(0, "Masculino"), FEMININO(1, "Feminino"), INVALIDO(100, "Sexo inválido");
+	MASCULINO(0, "Masculino"), FEMININO(1, "Feminino"), OUTRO(2, "Outro"), INVALIDO(100, "Sexo inválido");
 
 	private Sexo(int chave, String valor) {
 		this.chave = chave;

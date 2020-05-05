@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import br.com.franca.dao.ContratoDAO;
 import br.com.franca.domain.Aluno;
 import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
@@ -15,12 +14,14 @@ import br.com.franca.domain.enun.SituacaoMatricula;
 import br.com.franca.exceptions.CursoDAOException;
 import br.com.franca.exceptions.CursoServiceException;
 import br.com.franca.msg.Mensagem;
+import br.com.franca.repository.ContratoRepository;
 
 public class ContratoService extends CommonServiceValidations {
 
+	// @Inject
+	// private ContratoDAO dao;
 	@Inject
-	private ContratoDAO dao;
-	// private ContratoRepository dao;
+	private ContratoRepository dao;
 	// private DAOGeneric<Contrato> dao;
 
 	@Inject
@@ -36,12 +37,15 @@ public class ContratoService extends CommonServiceValidations {
 	public Contrato findById(Long id) throws CursoServiceException, CursoDAOException {
 
 		if (id == null)
-			throw new CursoServiceException(Mensagem.getMessage("id_fornecido_null"));
+			throw new CursoServiceException(Mensagem.getMessage("id_null"));
 
 		return dao.fimdById(id);
 	}
 
 	public Contrato save(Contrato contrato) throws CursoServiceException, CursoDAOException {
+
+		if (contrato == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
 
 		Aluno aluno = alunoService.findById(contrato.getAluno().getId());
 		Turma turma = turmaService.findById(contrato.getTurma().getId());
@@ -57,16 +61,10 @@ public class ContratoService extends CommonServiceValidations {
 		contrato.setMatricula(obterMatricula(contrato));
 
 		List<Parcela> listaDeParcelas = this.simularContrato(contrato);
+		
+		contrato.setSituacaoMatricula(SituacaoMatricula.ATIVA);
 
 		return dao.save(contrato, listaDeParcelas);
-	}
-
-	private String obterMatricula(Contrato contrato) {
-		int anoAtual = contrato.getDataMatricula().get(Calendar.YEAR);
-		String cpfInicio = contrato.getAluno().getCpf().substring(0, 3);
-		String turmaNome = contrato.getTurma().getNome();
-		String matricula = anoAtual + cpfInicio + turmaNome;
-		return matricula;
 	}
 
 	public void delete(Long id) throws CursoServiceException, CursoDAOException {
@@ -84,9 +82,6 @@ public class ContratoService extends CommonServiceValidations {
 	}
 
 	public List<Parcela> simularContrato(Contrato contrato) throws CursoServiceException {
-
-		if (contrato == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
 
 		if (contrato.getDiaVencimento() == null)
 			throw new CursoServiceException(Mensagem.getMessage("dia_vencimento_null"));
@@ -107,6 +102,14 @@ public class ContratoService extends CommonServiceValidations {
 	private List<Parcela> obterParcelas(Contrato contrato) {
 		return CondicaoDeContrato.getCondicaoContrato(contrato.getQtdParcelasCurso(), contrato.getQtdParcelasMaterial())
 				.calculaParcelas(contrato);
+	}
+
+	private String obterMatricula(Contrato contrato) {
+		int anoAtual = contrato.getDataMatricula().get(Calendar.YEAR);
+		String cpfInicio = contrato.getAluno().getCpf().substring(0, 3);
+		String turmaNome = contrato.getTurma().getNome();
+		String matricula = anoAtual + cpfInicio + turmaNome;
+		return matricula;
 	}
 
 }

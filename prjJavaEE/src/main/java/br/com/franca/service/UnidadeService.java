@@ -23,7 +23,7 @@ public class UnidadeService extends CommonServiceValidations {
 	public Unidade findById(Long id) throws CursoServiceException, CursoDAOException {
 
 		if (id == null)
-			throw new CursoServiceException(Mensagem.getMessage("id_fornecido_null"));
+			throw new CursoServiceException(Mensagem.getMessage("id_null"));
 
 		return dao.fimdById(id);
 	}
@@ -31,13 +31,13 @@ public class UnidadeService extends CommonServiceValidations {
 	public Unidade save(Unidade unidade) throws CursoServiceException, CursoDAOException {
 
 		if (unidade == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
+			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
 
 		if (nomeInvalido(unidade.getNome()))
-			throw new CursoServiceException(Mensagem.getMessage("nome_fornecido_null"));
+			throw new CursoServiceException(Mensagem.getMessage("nome_invalido"));
 
 		if (enderecoInvalido(unidade.getEndereco()))
-			throw new CursoServiceException(Mensagem.getMessage("endereco_fornecido_null"));
+			throw new CursoServiceException(Mensagem.getMessage("endereco_invalido"));
 
 		// aplicar regras de unique
 
@@ -51,7 +51,7 @@ public class UnidadeService extends CommonServiceValidations {
 		Unidade unidadeEncontrada = null;
 
 		if (unidade == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
+			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
 
 		unidadeEncontrada = findById(unidade.getId());
 
@@ -59,13 +59,13 @@ public class UnidadeService extends CommonServiceValidations {
 			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
 
 		if (nomeInvalido(unidade.getNome()))
-			throw new CursoServiceException(Mensagem.getMessage("nome_fornecido_null"));
+			throw new CursoServiceException(Mensagem.getMessage("nome_invalido"));
 
 		if (enderecoInvalido(unidade.getEndereco()))
-			throw new CursoServiceException(Mensagem.getMessage("endereco_fornecido_null"));
+			throw new CursoServiceException(Mensagem.getMessage("endereco_invalido"));
 
 		if (statusInvalido(unidade.getStatus()))
-			throw new CursoServiceException(Mensagem.getMessage("status_fornecido_null"));
+			throw new CursoServiceException(Mensagem.getMessage("status_invalido"));
 
 		return this.dao.update(unidade);
 	}

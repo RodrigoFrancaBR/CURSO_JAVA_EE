@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import br.com.franca.dao.AlunoDAO;
 import br.com.franca.dao.DAOGeneric;
 import br.com.franca.domain.Aluno;
+import br.com.franca.domain.enun.Sexo;
 import br.com.franca.domain.enun.SituacaoAluno;
 import br.com.franca.exceptions.CursoDAOException;
 import br.com.franca.exceptions.CursoServiceException;
@@ -24,7 +25,7 @@ public class AlunoService extends CommonServiceValidations {
 	public Aluno findById(Long id) throws CursoServiceException, CursoDAOException {
 
 		if (id == null)
-			throw new CursoServiceException(Mensagem.getMessage("id_fornecido_null"));
+			throw new CursoServiceException(Mensagem.getMessage("id_informado_null"));
 
 		return dao.fimdById(id);
 	}
@@ -32,22 +33,32 @@ public class AlunoService extends CommonServiceValidations {
 	public Aluno save(Aluno aluno) throws CursoServiceException, CursoDAOException {
 
 		if (aluno == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
+			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
 
 		if (nomeInvalido(aluno.getNome()))
-			throw new CursoServiceException(Mensagem.getMessage("nome_fornecido_null"));
-		
-		String cpf = aluno.getCpf();
-		Long parseLong = Long.parseLong(cpf);
-		System.out.println(parseLong);
-		
-//		if (aluno.getCpf() == null || aluno.getCpf().trim().equals("") || aluno.getCpf().trim().length() != 11) {
-//			throw new CursoServiceException(Mensagem.getMessage("cpf_invalido"));
-//		}
-		
-//		if (aluno.getRg() != null && !aluno.getRg().trim().equals("") && aluno.getCpf().length() == 11) {
-//			throw new CursoServiceException(Mensagem.getMessage("cpf_invalido"));
-//		}
+			throw new CursoServiceException(Mensagem.getMessage("nome_invalido"));
+
+		if (documentoInvalido(aluno.getCpf(), 11))
+			throw new CursoServiceException(Mensagem.getMessage("cpf_invalido"));
+
+		if (documentoInvalido(aluno.getRg(), 9))
+			throw new CursoServiceException(Mensagem.getMessage("rg_invalido"));
+
+		if (aluno.getSexo() == null || aluno.getSexo().equals(Sexo.INVALIDO))
+			throw new CursoServiceException(Mensagem.getMessage("sexo_invalido"));
+
+		if (telefoneInvalido(aluno.getResidencial(), 10))
+			throw new CursoServiceException(Mensagem.getMessage("residencial_invalido"));
+
+		if (telefoneInvalido(aluno.getCelular(), 11))
+			throw new CursoServiceException(Mensagem.getMessage("celular_invalido"));
+
+		if (enderecoInvalido(aluno.getEndereco()))
+			throw new CursoServiceException(Mensagem.getMessage("endereco_invalido"));
+
+		if (aluno.getBairro() == null || aluno.getBairro().trim().equals(""))
+			throw new CursoServiceException(Mensagem.getMessage("bairro_invalido"));
+
 		// outras validações de negócio os campos not-null e unique
 
 		aluno.setSituacao(SituacaoAluno.ATIVO);
@@ -60,7 +71,7 @@ public class AlunoService extends CommonServiceValidations {
 		Aluno alunoEncontrado = null;
 
 		if (aluno == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
+			throw new CursoServiceException(Mensagem.getMessage("entidade_informado_null"));
 
 		alunoEncontrado = findById(aluno.getId());
 
@@ -84,4 +95,28 @@ public class AlunoService extends CommonServiceValidations {
 		dao.delete(alunoEncontrado);
 	}
 
+	public boolean telefoneInvalido(String telefone, int qtdDigitos) {
+		if (telefone != null && telefone.trim().length() == qtdDigitos) {
+			try {
+				Long parseLong = Long.parseLong(telefone);
+				return false;
+			} catch (NumberFormatException ex) {
+				return true;
+			}
+		}
+		return true;
+	}
+
+	public boolean documentoInvalido(String documento, int qtdDigitos) {
+		if (documento != null && documento.trim().length() == qtdDigitos) {
+			try {
+				Long parseLong = Long.parseLong(documento);
+				return false;
+			} catch (NumberFormatException ex) {
+				// ex.getStackTrace();
+				return true;
+			}
+		}
+		return true;
+	}
 }

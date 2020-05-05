@@ -27,7 +27,7 @@ public class TurmaService extends CommonServiceValidations {
 	public Turma findById(Long id) throws CursoServiceException, CursoDAOException {
 
 		if (id == null)
-			throw new CursoServiceException(Mensagem.getMessage("id_fornecido_null"));
+			throw new CursoServiceException(Mensagem.getMessage("id_null"));
 
 		return dao.fimdById(id);
 	}
@@ -35,13 +35,13 @@ public class TurmaService extends CommonServiceValidations {
 	public Turma save(Turma turma) throws CursoServiceException, CursoDAOException {
 
 		if (turma == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
+			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
 
 		if (nomeInvalido(turma.getNome()))
-			throw new CursoServiceException(Mensagem.getMessage("nome_fornecido_null"));
+			throw new CursoServiceException(Mensagem.getMessage("nome_invalido"));
 
 		if (turma.getUnidade() == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
+			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
 
 		Unidade unidadeEncontrada = unidadeService.findById(turma.getUnidade().getId());
 
@@ -60,7 +60,7 @@ public class TurmaService extends CommonServiceValidations {
 	public Turma update(Turma turma) throws CursoServiceException, CursoDAOException {
 		
 		if (turma == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
+			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
 		
 		Turma turmaEncontrada = null;
 		
@@ -70,13 +70,13 @@ public class TurmaService extends CommonServiceValidations {
 			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
 
 		if (nomeInvalido(turma.getNome()))
-			throw new CursoServiceException(Mensagem.getMessage("nome_fornecido_null"));
+			throw new CursoServiceException(Mensagem.getMessage("nome_invalido"));
 		
 		if (statusInvalido(turma.getStatus()))
-			throw new CursoServiceException(Mensagem.getMessage("status_fornecido_null"));
+			throw new CursoServiceException(Mensagem.getMessage("status_invalido"));
 		
 		if (turma.getUnidade() == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_fornecida_null"));
+			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
 		
 		Unidade unidadeEncontrada = unidadeService.findById(turma.getUnidade().getId());
 

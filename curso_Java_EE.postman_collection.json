@@ -400,6 +400,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "SAVE_OBRIGATÓRIOS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nome\": \"SOPHIA FRANÇA\",\r\n        \"cpf\": \"69988877763\",\r\n        \"rg\": \"698887773\",\r\n        \"sexo\": \"FEMININO\",\r\n        \"celular\": \"21984880409\",\r\n        \"residencial\": \"2132768531\",\r\n        \"endereco\": \"QUINTÃO 153\",\r\n        \"bairro\": \"CASCADURA\"\r\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8081/curso/alunos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"curso",
+								"alunos"
+							]
+						},
+						"description": "APENAS OS CAMPOS OBRIGATÓRIOS"
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -500,7 +530,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"taxaMatricula\": 100,\n    \"valorCurso\": 1000,\n    \"descontoCurso\": 0.1,\n    \"valorMaterial\": 500,\n    \"formaPagamento\": \"DINHEIRO\",\n    \"diaVencimento\": 1,\n    \"dataMatricula\": 1577847600000,\n    \"situacao\": \"ATIVA\",\n    \"qtdParcelasCurso\": 1,\n    \"qtdParcelasMaterial\": 1,\n    \"aluno\": {\n        \"id\": 4\n    },\n    \"turma\": {\n        \"id\": 1,\n        \"unidade\": {\n            \"id\": 4\n        }\n    }\n}"
+							"raw": "{\n    \"taxaMatricula\": 100,\n    \"valorCurso\": 1000,\n    \"descontoCurso\": 0.1,\n    \"valorMaterial\": 500,\n    \"formaPagamento\": \"DINHEIRO\",\n    \"diaVencimento\": 1,\n    \"dataMatricula\": 1577847600000,\n    \"qtdParcelasCurso\": 1,\n    \"qtdParcelasMaterial\": 1,\n    \"aluno\": {\n        \"id\": 7\n    },\n    \"turma\": {\n        \"id\": 1,\n        \"unidade\": {\n            \"id\": 1\n        }\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8081/curso/contratos",
@@ -516,129 +546,27 @@
 						}
 					},
 					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "parcela",
-			"item": [
-				{
-					"name": "update",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"status\": \"ATIVA\",\r\n    \"turmas\": [],\r\n    \"nome\": \"MADUREIRA\",\r\n    \"endereco\": \"RUA DA ABOLIÇÃO 900\"\r\n}"
-						},
-						"url": {
-							"raw": "http://localhost:8080/curso/resources/unidades/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"curso",
-								"resources",
-								"unidades",
-								""
-							]
-						}
-					},
-					"response": []
 				},
 				{
-					"name": "save",
+					"name": "delete",
 					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"nome\":\"MADUREIRA\",\n\t\"endereco\":\"RUA DA ABOLIÇÃO 200\"\n}"
-						},
-						"url": {
-							"raw": "http://localhost:8080/curso/resources/unidades",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"curso",
-								"resources",
-								"unidades"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "findById",
-					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/curso/resources/parcelas/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"curso",
-								"resources",
-								"parcelas",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "findAll",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"taxaMatricula\": 100,\n        \"valorCurso\": 1000,\n        \"descontoCurso\": 0.1,\n        \"qtdParcelasCurso\": 1,\n        \"qtdParcelasMaterial\": 1,\n        \"valorMaterial\": 500,\n        \"formaPagamento\": \"DINHEIRO\",\n        \"diaVencimento\": 1,\n        \"matricula\": \"20201071001\",\n        \"dataMatricula\": 1577847600000,\n        \"situacao\": \"ATIVA\",\n        \n        \"aluno\":  {\n        \"id\": 1,\n        \"nome\": \"RODRIGO\",\n        \"cpf\": \"107.669.177-38\",\n        \"rg\": \"20.524.877-8\",\n        \"ufRg\": \"RJ\",\n        \"orgaoExpedidor\": \"DETRAN\",\n        \"sexo\": \"MASCULINO\",\n        \"dataNascimento\": 494640000000,\n        \"celular\": \"2198488-0409\",\n        \"residencial\": \"213276-8531\",\n        \"email\": \"FFRANCACOSTA@GMAIL.COM\",\n        \"cep\": \"21381-050\",\n        \"endereco\": \"QUINTÃO 153\",\n        \"bairro\": \"CASCADURA\",\n        \"cidade\": \"RIO DE JANEIRO\",\n        \"estado\": \"RJ\",\n        \"pai\": \"DARCY\",\n        \"mae\": \"FATIMA\",\n        \"situacao\": \"INATIVO\"\n    },\n        \n        \"turma\":     {\n        \"id\": 2,\n        \"nome\": \"1002\",\n        \"status\": \"ATIVA\",\n        \"unidade\": {\n            \"id\": 1,\n            \"nome\": \"CASCADURA\",\n            \"endereco\": \"RUA QUINTÃO 153\",\n            \"status\": \"ATIVA\"\n        }\n    }\n    }"
+							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/curso/resources/parcelas/",
+							"raw": "http://localhost:8081/curso/contratos/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"curso",
-								"resources",
-								"parcelas",
-								""
+								"contratos",
+								"4"
 							]
 						}
 					},
