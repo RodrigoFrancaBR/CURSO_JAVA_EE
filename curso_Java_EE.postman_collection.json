@@ -474,7 +474,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"taxaMatricula\": 100,\n    \"valorCurso\": 1000,\n    \"descontoCurso\": 0.1,\n    \"valorMaterial\": 500,\n    \"formaPagamento\": \"DINHEIRO\",\n    \"diaVencimento\": 1,\n    \"matricula\": \"20201071006\",\n    \"dataMatricula\": 1577847600000,\n    \"situacao\": \"ATIVA\",\n    \"qtdParcelasCurso\": 1,\n    \"qtdParcelasMaterial\": 1\n}",
+							"raw": "{\n    \"valorCurso\": 300,\n    \"valorMaterial\": 200,\n    \"qtdParcelasCurso\": 1,\n    \"qtdParcelasMaterial\": 3\n}",
 							"options": {
 								"raw": {
 									"language": "json"

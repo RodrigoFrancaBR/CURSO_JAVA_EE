@@ -25,7 +25,7 @@ public class CursoMaterialAvista extends CondicaoDeContrato {
 		// parcela.setNumeroDaParcelaMaterial(1);
 
 		parcela.setDataVencimento(Calendar.getInstance());
-
+		
 		BigDecimal desconto = contrato.getValorCurso().multiply(BigDecimal.valueOf(contrato.getDescontoCurso()));
 
 		parcela.setValorParcelaCurso(contrato.getValorCurso().subtract(desconto));
