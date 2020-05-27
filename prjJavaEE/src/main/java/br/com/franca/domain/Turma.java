@@ -98,4 +98,9 @@ public class Turma implements BaseEntity<Long>, Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Turma [id=" + id + ", nome=" + nome + ", status=" + status + ", unidade=" + unidade + "]";
+	}	
+
 }

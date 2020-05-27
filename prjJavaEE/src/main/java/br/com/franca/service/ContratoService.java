@@ -95,6 +95,12 @@ public class ContratoService extends CommonServiceValidations {
 
 		if (contrato.getFormaPagamento() == null)
 			contrato.setFormaPagamento(FormaPagamento.DINHEIRO);
+		
+		if (contrato.getValorCurso() == null)
+			throw new CursoServiceException(Mensagem.getMessage("valor_curso_null"));
+		
+		if (contrato.getValorMaterial() == null)
+			throw new CursoServiceException(Mensagem.getMessage("valor_material_null"));
 
 		if (contrato.getQtdParcelasCurso() == null)
 			throw new CursoServiceException(Mensagem.getMessage("qtd_parc_curso_null"));

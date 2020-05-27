@@ -248,6 +248,4 @@ public class Aluno implements BaseEntity<Long>, Serializable {
 				+ ", pai=" + pai + ", mae=" + mae + ", situacao=" + situacao + "]";
 	}
 	
-	
-
 }

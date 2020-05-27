@@ -180,4 +180,13 @@ public class Parcela implements BaseEntity<Long>, Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Parcela [id=" + id + ", dataVencimento=" + dataVencimento + ", valorPago=" + valorPago
+				+ ", dataPagamento=" + dataPagamento + ", valorParcelaCurso=" + valorParcelaCurso
+				+ ", valorParcelaMaterial=" + valorParcelaMaterial + ", valorTotalParcela=" + valorTotalParcela
+				+ ", situacao=" + situacao + ", valorResidualParcelaCurso=" + valorResidualParcelaCurso
+				+ ", valorResidualParcelaMaterial=" + valorResidualParcelaMaterial + ", contrato=" + contrato + "]";
+	}	
+
 }

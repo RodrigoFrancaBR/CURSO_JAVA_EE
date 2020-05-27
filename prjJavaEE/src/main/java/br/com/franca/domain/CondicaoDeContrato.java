@@ -8,21 +8,16 @@ public abstract class CondicaoDeContrato {
 		CondicaoDeContrato contrato = null;
 
 		if (qtdParcelasCurso == 1 && qtdParcelasMaterial == 1)
-			// return new CursoMaterialAvista();
-			contrato = new CursoMaterialAvista();
-		;
+			contrato = new CursoMaterialAvista();		
 
 		if (qtdParcelasCurso == 1 && qtdParcelasMaterial >= 2)
 			contrato = new CursoAvistaMaterialParcelado();
-		// return new CursoAvistaMaterialParcelado();
 
 		if (qtdParcelasCurso >= 2 && qtdParcelasMaterial == 1)
 			contrato = new CursoParceladoMaterialAvista();
-		// return new CursoParceladoMaterialAvista();
 
 		if (qtdParcelasCurso >= 2 && qtdParcelasMaterial >= 2)
 			contrato = new CursoMaterialParcelado();
-		// return new CursoMaterialParcelado();
 
 		return contrato;
 	}

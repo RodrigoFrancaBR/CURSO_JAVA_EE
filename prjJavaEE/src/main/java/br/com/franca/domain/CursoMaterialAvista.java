@@ -15,17 +15,8 @@ public class CursoMaterialAvista extends CondicaoDeContrato {
 		Parcela parcela = new Parcela();
 		List<Parcela> parcelas = new ArrayList<Parcela>();
 
-		// parcela.setNumeroDaParcela(1);
-
-		// uma cobrança de curso
-
-		// parcela.setNumeroDaParcelaCurso(1);
-
-		// uma cobrança de material
-		// parcela.setNumeroDaParcelaMaterial(1);
-
 		parcela.setDataVencimento(Calendar.getInstance());
-		
+
 		BigDecimal desconto = contrato.getValorCurso().multiply(BigDecimal.valueOf(contrato.getDescontoCurso()));
 
 		parcela.setValorParcelaCurso(contrato.getValorCurso().subtract(desconto));
