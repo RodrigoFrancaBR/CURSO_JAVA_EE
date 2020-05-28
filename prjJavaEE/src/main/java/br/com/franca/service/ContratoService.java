@@ -1,5 +1,6 @@
 package br.com.franca.service;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import br.com.franca.domain.CondicaoDeContrato;
 import br.com.franca.domain.Contrato;
 import br.com.franca.domain.Parcela;
 import br.com.franca.domain.Turma;
+import br.com.franca.domain.enun.FormaPagamento;
 import br.com.franca.domain.enun.SituacaoMatricula;
 import br.com.franca.exceptions.CursoDAOException;
 import br.com.franca.exceptions.CursoServiceException;
@@ -61,7 +63,7 @@ public class ContratoService extends CommonServiceValidations {
 		contrato.setMatricula(obterMatricula(contrato));
 
 		List<Parcela> listaDeParcelas = this.simularContrato(contrato);
-		
+
 		contrato.setSituacaoMatricula(SituacaoMatricula.ATIVA);
 
 		return dao.save(contrato, listaDeParcelas);
@@ -82,12 +84,23 @@ public class ContratoService extends CommonServiceValidations {
 	}
 
 	public List<Parcela> simularContrato(Contrato contrato) throws CursoServiceException {
+		if (contrato.getDescontoCurso() == null)
+			contrato.setDescontoCurso(0.0);
+		
+		if (contrato.getTaxaMatricula() == null)
+			contrato.setTaxaMatricula(BigDecimal.valueOf(0));
 
 		if (contrato.getDiaVencimento() == null)
-			throw new CursoServiceException(Mensagem.getMessage("dia_vencimento_null"));
+			contrato.setDiaVencimento(Calendar.getInstance().DAY_OF_YEAR);// obter o dia atual
 
 		if (contrato.getFormaPagamento() == null)
-			throw new CursoServiceException(Mensagem.getMessage("forma_pagamento_null"));
+			contrato.setFormaPagamento(FormaPagamento.DINHEIRO);
+		
+		if (contrato.getValorCurso() == null)
+			throw new CursoServiceException(Mensagem.getMessage("valor_curso_null"));
+		
+		if (contrato.getValorMaterial() == null)
+			throw new CursoServiceException(Mensagem.getMessage("valor_material_null"));
 
 		if (contrato.getQtdParcelasCurso() == null)
 			throw new CursoServiceException(Mensagem.getMessage("qtd_parc_curso_null"));

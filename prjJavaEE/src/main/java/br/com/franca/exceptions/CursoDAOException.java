@@ -7,7 +7,6 @@ public class CursoDAOException extends Exception {
 	private static final long serialVersionUID = 4006053101689362657L;
 
 	public CursoDAOException() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public CursoDAOException(String message) {

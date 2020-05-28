@@ -92,4 +92,9 @@ public class Unidade implements BaseEntity<Long>, Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Unidade [id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", status=" + status + "]";
+	}	
+
 }
