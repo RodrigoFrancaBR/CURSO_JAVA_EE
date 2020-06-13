@@ -198,7 +198,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nome\": \"1000\",\n    \"unidade\": {\n        \"id\": 4\n    }\n}"
+							"raw": "{\n    \"nome\": \"1005\",\n    \"unidade\": {\n        \"id\": 1\n    }\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8081/curso/turmas",
@@ -567,6 +567,35 @@
 								"curso",
 								"contratos",
 								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save_obrigatorios",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n    \"valorCurso\": 986.56,\n    \"valorMaterial\": 325.66,\n    \"qtdParcelasCurso\": 3,\n    \"qtdParcelasMaterial\": 3,\n    \"aluno\": {\n        \"id\": 1\n    },\n    \"turma\": {\n        \"id\": 5,\n        \"unidade\": {\n            \"id\": 1\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/curso/contratos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"curso",
+								"contratos"
 							]
 						}
 					},
