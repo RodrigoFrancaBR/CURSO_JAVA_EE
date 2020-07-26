@@ -1,0 +1,344 @@
+{
+	"info": {
+		"_postman_id": "298c7a66-cee1-4411-94d4-3008fff8ecbf",
+		"name": "prjCursoJavaEE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "unidade",
+			"item": [
+				{
+					"name": "unidades/{/id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:8081/prjCursoJavaEE/unidades/1"
+					},
+					"response": []
+				},
+				{
+					"name": "unidades",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/prjCursoJavaEE/unidades"
+					},
+					"response": []
+				},
+				{
+					"name": "unidades",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"ATIVA\",\n    \"nome\": \"ABOLIÇÃO\",\n    \"endereco\": \"RUA MACHADO 700\"\n}"
+						},
+						"url": "http://localhost:8081/prjCursoJavaEE/unidades"
+					},
+					"response": []
+				},
+				{
+					"name": "unidades/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"ABOLIÇÃO3\",\r\n    \"endereco\": \"RUA MACHADO 700\",\r\n    \"status\": \"ATIVA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/prjCursoJavaEE/unidades/1"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "turma",
+			"item": [
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:8081/curso/turmas/1"
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/curso/turmas"
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"1005\",\n    \"unidade\": {\n        \"id\": 1\n    }\n}"
+						},
+						"url": "http://localhost:8081/curso/turmas"
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/curso/turmas/3"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"id\": 3,\r\n        \"nome\": \"1\",\r\n        \"status\": \"ATIVA\",\r\n        \"unidade\": {\r\n            \"id\": 4,\r\n            \"nome\": \"CASCADURA\",\r\n            \"endereco\": \"RUA QUINTÃO 700\",\r\n            \"status\": \"DESATIVADA\"\r\n        }\r\n    }"
+						},
+						"url": "http://localhost:8081/curso/turmas/"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "aluno",
+			"item": [
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"id\": 1,\r\n        \"nome\": \"x\",\r\n        \"cpf\": \"107.669.277-27\",\r\n        \"rg\": \"20.524.277-5\",\r\n        \"ufRg\": \"RJ\",\r\n        \"orgaoExpedidor\": \"DETRAN\",\r\n        \"sexo\": \"MASCULINO\",\r\n        \"dataNascimento\": 494564400000,\r\n        \"celular\": \"2198488-0409\",\r\n        \"residencial\": \"213276-8531\",\r\n        \"email\": \"RFRANCA@GMAIL.COM\",\r\n        \"cep\": \"21381-050\",\r\n        \"endereco\": \"QUINTÃO 153\",\r\n        \"bairro\": \"CASCADURA\",\r\n        \"cidade\": \"RIO DE JANEIRO\",\r\n        \"estado\": \"RJ\",\r\n        \"pai\": \"DARCY\",\r\n        \"mae\": \"FATIMA\",\r\n        \"situacao\": \"ATIVO\"\r\n    }"
+						},
+						"url": "http://localhost:8081/curso/alunos/"
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/curso/alunos/500"
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nome\": \"rossy\",\r\n        \"cpf\": \"107.669.277-31\",\r\n        \"rg\": \"20.524.277-11\",\r\n        \"orgaoExpedidor\": \"DETRAN\",\r\n        \"ufRg\": \"RJ\",\r\n        \"dataNascimento\":\"1985-09-04\",\r\n        \"sexo\": \"MASCULINO\",\r\n        \"celular\": \"2198488-0409\",\r\n        \"residencial\": \"213276-8531\",\r\n        \"email\": \"RFRANCA@GMAIL.COM\",\r\n        \"cep\": \"21381-050\",\r\n        \"endereco\": \"QUINTÃO 153\",\r\n        \"bairro\": \"CASCADURA\",\r\n        \"cidade\": \"RIO DE JANEIRO\",\r\n        \"estado\": \"RJ\",\r\n        \"pai\": \"DARCY\",\r\n        \"mae\": \"FATIMA\"\r\n    }"
+						},
+						"url": "http://localhost:8081/curso/alunos"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:8081/curso/alunos/1"
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/curso/alunos"
+					},
+					"response": []
+				},
+				{
+					"name": "SAVE_OBRIGATÓRIOS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nome\": \"SOPHIA FRANÇA\",\r\n        \"cpf\": \"69988877763\",\r\n        \"rg\": \"698887773\",\r\n        \"sexo\": \"FEMININO\",\r\n        \"celular\": \"21984880409\",\r\n        \"residencial\": \"2132768531\",\r\n        \"endereco\": \"QUINTÃO 153\",\r\n        \"bairro\": \"CASCADURA\"\r\n    }"
+						},
+						"url": "http://localhost:8081/curso/alunos",
+						"description": "APENAS OS CAMPOS OBRIGATÓRIOS"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "contrato",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/curso/contratos"
+					},
+					"response": []
+				},
+				{
+					"name": "simular",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"valorCurso\": 300,\n    \"valorMaterial\": 200,\n    \"qtdParcelasCurso\": 1,\n    \"qtdParcelasMaterial\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/curso/contratos/simular"
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/curso/contratos/1"
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"taxaMatricula\": 100,\n    \"valorCurso\": 1000,\n    \"descontoCurso\": 0.1,\n    \"valorMaterial\": 500,\n    \"formaPagamento\": \"DINHEIRO\",\n    \"diaVencimento\": 1,\n    \"dataMatricula\": 1577847600000,\n    \"qtdParcelasCurso\": 1,\n    \"qtdParcelasMaterial\": 1,\n    \"aluno\": {\n        \"id\": 7\n    },\n    \"turma\": {\n        \"id\": 1,\n        \"unidade\": {\n            \"id\": 1\n        }\n    }\n}"
+						},
+						"url": "http://localhost:8081/curso/contratos"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:8081/curso/contratos/4"
+					},
+					"response": []
+				},
+				{
+					"name": "save_obrigatorios",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n    \"valorCurso\": 986.56,\n    \"valorMaterial\": 325.66,\n    \"qtdParcelasCurso\": 3,\n    \"qtdParcelasMaterial\": 3,\n    \"aluno\": {\n        \"id\": 1\n    },\n    \"turma\": {\n        \"id\": 5,\n        \"unidade\": {\n            \"id\": 1\n        }\n    }\n}"
+						},
+						"url": "http://localhost:8081/curso/contratos"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

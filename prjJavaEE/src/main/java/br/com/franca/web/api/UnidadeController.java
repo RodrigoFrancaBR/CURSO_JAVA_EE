@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response.Status;
 
 import br.com.franca.domain.Unidade;
 import br.com.franca.exceptions.CursoServiceException;
+import br.com.franca.msg.Mensagem;
 import br.com.franca.service.UnidadeService;
 
 public class UnidadeController extends CommonController implements UnidadeAPI {
@@ -26,9 +27,9 @@ public class UnidadeController extends CommonController implements UnidadeAPI {
 		try {
 			List<Unidade> resposta = service.findAll();
 
-			if (resposta.size() == 0)
+			/*if (resposta.size() == 0)
 				return Response.status(Status.NOT_FOUND).entity(resposta).build();
-
+*/
 			return Response.status(Status.OK).entity(resposta).build();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -42,7 +43,7 @@ public class UnidadeController extends CommonController implements UnidadeAPI {
 			Unidade resposta = service.findById(id);
 
 			if (resposta == null)
-				return Response.status(Status.NOT_FOUND).entity(id).build();
+				return Response.status(Status.NOT_FOUND).entity(Mensagem.getMessage("not_found")).build();
 
 			return Response.status(Status.OK).entity(resposta).build();
 		} catch (CursoServiceException ex) {
@@ -73,7 +74,7 @@ public class UnidadeController extends CommonController implements UnidadeAPI {
 	}
 
 	@Override
-	public Response update(Unidade unidade) {
+	public Response update(Long id, Unidade unidade) {
 
 		try {
 			Unidade resposta = service.update(unidade);

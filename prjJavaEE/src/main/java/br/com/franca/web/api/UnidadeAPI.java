@@ -22,7 +22,7 @@ public interface UnidadeAPI {
 	public Response findAll();
 
 	@GET
-	@Path("/{id}/")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response findById(@PathParam("id") Long id);
@@ -33,12 +33,13 @@ public interface UnidadeAPI {
 	public Response save(Unidade unidade);
 
 	@PUT
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(Unidade unidade);
+	public Response update(@PathParam("id")Long id,  Unidade unidade);
 
 	@DELETE
-	@Path("/{id}/")
+	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delete(@PathParam("id") Long id);

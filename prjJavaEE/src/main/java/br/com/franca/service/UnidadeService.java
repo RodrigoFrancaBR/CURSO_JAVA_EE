@@ -22,8 +22,8 @@ public class UnidadeService extends CommonServiceValidations {
 
 	public Unidade findById(Long id) throws CursoServiceException, CursoDAOException {
 
-		if (id == null)
-			throw new CursoServiceException(Mensagem.getMessage("id_null"));
+		/*if (id == null)
+			throw new CursoServiceException(Mensagem.getMessage("id_null"));*/
 
 		return dao.fimdById(id);
 	}
