@@ -116,6 +116,8 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 .flattened-pom.xml
+## repositorio maven
+maven_repo
 
 ### Node ###
 # Logs
@@ -212,6 +214,7 @@ dist/
 # Serverless directories
 .serverless/
 
+Servers
 # FuseBox cache
 .fusebox/
 
