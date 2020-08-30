@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.franca</groupId>
-	<artifactId>prjCursoJavaEE</artifactId>
+	<artifactId>cursojavaee</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
@@ -23,7 +22,7 @@
 		</plugins>
 	</build>
 
-		<properties>
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -38,7 +37,6 @@
 
 	<dependencies>
 
-
 		<!-- <dependency> <groupId>org.eclipse.persistence</groupId> <artifactId>eclipselink</artifactId> 
 			<version>2.0.0</version> <scope>provided</scope>since I'm running inside 
 			a Java EE container </dependency> <dependency> <groupId>org.eclipse.persistence</groupId> 
@@ -47,7 +45,7 @@
 
 		<!-- https://mvnrepository.com/artifact/javax/javaee-web-api -->
 
-				<dependency>
+		<dependency>
 			<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet -->
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core" -->
@@ -82,23 +80,15 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			   <version>8.0.16</version>
-		</dependency>
+			<version>5.1.40</version>
+		</dependency>	
 
 		<dependency>
-			<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet -->
-			<groupId>org.glassfish.jersey.containers</groupId>
-			<!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core" -->
-			<artifactId>jersey-container-servlet</artifactId>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
 			<version>2.23</version>
+			<scope>compile</scope>
 		</dependency>
-		
-		   <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
-            <version>2.23</version>
-            <scope>compile</scope>
-        </dependency>
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -107,7 +97,7 @@
 			<scope>test</scope>
 		</dependency>
 
-			<dependency>
+		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
 			<artifactId>weld-servlet</artifactId>
 			<version>2.3.5.Final</version>
@@ -119,7 +109,7 @@
 			<version>2.23</version>
 		</dependency>
 
-			<dependency>
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>

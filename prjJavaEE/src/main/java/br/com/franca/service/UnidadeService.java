@@ -22,10 +22,13 @@ public class UnidadeService extends CommonServiceValidations {
 
 	public Unidade findById(Long id) throws CursoServiceException, CursoDAOException {
 
-		/*if (id == null)
-			throw new CursoServiceException(Mensagem.getMessage("id_null"));*/
+		Unidade unidade = dao.fimdById(id);
 
-		return dao.fimdById(id);
+		if (unidade == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
+
+		return unidade;
+
 	}
 
 	public Unidade save(Unidade unidade) throws CursoServiceException, CursoDAOException {
@@ -46,14 +49,14 @@ public class UnidadeService extends CommonServiceValidations {
 		return this.dao.save(unidade);
 	}
 
-	public Unidade update(Unidade unidade) throws CursoServiceException, CursoDAOException {
+	public Unidade update(Long id, Unidade unidade) throws CursoServiceException, CursoDAOException {
 
 		Unidade unidadeEncontrada = null;
 
 		if (unidade == null)
 			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
 
-		unidadeEncontrada = findById(unidade.getId());
+		unidadeEncontrada = findById(id);
 
 		if (unidadeEncontrada == null)
 			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
@@ -66,8 +69,12 @@ public class UnidadeService extends CommonServiceValidations {
 
 		if (statusInvalido(unidade.getStatus()))
 			throw new CursoServiceException(Mensagem.getMessage("status_invalido"));
+		
+		unidadeEncontrada.setNome(unidade.getNome());
+		unidadeEncontrada.setEndereco(unidade.getEndereco());
+		unidadeEncontrada.setStatus(unidade.getStatus());
 
-		return this.dao.update(unidade);
+		return this.dao.update(unidadeEncontrada);
 	}
 
 	public void delete(Long id) throws CursoServiceException, CursoDAOException {
