@@ -67,12 +67,7 @@ public class UnidadeService extends CommonServiceValidations {
 		if (enderecoInvalido(unidade.getEndereco()))
 			throw new CursoServiceException(Mensagem.getMessage("endereco_invalido"));
 
-		if (statusInvalido(unidade.getStatus()))
-			throw new CursoServiceException(Mensagem.getMessage("status_invalido"));
-		
-		unidadeEncontrada.setNome(unidade.getNome());
-		unidadeEncontrada.setEndereco(unidade.getEndereco());
-		unidadeEncontrada.setStatus(unidade.getStatus());
+		configurarObjetoAntesDeAtualizar(unidade, unidadeEncontrada);
 
 		return this.dao.update(unidadeEncontrada);
 	}
@@ -89,5 +84,10 @@ public class UnidadeService extends CommonServiceValidations {
 		unidadeEncontrada.setStatus(Status.DESATIVADA);
 
 		dao.delete(unidadeEncontrada);
+	}
+
+	private void configurarObjetoAntesDeAtualizar(Unidade unidade, Unidade unidadeEncontrada) {
+		unidadeEncontrada.setNome(unidade.getNome());
+		unidadeEncontrada.setEndereco(unidade.getEndereco());
 	}
 }

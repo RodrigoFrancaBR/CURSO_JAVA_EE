@@ -3,7 +3,7 @@ package br.com.franca.msg;
 import java.util.ResourceBundle;
 
 public class Mensagem {
-	private static ResourceBundle MSG_SISTEMA = ResourceBundle.getBundle("br.com.franca.msg.mensagem");
+	private static ResourceBundle MSG_SISTEMA = ResourceBundle.getBundle("br.com.franca.msg.config_pt_BR");
 
 	public static String getMessage(String chave) {
 		
