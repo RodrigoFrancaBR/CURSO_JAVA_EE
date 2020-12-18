@@ -1,12 +1,16 @@
 package br.com.franca.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
+
+import org.modelmapper.ModelMapper;
 
 import br.com.franca.dao.TurmaDAO;
 import br.com.franca.domain.Turma;
 import br.com.franca.domain.Unidade;
+import br.com.franca.domain.dto.TurmaDTO;
 import br.com.franca.domain.enun.Status;
 import br.com.franca.exceptions.CursoDAOException;
 import br.com.franca.exceptions.CursoServiceException;
@@ -20,85 +24,100 @@ public class TurmaService extends CommonServiceValidations {
 	@Inject
 	private UnidadeService unidadeService;
 
-	public List<Turma> findAll() throws CursoDAOException {
-		return this.dao.findAll();
+	public List<TurmaDTO> findAll() throws CursoDAOException {
+
+		List<TurmaDTO> listaDeTurmasDTO = 
+				this.dao.findAll()
+				.parallelStream()
+				.map(turma -> new ModelMapper()
+									.map(turma, TurmaDTO.class))
+				.collect(Collectors.toList());
+		
+		return listaDeTurmasDTO;
+				
 	}
 
-	public Turma findById(Long id) throws CursoServiceException, CursoDAOException {
+	public TurmaDTO findById(Long id) throws CursoServiceException, CursoDAOException {
 
-		if (id == null)
-			throw new CursoServiceException(Mensagem.getMessage("id_null"));
+		Turma turma = dao.fimdById(id);
+		TurmaDTO turmaDTO = new ModelMapper().map(turma, TurmaDTO.class);
 
-		return dao.fimdById(id);
+		return turmaDTO;
+
 	}
 
-	public Turma save(Turma turma) throws CursoServiceException, CursoDAOException {
+	public Turma save(TurmaDTO turmaDTO) throws CursoServiceException, CursoDAOException {
 
-		if (turma == null)
+		if (turmaDTO == null)
 			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
 
-		if (nomeInvalido(turma.getNome()))
+		if (nomeInvalido(turmaDTO.getNome()))
 			throw new CursoServiceException(Mensagem.getMessage("nome_invalido"));
 
-		if (turma.getUnidade() == null)
+		if (turmaDTO.getUnidadeId() == null)
 			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
-
-		Unidade unidadeEncontrada = unidadeService.findById(turma.getUnidade().getId());
+		
+		Unidade unidadeEncontrada = unidadeService.findById(turmaDTO.getUnidadeId());
 
 		if (unidadeEncontrada == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
+			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));		
 
+		Turma turma = new ModelMapper().map(turmaDTO, Turma.class);
+		
 		turma.setUnidade(unidadeEncontrada);
-
-		// aplicar regras de unique
-
-		turma.setStatus(Status.ATIVA);
 
 		return this.dao.save(turma);
 	}
+	
+	public Turma update(Long id, TurmaDTO turmaDTO) throws CursoServiceException, CursoDAOException {
+		TurmaDTO turmaEncontrada = null;
 
-	public Turma update(Turma turma) throws CursoServiceException, CursoDAOException {
-		
-		if (turma == null)
+		if (turmaDTO == null)
 			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
-		
-		Turma turmaEncontrada = null;
-		
-		turmaEncontrada = findById(turma.getId());
-
-		if (turmaEncontrada == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
-
-		if (nomeInvalido(turma.getNome()))
-			throw new CursoServiceException(Mensagem.getMessage("nome_invalido"));
-		
-		if (statusInvalido(turma.getStatus()))
-			throw new CursoServiceException(Mensagem.getMessage("status_invalido"));
-		
-		if (turma.getUnidade() == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
-		
-		Unidade unidadeEncontrada = unidadeService.findById(turma.getUnidade().getId());
-
-		if (unidadeEncontrada == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
-
-		turma.setUnidade(unidadeEncontrada);
-
-		return turma = this.dao.update(turma);
-	}
-
-	public void delete(Long id) throws CursoServiceException, CursoDAOException {
-
-		Turma turmaEncontrada = null;
 
 		turmaEncontrada = findById(id);
 
 		if (turmaEncontrada == null)
 			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
 
-		turmaEncontrada.setStatus(Status.DESATIVADA);
+		if (nomeInvalido(turmaDTO.getNome()))
+			throw new CursoServiceException(Mensagem.getMessage("nome_invalido"));						
 
-		dao.delete(turmaEncontrada);
+		if (turmaDTO.getUnidadeId() == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
+
+		Unidade unidadeEncontrada = unidadeService.findById(turmaDTO.getUnidadeId());
+
+		if (unidadeEncontrada == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
+		
+		Turma turma = new ModelMapper().map(turmaDTO, Turma.class);
+		
+		turma.setUnidade(unidadeEncontrada);
+
+		return this.dao.update(turma);
+		
 	}
+
+	public void delete(Long id) throws CursoServiceException, CursoDAOException {
+
+		TurmaDTO turmaDTO = null;
+
+		turmaDTO = findById(id);
+
+		if (turmaDTO == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
+
+		turmaDTO.setStatus(Status.DESATIVADA);	
+		
+		Turma turma = new ModelMapper().map(turmaDTO, Turma.class);
+
+		dao.delete(turma);
+	}
+	
+/*	private boolean unidadeExiste(Long unidadeId) throws CursoServiceException, CursoDAOException {
+		Unidade unidadeEncontrada = unidadeService.findById(unidadeId);
+		return unidadeEncontrada != null ? true : false;
+	}*/
+
 }

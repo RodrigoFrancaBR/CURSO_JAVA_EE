@@ -12,8 +12,8 @@ public abstract class CommonServiceValidations {
 		return endereco == null || endereco.trim().equals("") ? true : false;
 	}
 
-	protected boolean statusInvalido(Status status) {
+	/*protected boolean statusInvalido(Status status) {
 		return status == null || status.equals(Status.INVALIDA) ? true : false;
-	}
+	}*/
 
 }

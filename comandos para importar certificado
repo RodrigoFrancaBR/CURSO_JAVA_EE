@@ -1,0 +1,1 @@
+D:\rodrigo\java\jdk1.8.0_231\jre\lib\security λ keytool -import -v -trustcacerts -file D:\rodrigo\git_repo\CURSO_JAVA_EE\tomcat.cer -keystore cacerts -keypass changeit -storepass changeit

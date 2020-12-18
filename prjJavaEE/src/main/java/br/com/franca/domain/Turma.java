@@ -17,8 +17,9 @@ import javax.persistence.UniqueConstraint;
 import br.com.franca.domain.enun.Status;
 
 @Entity
-//definindo um index name unique: "nome_unidade_id_UK" para as colunas: nome, unidade_id
-//definindo um index name: FK_tb_turma_tb_unidade_UK para fk unidade_id
+// definindo um index name unique: "nome_unidade_id_UK" para as colunas: nome,
+// unidade_id
+// definindo um index name: FK_tb_turma_tb_unidade_UK para fk unidade_id
 @Table(name = "TB_TURMA", uniqueConstraints = @UniqueConstraint(columnNames = { "nome",
 		"unidade_id" }, name = "nome_unidade_id_UK"), indexes = @Index(columnList = "unidade_id", name = "FK_tb_turma_tb_unidade_UK"))
 public class Turma implements BaseEntity<Long>, Serializable {
@@ -31,12 +32,14 @@ public class Turma implements BaseEntity<Long>, Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private String nome;
-	
-	@Enumerated(EnumType.STRING)
-	private Status status;
 
+	private String nome;
+
+	/*@Enumerated(EnumType.STRING)
+	private Status status;*/
+	
+	private String status;
+	
 	@ManyToOne
 	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
@@ -64,13 +67,23 @@ public class Turma implements BaseEntity<Long>, Serializable {
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
 	}
+	
+	
 
-	public Status getStatus() {
+	/*public Status getStatus() {
 		return status;
 	}
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}*/
+
+	public Status getStatus() {
+		return Status.getStatus(this.status);
+	}
+
+	public void setStatus(Status status) {
+		this.status = status.getValor();
 	}
 
 	@Override
@@ -101,6 +114,6 @@ public class Turma implements BaseEntity<Long>, Serializable {
 	@Override
 	public String toString() {
 		return "Turma [id=" + id + ", nome=" + nome + ", status=" + status + ", unidade=" + unidade + "]";
-	}	
+	}
 
 }
