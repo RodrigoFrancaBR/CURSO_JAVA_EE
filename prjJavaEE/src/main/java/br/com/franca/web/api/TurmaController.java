@@ -9,6 +9,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.com.franca.domain.Turma;
+import br.com.franca.domain.dto.TurmaDTO;
 import br.com.franca.exceptions.CursoServiceException;
 import br.com.franca.service.TurmaService;
 
@@ -20,14 +21,11 @@ public class TurmaController extends CommonController implements TurmaAPI {
 	@Override
 	public Response findAll() {
 		try {
-			List<Turma> resposta = service.findAll();
 
-			if (resposta.size() == 0)
-				return Response.status(Status.NOT_FOUND).entity(resposta).build();
+			List<TurmaDTO> resposta = service.findAll();
+			return Response.ok().entity(resposta).build();
 
-			return Response.status(Status.OK).entity(resposta).build();
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex.getMessage()).build();
 		}
 	}
@@ -36,7 +34,8 @@ public class TurmaController extends CommonController implements TurmaAPI {
 	public Response findById(Long id) {
 
 		try {
-			Turma resposta = this.service.findById(id);
+
+			TurmaDTO resposta = this.service.findById(id);
 
 			if (resposta == null)
 				return Response.status(Status.NOT_FOUND).entity(resposta).build();
@@ -52,7 +51,7 @@ public class TurmaController extends CommonController implements TurmaAPI {
 	}
 
 	@Override
-	public Response save(Turma turma) {
+	public Response save(TurmaDTO turma) {
 
 		try {
 			Turma resposta = this.service.save(turma);
@@ -70,10 +69,10 @@ public class TurmaController extends CommonController implements TurmaAPI {
 	}
 
 	@Override
-	public Response update(Turma turma) {
+	public Response update(Long id, TurmaDTO turmaDTO) {
 
 		try {
-			Turma resposta = service.update(turma);
+			Turma resposta = service.update(id, turmaDTO);
 			return Response.status(Status.OK).entity(resposta).build();
 		} catch (CursoServiceException ex) {
 			ex.printStackTrace();

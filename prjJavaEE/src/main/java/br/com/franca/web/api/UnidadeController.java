@@ -32,7 +32,7 @@ public class UnidadeController extends CommonController implements UnidadeAPI {
 	}
 
 	@Override
-	public Response findById(Long id) {
+	public Response findById(Long id) { 
 		try {
 			Unidade resposta = service.findById(id);
 			return Response.ok().entity(resposta).build();

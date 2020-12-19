@@ -11,7 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.franca.domain.Turma;
+import br.com.franca.domain.dto.TurmaDTO;
 
 @Path("turmas")
 public interface TurmaAPI {
@@ -30,12 +30,13 @@ public interface TurmaAPI {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response save(Turma turma);
+	public Response save(TurmaDTO turmaDTO);
 
 	@PUT
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(Turma turma);
+	public Response update(@PathParam("id") Long id, TurmaDTO turmaDTO);
 
 	@DELETE
 	@Path("/{id}/")

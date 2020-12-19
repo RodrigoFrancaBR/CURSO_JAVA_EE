@@ -1,16 +1,12 @@
 package br.com.franca.web.api;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import br.com.franca.domain.Contrato;
-import br.com.franca.domain.Parcela;
-import br.com.franca.exceptions.CursoServiceException;
+import br.com.franca.exceptions.CursoDAOException;
 import br.com.franca.service.ContratoService;
 
 public class ContratoController extends CommonController implements ContratoAPI {
@@ -19,6 +15,41 @@ public class ContratoController extends CommonController implements ContratoAPI 
 	private ContratoService service;
 
 	@Override
+	public Response findAll() {
+		try {
+			List<Contrato> resposta = service.findAll();
+		} catch (CursoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Response findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Response simularContrato(Contrato contrato) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Response save(Contrato contrato) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Response delete(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*@Override
 	public Response findAll() {
 		try {
 			List<Contrato> resposta = service.findAll();
@@ -98,6 +129,6 @@ public class ContratoController extends CommonController implements ContratoAPI 
 			ex.printStackTrace();
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex.getMessage()).build();
 		}
-	}
+	}*/
 
 }

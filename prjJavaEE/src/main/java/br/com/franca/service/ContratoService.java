@@ -50,16 +50,16 @@ public class ContratoService extends CommonServiceValidations {
 			throw new CursoServiceException(Mensagem.getMessage("entidade_null"));
 
 		Aluno aluno = alunoService.findById(contrato.getAluno().getId());
-		Turma turma = turmaService.findById(contrato.getTurma().getId());
+		// Turma turma = turmaService.findById(contrato.getTurma().getId());
 
 		if (aluno == null)
 			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
 
-		if (turma == null)
-			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));
+	/*	if (turma == null)
+			throw new CursoServiceException(Mensagem.getMessage("entidade_nao_encontrada"));*/
 
 		contrato.setAluno(aluno);
-		contrato.setTurma(turma);
+		// contrato.setTurma(turma);
 		contrato.setMatricula(obterMatricula(contrato));
 
 		List<Parcela> listaDeParcelas = this.simularContrato(contrato);

@@ -19,7 +19,7 @@ public interface UnidadeAPI {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findAll();
+	public Response findAll();	
 
 	@GET
 	@Path("/{id}")

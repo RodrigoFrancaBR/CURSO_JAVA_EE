@@ -1,12 +1,14 @@
 package br.com.franca.domain.enun;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Status {
 
-// Usado para Turmas e Unidades
+	// Usado para Turmas e Unidades
 
-	DESATIVADA(0, "Desativada"), ATIVA(1, "Ativa"), INVALIDA(100, "Status inválido");
+	DESATIVADA(0, "Desativada"), ATIVA(1, "Ativa");
 
 	private int chave;
 	private String valor;
@@ -16,14 +18,20 @@ public enum Status {
 		this.valor = valor;
 	}
 
-	/**
-	 * @param Alguma chave v�lida 0,1,2,3 etc..
-	 * @return Um Status ou null caso n�o encontre um status existente
-	 */
 	public static Status getStatus(int chave) {
-		return Arrays.asList(Status.values()).parallelStream().filter(e -> e.getChave() == chave).findFirst()
-				.orElse(Status.INVALIDA);
+		return Arrays.asList(Status.values())
+				.parallelStream()
+				.filter(e -> e.getChave() == chave)
+				.collect(Collectors.toList()).get(0);
+	}	
+	
+	public static Status getStatus(String valor) {		
+		return Arrays.asList(Status.values())
+				.parallelStream()
+				.filter(e -> e.getValor().equals(valor))
+				.collect(Collectors.toList()).get(0);		
 	}
+
 
 	public int getChave() {
 		return chave;
